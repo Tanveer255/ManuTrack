@@ -1,0 +1,6 @@
+@ProductNest_HostAddress = http://localhost:5143
+
+GET {{ProductNest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
