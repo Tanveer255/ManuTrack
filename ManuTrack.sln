@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductNest.DAL", "ProductN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductNest.Entity", "ProductNest.Entity\ProductNest.Entity.csproj", "{1A69FAF5-E134-4C67-BC85-A9DAC62BF654}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{1A69FAF5-E134-4C67-BC85-A9DAC62BF654}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A69FAF5-E134-4C67-BC85-A9DAC62BF654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A69FAF5-E134-4C67-BC85-A9DAC62BF654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,5 +89,6 @@ Global
 		{36A75E02-AB30-4F5D-B2D8-0422D5B19197} = {2A331BCE-5E7F-4674-A943-B5C67F9F230A}
 		{037F8205-808D-4B5C-8DC6-46F467F6FB96} = {2A331BCE-5E7F-4674-A943-B5C67F9F230A}
 		{1A69FAF5-E134-4C67-BC85-A9DAC62BF654} = {2A331BCE-5E7F-4674-A943-B5C67F9F230A}
+		{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8} = {32FCBFBC-9189-437E-81C1-77C1FAD4EA34}
 	EndGlobalSection
 EndGlobal
