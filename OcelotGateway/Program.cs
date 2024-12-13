@@ -6,10 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Logging.AddConsole();
-//builder.WebHost.ConfigureKestrel(options =>
-//{
-//    options.Listen(IPAddress.Any, 5000);  // Or any other free port
-//});
 // Add Ocelot configuration
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 // Add Ocelot services
