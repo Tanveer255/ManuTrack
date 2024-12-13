@@ -3,9 +3,9 @@ using JwtAuthentication.Model;
 using JwtAuthentication.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProductNest;
 using ProductNest.Entity.Data;
 using System.Text;
 
@@ -72,6 +72,11 @@ builder.Services.AddAuthorization();
 // Optionally add database context for EF Core (if required)
 builder.Services.AddDbContext<ProductNestDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services
+    .AddAllCustomServices();
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
