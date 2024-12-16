@@ -13,8 +13,8 @@ public class BOMItemDto : BOMItem
         {
             Id = dto.Id,
             IsDeleted = dto.IsDeleted,
-            CreatedTime = dto.CreatedTime,
-            UpdatedTime = dto.UpdatedTime,
+            CreatedAt = dto.CreatedAt,
+            UpdatedAt = dto.UpdatedAt,
             MaterialName = dto.MaterialName,
             Quantity = dto.Quantity,
             UnitOfMeasure = dto.UnitOfMeasure,
@@ -27,8 +27,8 @@ public class BOMItemDto : BOMItem
         {
             Id = entity.Id,
             IsDeleted = entity.IsDeleted,
-            CreatedTime = entity.CreatedTime,
-            UpdatedTime = entity.UpdatedTime,
+            CreatedAt = entity.CreatedAt,
+            UpdatedAt = entity.UpdatedAt,
             MaterialName = entity.MaterialName,
             Quantity = entity.Quantity,
             UnitOfMeasure = entity.UnitOfMeasure,

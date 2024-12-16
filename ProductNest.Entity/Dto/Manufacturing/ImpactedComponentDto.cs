@@ -27,8 +27,8 @@ public class ImpactedComponentDto : ImpactedComponent
         {
             Id = dto.Id,
             IsDeleted = dto.IsDeleted,
-            CreatedTime = dto.CreatedTime,
-            UpdatedTime = dto.UpdatedTime,
+            CreatedAt = dto.CreatedAt,
+            UpdatedAt = dto.UpdatedAt,
             BOMItemId = dto.BOMItemId,
             WarehouseId = dto.WarehouseId,
             SectionZone = dto.SectionZone,
@@ -53,8 +53,8 @@ public class ImpactedComponentDto : ImpactedComponent
         {
             Id = entity.Id,
             IsDeleted = entity.IsDeleted,
-            CreatedTime = entity.CreatedTime,
-            UpdatedTime = entity.UpdatedTime,
+            CreatedAt = entity.UpdatedAt,
+            UpdatedAt = entity.UpdatedAt,
             BOMItemId = entity.BOMItemId,
             WarehouseId = entity.WarehouseId,
             SectionZone = entity.SectionZone,

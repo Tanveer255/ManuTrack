@@ -22,8 +22,8 @@ public class ProductDto : Product
         {
             Id = dto.Id,
             IsDeleted = dto.IsDeleted,
-            CreatedTime = dto.CreatedTime,
-            UpdatedTime = dto.UpdatedTime,
+            CreatedAt = dto.CreatedAt,
+            UpdatedAt = dto.CreatedAt,
             Name = dto.Name,
             Description = dto.Description,
             SKU = dto.SKU,
@@ -42,8 +42,8 @@ public class ProductDto : Product
         {
             Id = entity.Id,
             IsDeleted = entity.IsDeleted,
-            CreatedTime = entity.CreatedTime,
-            UpdatedTime = entity.UpdatedTime,
+            CreatedAt = entity.CreatedAt,
+            UpdatedAt = entity.UpdatedAt,
             Name = entity.Name,
             Description = entity.Description,
             SKU = entity.SKU,

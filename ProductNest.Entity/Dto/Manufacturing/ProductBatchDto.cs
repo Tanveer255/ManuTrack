@@ -63,8 +63,8 @@ public class ProductBatchDto : ProductBatch
         {
             Id = dto.Id,
             IsDeleted = dto.IsDeleted,
-            CreatedTime = dto.CreatedTime,
-            UpdatedTime = dto.UpdatedTime,
+            CreatedAt = dto.CreatedAt,
+            UpdatedAt = dto.UpdatedAt,
             Quantity = dto.Quantity,
             ProcessType = dto.ProcessType,
             Reason = dto.Reason,
@@ -124,8 +124,8 @@ public class ProductBatchDto : ProductBatch
         {
             Id = entity.Id,
             IsDeleted = entity.IsDeleted,
-            CreatedTime = entity.CreatedTime,
-            UpdatedTime = entity.UpdatedTime,
+            CreatedAt = entity.CreatedAt,
+            UpdatedAt = entity.UpdatedAt,
             Quantity = entity.Quantity,
             ProcessType = entity.ProcessType,
             Reason = entity.Reason,

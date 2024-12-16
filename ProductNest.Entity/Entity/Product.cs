@@ -1,12 +1,14 @@
-﻿using ProductNest.Enum;
+﻿using ProductNest.Entity.Entity;
+using ProductNest.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProductNest.Entity;
 
 [Table("Product")]
-public class Product : _Base
+public class Product : _BaseProduct
 {
 
     public string Name { get; set; }
@@ -19,12 +21,19 @@ public class Product : _Base
     public int ReorderLevel { get; set; }
     public int LeadTimeInDays { get; set; }
     public List<BOMItem> BillOfMaterials { get; set; }
-    public string Status { get; set; }
+    public List<Variant> Variants { get; set; }
+    public List<VariantOption> Options { get; set; }
+    public List<ImageFile> ImageFiles { get; set; }
+    //public Image Image { get; set; }
     public Product()
     {
-        CreatedTime = DateTime.Now;
-        UpdatedTime = DateTime.Now;
+        CreatedAt = DateTime.Now;
+        UpdatedAt = DateTime.Now;
         BillOfMaterials = new List<BOMItem>();
+        Variants = new List<Variant>();
+        Options = new List<VariantOption>();
+        ImageFiles = new List<ImageFile>();
         Status = ProductStatus.Active.ToString();
     }
+
 }

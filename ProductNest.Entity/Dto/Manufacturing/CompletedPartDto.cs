@@ -15,8 +15,8 @@ public class CompletedPartDto : CompletedPart
         {
             Id = dto.Id,
             IsDeleted = dto.IsDeleted,
-            CreatedTime = dto.CreatedTime,
-            UpdatedTime = dto.UpdatedTime,
+            CreatedAt = dto.CreatedAt,
+            UpdatedAt = dto.UpdatedAt,
             DateCompleted = dto.DateCompleted,
             PartCompleted = dto.PartCompleted,
             BatchId = dto.BatchId,
@@ -30,8 +30,8 @@ public class CompletedPartDto : CompletedPart
         {
             Id = entity.Id,
             IsDeleted = entity.IsDeleted,
-            CreatedTime = entity.CreatedTime,
-            UpdatedTime = entity.UpdatedTime,
+            CreatedAt = entity.CreatedAt,
+            UpdatedAt = entity.UpdatedAt,
             DateCompleted = entity.DateCompleted,
             PartCompleted = entity.PartCompleted,
             ProductBatch = entity.ProductBatch,
