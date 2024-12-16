@@ -20,7 +20,7 @@ public class ImpactedComponentDto : ImpactedComponent
     public new ImpactType ImpactType { get; set; }
     public new string Direction { get; set; } = string.Empty;
     public new Guid BatchId { get; set; }
-    public new ProductBatch ProductBatch { get; set; }
+    public new Batch ProductBatch { get; set; }
     public ImpactedComponent MapDtoToModel(ImpactedComponentDto dto)
     {
         return new ImpactedComponent()
@@ -31,14 +31,6 @@ public class ImpactedComponentDto : ImpactedComponent
             UpdatedAt = dto.UpdatedAt,
             BOMItemId = dto.BOMItemId,
             WarehouseId = dto.WarehouseId,
-            SectionZone = dto.SectionZone,
-            Aisle = dto.Aisle,
-            Rack = dto.Rack,
-            Shelf = dto.Shelf,
-            Position = dto.Position,
-            PickedAvlQty = dto.PickedAvlQty,
-            PickedResQty = dto.PickedResQty,
-            PickedQty = dto.PickedQty,
             IsPicked = dto.IsPicked,
             ImpactType = dto.ImpactType,
             Direction = dto.Direction,
@@ -57,14 +49,6 @@ public class ImpactedComponentDto : ImpactedComponent
             UpdatedAt = entity.UpdatedAt,
             BOMItemId = entity.BOMItemId,
             WarehouseId = entity.WarehouseId,
-            SectionZone = entity.SectionZone,
-            Aisle = entity.Aisle,
-            Rack = entity.Rack,
-            Shelf = entity.Shelf,
-            Position = entity.Position,
-            PickedAvlQty = entity.PickedAvlQty,
-            PickedResQty = entity.PickedResQty,
-            PickedQty = entity.PickedQty,
             IsPicked = entity.IsPicked,
             ImpactType = entity.ImpactType,
             Direction = entity.Direction,

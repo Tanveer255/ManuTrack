@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductNest.Entity.Entity
-{
-    [Table("PresentmentPrice")]
-    public class PresentmentPrice: _Base
-    {
-        public Price Price { get; set; }
-        public string CompareAtPrice { get; set; }
-    }
+namespace ProductNest.Entity.Entity;
 
+[Table("PresentmentPrice")]
+public class PresentmentPrice: _Base
+{
+    public Price Price { get; set; }
+    public string CompareAtPrice { get; set; }
 }

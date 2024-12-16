@@ -1,29 +1,27 @@
-﻿using ProductNest.Enum.Manufacturing;
+﻿using ProductNest.Entity.Entity;
+using ProductNest.Enum.Manufacturing;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProductNest.Entity.Manufacturing
+namespace ProductNest.Entity.Manufacturing;
+
+[Table("ImpactedComponent")]
+public class ImpactedComponent : _Base
 {
-    [Table("ImpactedComponent")]
-    public class ImpactedComponent : _Base
-    {
+    public Guid BOMItemId { get; set; }
+    public bool IsPicked { get; set; } = false;
+    public ImpactType ImpactType { get; set; }
+    public string Direction { get; set; } = string.Empty;
 
-        public Guid BOMItemId { get; set; }
-        public Guid WarehouseId { get; set; }
-        public string SectionZone { get; set; }
-        public string Aisle { get; set; }
-        public string Rack { get; set; }
-        public string Shelf { get; set; }
-        public string Position { get; set; }
-        public double PickedAvlQty { get; set; }
-        public double PickedResQty { get; set; }
-        public double PickedQty { get; set; }
-        public bool IsPicked { get; set; } = false;
-        public ImpactType ImpactType { get; set; }
-        public string Direction { get; set; } = string.Empty;
+    [ForeignKey("Batch")]
+    public Guid BatchId { get; set; }
+    public Batch ProductBatch { get; set; }
 
-        [ForeignKey("ProductBatch")]
-        public Guid BatchId { get; set; }
-        public ProductBatch ProductBatch { get; set; }
-    }
+    [ForeignKey("Warehouse")]
+    public Guid WarehouseId { get; set; }
+    public Warehouse Warehouse { get; set; }
+
+    [ForeignKey("Inventory")]
+    public Guid InventoryId { get; set; }
+    public Inventory Inventory { get; set; }
 }

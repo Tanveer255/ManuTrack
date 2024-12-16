@@ -13,4 +13,7 @@ public class BOMItem : _Base
     public string MaterialName { get; set; } = string.Empty;
     public decimal Quantity { get; set; }
     public string UnitOfMeasure { get; set; } = string.Empty;
+    public long ProductId { get; set; }
+    public string Version { get; set; }
+
 }

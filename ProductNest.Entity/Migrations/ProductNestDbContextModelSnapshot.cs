@@ -38,7 +38,10 @@ namespace ProductNest.Entity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProductId")
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid?>("ProductId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Quantity")
@@ -51,9 +54,13 @@ namespace ProductNest.Entity.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Version")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("BOMItem", (string)null);
                 });
@@ -111,6 +118,67 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("ImageFile", (string)null);
                 });
 
+            modelBuilder.Entity("ProductNest.Entity.Entity.Inventory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AvailableQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExpiredQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuarantinedQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RejectedQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservedQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StorageLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("Inventory", (string)null);
+                });
+
             modelBuilder.Entity("ProductNest.Entity.Entity.PresentmentPrice", b =>
                 {
                     b.Property<Guid>("Id")
@@ -165,6 +233,9 @@ namespace ProductNest.Entity.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -208,7 +279,7 @@ namespace ProductNest.Entity.Migrations
                     b.Property<long?>("ImageId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("InventoryItemId")
+                    b.Property<long>("InventoryId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("InventoryManagement")
@@ -339,6 +410,149 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("VariantOption", (string)null);
                 });
 
+            modelBuilder.Entity("ProductNest.Entity.Entity.Warehouse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aisle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rack")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Shelf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("VariantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Zone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VariantId");
+
+                    b.ToTable("Warehouse", (string)null);
+                });
+
+            modelBuilder.Entity("ProductNest.Entity.Manufacturing.Batch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ActualFinishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ActualStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("BOMItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CancellationReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompletedQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CurrentActionState")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ExpectedFinishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpectedStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("InventoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReinstated")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ManufacturedQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProcessType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProgressTracking")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectJobNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StockHandlingProcedure")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalWorkingDays")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BOMItemId");
+
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("Batch", (string)null);
+                });
+
             modelBuilder.Entity("ProductNest.Entity.Manufacturing.CompletedPart", b =>
                 {
                     b.Property<Guid>("Id")
@@ -377,10 +591,6 @@ namespace ProductNest.Entity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Aisle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("BOMItemId")
                         .HasColumnType("uniqueidentifier");
 
@@ -397,36 +607,14 @@ namespace ProductNest.Entity.Migrations
                     b.Property<int>("ImpactType")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("InventoryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsPicked")
                         .HasColumnType("bit");
-
-                    b.Property<double>("PickedAvlQty")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PickedQty")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PickedResQty")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Rack")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SectionZone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Shelf")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -438,219 +626,11 @@ namespace ProductNest.Entity.Migrations
 
                     b.HasIndex("BatchId");
 
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("WarehouseId");
+
                     b.ToTable("ImpactedComponent", (string)null);
-                });
-
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.ProductBatch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ActionState")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ActualFinishDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ActualStartDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdditionalQuantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BOMVersion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CancellationStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompleteQtyTreatment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedDateTimeStamp")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ExpectedFinishDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExpectedStartDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FinishProductTo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsCancelled")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("IsDone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsReinstate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsStarted")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsWIP")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProcessType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ProgressStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProjectJNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QtyAvailable")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QtyCompleted")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QtyExpired")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QtyQuarantine")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QtyRejected")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QtyReserved")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReasonForcancellation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StartStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StockImpact")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StockStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StockTreatment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TenantId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TrackProgress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedDateTimeStamp")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("WIPStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WarehouseAisle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WarehouseBay")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WarehouseBuildIn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("WarehouseBuildInSaveId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("WarehouseFinished")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("WarehouseFinishedSaveId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("WarehouseLocation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WarehouseRack")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WarehouseShelf")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WarehouseZone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkingDays")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductBatch", (string)null);
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Product", b =>
@@ -683,6 +663,9 @@ namespace ProductNest.Entity.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ProductType")
                         .IsRequired()
@@ -736,7 +719,7 @@ namespace ProductNest.Entity.Migrations
                 {
                     b.HasOne("ProductNest.Entity.Product", null)
                         .WithMany("BillOfMaterials")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Entity.ImageFile", b =>
@@ -744,6 +727,17 @@ namespace ProductNest.Entity.Migrations
                     b.HasOne("ProductNest.Entity.Product", null)
                         .WithMany("ImageFiles")
                         .HasForeignKey("ProductId1");
+                });
+
+            modelBuilder.Entity("ProductNest.Entity.Entity.Inventory", b =>
+                {
+                    b.HasOne("ProductNest.Entity.Entity.Warehouse", "Warehouse")
+                        .WithMany("Inventory")
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Warehouse");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Entity.PresentmentPrice", b =>
@@ -775,42 +769,98 @@ namespace ProductNest.Entity.Migrations
                         .HasForeignKey("ProductId1");
                 });
 
+            modelBuilder.Entity("ProductNest.Entity.Entity.Warehouse", b =>
+                {
+                    b.HasOne("ProductNest.Entity.Entity.Variant", "Variant")
+                        .WithMany()
+                        .HasForeignKey("VariantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Variant");
+                });
+
+            modelBuilder.Entity("ProductNest.Entity.Manufacturing.Batch", b =>
+                {
+                    b.HasOne("ProductNest.Entity.BOMItem", "BOMItem")
+                        .WithMany()
+                        .HasForeignKey("BOMItemId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ProductNest.Entity.Entity.Inventory", "Inventory")
+                        .WithMany()
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ProductNest.Entity.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ProductNest.Entity.Entity.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BOMItem");
+
+                    b.Navigation("Inventory");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Warehouse");
+                });
+
             modelBuilder.Entity("ProductNest.Entity.Manufacturing.CompletedPart", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Manufacturing.ProductBatch", "ProductBatch")
+                    b.HasOne("ProductNest.Entity.Manufacturing.Batch", "Batch")
                         .WithMany()
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductBatch");
+                    b.Navigation("Batch");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Manufacturing.ImpactedComponent", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Manufacturing.ProductBatch", "ProductBatch")
+                    b.HasOne("ProductNest.Entity.Manufacturing.Batch", "ProductBatch")
                         .WithMany()
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductBatch");
-                });
-
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.ProductBatch", b =>
-                {
-                    b.HasOne("ProductNest.Entity.Product", "Products")
+                    b.HasOne("ProductNest.Entity.Entity.Inventory", "Inventory")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("InventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Products");
+                    b.HasOne("ProductNest.Entity.Entity.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Inventory");
+
+                    b.Navigation("ProductBatch");
+
+                    b.Navigation("Warehouse");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Entity.Variant", b =>
                 {
                     b.Navigation("PresentmentPrices");
+                });
+
+            modelBuilder.Entity("ProductNest.Entity.Entity.Warehouse", b =>
+                {
+                    b.Navigation("Inventory");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Product", b =>
