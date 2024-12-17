@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ProductNest.DAL.Interface;
 using ProductNest.Entity;
+using System;
+using Enums = ProductNest.Entity.Enum;
 namespace ProductNest.DAL.Repository;
 
 public class ProductRepository : Repository<Product>, IProductRepository
@@ -12,5 +15,42 @@ public class ProductRepository : Repository<Product>, IProductRepository
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
+    }
+    public async Task<Product> GetById(Guid productId)
+    {
+        Product product = new Product();
+        try
+        {
+            _logger.LogError("Getting products by Id");
+            product = (from pro in _unitOfWork.Context.Product
+                       where
+                       pro.Id.Equals(productId)
+                       && pro.Status == Enum.ProductStatus.Active.ToString()
+                       && pro.IsDeleted.Equals(false)
+
+                       select new Product
+                       {
+                           ProductId = pro.ProductId,
+                           Name = pro.Name,
+                           Description = pro.Description,
+                           SKU = pro.SKU,
+                           UnitOfMeasure = pro.UnitOfMeasure,
+                           UnitCost = pro.UnitCost ,
+                           StockLevel = pro.StockLevel,
+                           ReorderLevel = pro.ReorderLevel,
+                           LeadTimeInDays = pro.LeadTimeInDays,
+                           Price = pro.Price,
+                           BillOfMaterials = pro.BillOfMaterials,
+                           Variants = pro.Variants,
+                           ImageFiles = pro.ImageFiles,
+                       }).FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message, ex.InnerException, ex.InnerException != null ? ex.InnerException.Message : string.Empty);
+            throw new Exception(ex.Message, ex.InnerException);
+        }
+        _logger.LogError("Returning products :" + product);
+        return await Task.FromResult(product);
     }
 }

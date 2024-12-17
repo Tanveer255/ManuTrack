@@ -8,6 +8,7 @@ namespace ProductNest.Entity.Manufacturing;
 [Table("ImpactedComponent")]
 public class ImpactedComponent : _Base
 {
+    public long ImpactedComponentId { get; set; }
     public Guid BOMItemId { get; set; }
     public bool IsPicked { get; set; } = false;
     public ImpactType ImpactType { get; set; }

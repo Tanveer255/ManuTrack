@@ -10,6 +10,7 @@ namespace ProductNest.Entity;
 
 public class BOMItem : _Base
 {
+    public long BomItemId { get; set; }
     public string MaterialName { get; set; } = string.Empty;
     public decimal Quantity { get; set; }
     public string UnitOfMeasure { get; set; } = string.Empty;

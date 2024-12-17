@@ -11,6 +11,7 @@ namespace ProductNest.Entity.Entity;
 [Table("Price")]
 public class Price:_Base
 {
+    public long PriceId { get; set; }
     [Precision(18, 4)]
     public decimal Amount { get; set; }
     [Precision(18, 4)]

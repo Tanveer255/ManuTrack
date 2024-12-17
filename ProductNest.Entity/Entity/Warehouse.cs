@@ -10,6 +10,7 @@ namespace ProductNest.Entity.Entity;
 
 public class Warehouse : _Base
 {
+    public long WarehouseId { get; set; }
     public string Zone { get; set; }
     public string Aisle { get; set; }
     public string Location { get; set; }

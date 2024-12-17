@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductNest.Entity.Data;
 
@@ -11,9 +12,11 @@ using ProductNest.Entity.Data;
 namespace ProductNest.Entity.Migrations
 {
     [DbContext(typeof(ProductNestDbContext))]
-    partial class ProductNestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241217180325_newLongIds_added_inTables")]
+    partial class newLongIds_added_inTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -6,6 +6,7 @@ namespace ProductNest.Entity.Manufacturing;
 [Table("CompletedPart")]
 public class CompletedPart : _Base
 {
+    public long CompletePartId { get; set; }
     public DateTime DateCompleted { get; set; }
     public string PartCompleted { get; set; } = string.Empty;
 

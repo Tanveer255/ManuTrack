@@ -122,6 +122,20 @@ public class ProductNestDbContext : DbContext
         new UnitOfMeasure { Name = "Square Inch", Code = "sin" },
         new UnitOfMeasure { Name = "Other", Code = "Other" }
     );
-    }
 
+    }
+    public async Task CreateStoredProcedureAsync()
+    {
+        var sql = @"
+            CREATE PROCEDURE GetAllUnitOfMeasure
+            AS
+            BEGIN
+                SET NOCOUNT ON;
+                SELECT TOP (1000) [Code], [Name]
+                FROM [ProductNestDev].[dbo].[UnitOfMeasures];
+            END;
+        ";
+
+        await this.Database.ExecuteSqlRawAsync(sql);
+    }
 }

@@ -20,8 +20,9 @@ public class Product : _BaseProduct
     public int ReorderLevel { get; set; }
     public int LeadTimeInDays { get; set; }
 
-    [ForeignKey("Price")]
-    public Guid PriceId { get; set; }
+    //[ForeignKey("Price")]
+    //public Guid PriceId { get; set; }
+    //public Price Price { get; set; }
     public Price Price { get; set; }
     public List<BOMItem> BillOfMaterials { get; set; }
     public List<Variant> Variants { get; set; }
@@ -32,6 +33,7 @@ public class Product : _BaseProduct
     {
         CreatedAt = DateTime.Now;
         UpdatedAt = DateTime.Now;
+        Price = new Price();
         BillOfMaterials = new List<BOMItem>();
         Variants = new List<Variant>();
         Options = new List<VariantOption>();

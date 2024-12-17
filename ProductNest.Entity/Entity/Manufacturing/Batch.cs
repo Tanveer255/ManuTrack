@@ -9,6 +9,7 @@ namespace ProductNest.Entity.Manufacturing;
 [Table("Batch")]
 public class Batch : _Base
 {
+    public long BatchId { get; set; }
     public string ProcessType { get; set; }
     public string CancellationReason { get; set; }
     public int ManufacturedQuantity { get; set; }

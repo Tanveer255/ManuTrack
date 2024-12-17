@@ -10,6 +10,7 @@ namespace ProductNest.Entity.Entity;
 [Table("Variant")]
 public class Variant : _BaseProduct
 {
+    public long VariantId { get; set; }
     public long ParentProductId { get; set; }
     public string Price { get; set; }
     public int Position { get; set; }
