@@ -5,7 +5,7 @@ namespace ProductNest.Dto;
 public class BOMItemDto : BOMItem
 {
     public new string MaterialName { get; set; } = string.Empty;
-    public new decimal Quantity { get; set; }
+    public new long InventoryId { get; set; }
     public new string UnitOfMeasure { get; set; } = string.Empty;
     public BOMItem MapDtoToModel(BOMItemDto dto)
     {
@@ -16,7 +16,7 @@ public class BOMItemDto : BOMItem
             CreatedAt = dto.CreatedAt,
             UpdatedAt = dto.UpdatedAt,
             MaterialName = dto.MaterialName,
-            Quantity = dto.Quantity,
+            InventoryId = dto.InventoryId,
             UnitOfMeasure = dto.UnitOfMeasure,
 
         };
@@ -30,7 +30,7 @@ public class BOMItemDto : BOMItem
             CreatedAt = entity.CreatedAt,
             UpdatedAt = entity.UpdatedAt,
             MaterialName = entity.MaterialName,
-            Quantity = entity.Quantity,
+            InventoryId = entity.InventoryId,
             UnitOfMeasure = entity.UnitOfMeasure,
 
         };
