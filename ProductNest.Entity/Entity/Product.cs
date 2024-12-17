@@ -16,10 +16,13 @@ public class Product : _BaseProduct
     public string SKU { get; set; }
     public string UnitOfMeasure { get; set; }
     public decimal UnitCost { get; set; }
-    public decimal SellingPrice { get; set; }
     public int StockLevel { get; set; }
     public int ReorderLevel { get; set; }
     public int LeadTimeInDays { get; set; }
+
+    [ForeignKey("Price")]
+    public Guid PriceId { get; set; }
+    public Price Price { get; set; }
     public List<BOMItem> BillOfMaterials { get; set; }
     public List<Variant> Variants { get; set; }
     public List<VariantOption> Options { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductNest.Entity.Data;
 
@@ -11,9 +12,11 @@ using ProductNest.Entity.Data;
 namespace ProductNest.Entity.Migrations
 {
     [DbContext(typeof(ProductNestDbContext))]
-    partial class ProductNestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241217053126_price_relation_added")]
+    partial class price_relation_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,247 +261,6 @@ namespace ProductNest.Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Price", (string)null);
-                });
-
-            modelBuilder.Entity("ProductNest.Entity.Entity.UnitOfMeasure", b =>
-                {
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Code");
-
-                    b.ToTable("UnitOfMeasures");
-
-                    b.HasData(
-                        new
-                        {
-                            Code = "AI",
-                            Name = "Assembled Item"
-                        },
-                        new
-                        {
-                            Code = "L",
-                            Name = "Liter"
-                        },
-                        new
-                        {
-                            Code = "cl",
-                            Name = "Centiliter"
-                        },
-                        new
-                        {
-                            Code = "ml",
-                            Name = "Milliliter"
-                        },
-                        new
-                        {
-                            Code = "dl",
-                            Name = "Deciliter"
-                        },
-                        new
-                        {
-                            Code = "dcl",
-                            Name = "Decaliter"
-                        },
-                        new
-                        {
-                            Code = "hcl",
-                            Name = "Hectoliter"
-                        },
-                        new
-                        {
-                            Code = "kl",
-                            Name = "Kiloliter"
-                        },
-                        new
-                        {
-                            Code = "pt",
-                            Name = "Pint"
-                        },
-                        new
-                        {
-                            Code = "gll",
-                            Name = "Gallon (Metric)"
-                        },
-                        new
-                        {
-                            Code = "glim",
-                            Name = "Gallon (Imperial)"
-                        },
-                        new
-                        {
-                            Code = "mcg",
-                            Name = "Microgram"
-                        },
-                        new
-                        {
-                            Code = "mg",
-                            Name = "Milligram"
-                        },
-                        new
-                        {
-                            Code = "g",
-                            Name = "Gram"
-                        },
-                        new
-                        {
-                            Code = "kg",
-                            Name = "Kilogram"
-                        },
-                        new
-                        {
-                            Code = "lb",
-                            Name = "Pound"
-                        },
-                        new
-                        {
-                            Code = "mt",
-                            Name = "Metric-Ton"
-                        },
-                        new
-                        {
-                            Code = "mm",
-                            Name = "Millimeter"
-                        },
-                        new
-                        {
-                            Code = "cm",
-                            Name = "Centimeter"
-                        },
-                        new
-                        {
-                            Code = "dm",
-                            Name = "Decimeter"
-                        },
-                        new
-                        {
-                            Code = "m",
-                            Name = "Meter"
-                        },
-                        new
-                        {
-                            Code = "dcm",
-                            Name = "Decameter"
-                        },
-                        new
-                        {
-                            Code = "hcm",
-                            Name = "Hectometer"
-                        },
-                        new
-                        {
-                            Code = "km",
-                            Name = "Kilometer"
-                        },
-                        new
-                        {
-                            Code = "in",
-                            Name = "Inch"
-                        },
-                        new
-                        {
-                            Code = "ft",
-                            Name = "Foot"
-                        },
-                        new
-                        {
-                            Code = "yard",
-                            Name = "Yard"
-                        },
-                        new
-                        {
-                            Code = "SI",
-                            Name = "Single Item"
-                        },
-                        new
-                        {
-                            Code = "SU",
-                            Name = "Single Unit"
-                        },
-                        new
-                        {
-                            Code = "t",
-                            Name = "Ton"
-                        },
-                        new
-                        {
-                            Code = "m2",
-                            Name = "Square Meter"
-                        },
-                        new
-                        {
-                            Code = "ha",
-                            Name = "Hectare"
-                        },
-                        new
-                        {
-                            Code = "km2",
-                            Name = "Square Kilometer"
-                        },
-                        new
-                        {
-                            Code = "cm3",
-                            Name = "Cubic Centimeter"
-                        },
-                        new
-                        {
-                            Code = "m3",
-                            Name = "Cubic Meter"
-                        },
-                        new
-                        {
-                            Code = "kg/m3",
-                            Name = "Kilogram Per Cubic Meter"
-                        },
-                        new
-                        {
-                            Code = "each",
-                            Name = "Each"
-                        },
-                        new
-                        {
-                            Code = "piece",
-                            Name = "Piece"
-                        },
-                        new
-                        {
-                            Code = "pair",
-                            Name = "Pair"
-                        },
-                        new
-                        {
-                            Code = "oz",
-                            Name = "Ounce"
-                        },
-                        new
-                        {
-                            Code = "floz",
-                            Name = "Fluid Ounce"
-                        },
-                        new
-                        {
-                            Code = "ac",
-                            Name = "Acre"
-                        },
-                        new
-                        {
-                            Code = "lot",
-                            Name = "Lot"
-                        },
-                        new
-                        {
-                            Code = "sin",
-                            Name = "Square Inch"
-                        },
-                        new
-                        {
-                            Code = "Other",
-                            Name = "Other"
-                        });
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Entity.Variant", b =>
