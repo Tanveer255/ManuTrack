@@ -20,7 +20,7 @@ public class ImpactedComponentDto : ImpactedComponent
     public new ImpactType ImpactType { get; set; }
     public new string Direction { get; set; } = string.Empty;
     public new Guid BatchId { get; set; }
-    public new Batch ProductBatch { get; set; }
+    public new Batch Batch { get; set; }
     public ImpactedComponent MapDtoToModel(ImpactedComponentDto dto)
     {
         return new ImpactedComponent()
@@ -35,7 +35,7 @@ public class ImpactedComponentDto : ImpactedComponent
             ImpactType = dto.ImpactType,
             Direction = dto.Direction,
             BatchId = dto.BatchId,
-            ProductBatch = dto.ProductBatch,
+            Batch = dto.Batch,
 
         };
     }
@@ -53,7 +53,7 @@ public class ImpactedComponentDto : ImpactedComponent
             ImpactType = entity.ImpactType,
             Direction = entity.Direction,
             BatchId = entity.BatchId,
-            ProductBatch = entity.ProductBatch,
+            Batch = entity.Batch,
 
         };
     }

@@ -15,7 +15,7 @@ public class ImpactedComponent : _Base
 
     [ForeignKey("Batch")]
     public Guid BatchId { get; set; }
-    public Batch ProductBatch { get; set; }
+    public Batch Batch { get; set; }
 
     [ForeignKey("Warehouse")]
     public Guid WarehouseId { get; set; }
