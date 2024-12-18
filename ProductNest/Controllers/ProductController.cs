@@ -6,6 +6,7 @@ using ProductNest.BLL.Interface;
 using ProductNest.Entity;
 using ProductNest.Entity.Commaon.Model;
 using ProductNest.Entity.Data;
+using ProductNest.Entity.Entity;
 using ProductNest.Enum;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,10 +18,25 @@ namespace ProductNest.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IVariantOptionService _variantOptionService;
+        private readonly IVariantService _variantService;
+        private readonly IBOMItemService _bOMItemService;
+        private readonly IPriceService _priceService;
+        private readonly IImageFileService _imageFileService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService,
+            IVariantOptionService variantOptionService,
+            IVariantService variantService,
+            IBOMItemService bOMItemService,
+            IPriceService priceService,
+            IImageFileService imageFileService)
         {
             _productService = productService;
+            _variantOptionService = variantOptionService;
+            _variantService = variantService;
+            _bOMItemService = bOMItemService;
+            _priceService = priceService;
+            _imageFileService = imageFileService;
         }
         //GET: api/<ProductController>
         [HttpGet]
@@ -44,8 +60,9 @@ namespace ProductNest.Controllers
             product.CreatedAt = DateTime.UtcNow;
             product.UpdatedAt = DateTime.UtcNow;
             product.Status = ProductStatus.Active.ToString();
-
+            await _productService.Add(product);
             // Add Product Variants if any
+            var VariantsAdd = new List<Variant>();
             if (product.Variants != null && product.Variants.Count > 0)
             {
                 foreach (var variant in product.Variants)
@@ -55,10 +72,14 @@ namespace ProductNest.Controllers
                     variant.CreatedAt = DateTime.UtcNow;
                     variant.UpdatedAt = DateTime.UtcNow;
                     variant.Status = ProductStatus.Active.ToString();
+                    VariantsAdd.Add(variant);
                 }
             }
+            if (VariantsAdd.Any())
+            _variantService.Add(VariantsAdd);
 
             // Add BOM items if any
+            var billOfMaterialsAdd = new List<BOMItem>();
             if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
             {
                 foreach (var material in product.BillOfMaterials)
@@ -66,10 +87,13 @@ namespace ProductNest.Controllers
                     material.BomItemId = GenerateId();
                     material.CreatedAt = DateTime.UtcNow;
                     material.UpdatedAt = DateTime.UtcNow;
+                    billOfMaterialsAdd.Add(material);
                 }
             }
-
+            if (!billOfMaterialsAdd.Any())
+            _bOMItemService.Add(billOfMaterialsAdd);
             // Add ImageFiles if any
+            var imageFilesAdd = new List<ImageFile>();
             if (product.ImageFiles != null && product.ImageFiles.Count > 0)
             {
                 foreach (var imageFile in product.ImageFiles)
@@ -77,11 +101,13 @@ namespace ProductNest.Controllers
                     imageFile.ProductId = product.ProductId;
                     imageFile.CreatedAt = DateTime.UtcNow;
                     imageFile.UpdatedAt = DateTime.UtcNow;
+                    imageFilesAdd.Add(imageFile);
                 }
             }
-
+            if(imageFilesAdd.Any())
+                _imageFileService.Add(imageFilesAdd);
             // Add the product using service layer
-            await _productService.Add(product);
+           
 
             // Return a structured response
             return CreatedAtAction(nameof(GetProductById),
