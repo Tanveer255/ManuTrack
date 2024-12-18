@@ -1,19 +1,18 @@
 ﻿using ProductNest.Entity;
-using ProductNest.Entity.Manufacturing;
+using ProductNest.Entity.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductNest.DAL.Interface.Manufacturing;
-
-public interface IBatchRepository : IRepository<Batch>
+namespace ProductNest.DAL.Interface;
+public interface IVariantOptionRepository : IRepository<VariantOption>
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Task<Batch> GetById(Guid id);
+    public Task<VariantOption> GetById(Guid id);
 }

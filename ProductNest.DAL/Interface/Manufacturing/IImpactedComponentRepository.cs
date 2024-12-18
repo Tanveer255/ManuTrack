@@ -1,5 +1,4 @@
-﻿using ProductNest.Entity;
-using ProductNest.Entity.Manufacturing;
+﻿using ProductNest.Entity.Manufacturing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProductNest.DAL.Interface.Manufacturing;
-
-public interface IBatchRepository : IRepository<Batch>
+public interface IImpactedComponentRepository : IRepository<ImpactedComponent>
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Task<Batch> GetById(Guid id);
+    public Task<ImpactedComponent> GetById(Guid id);
 }

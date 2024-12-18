@@ -12,8 +12,8 @@ namespace ProductNest.Entity.Entity;
 [Table("Inventory")]
 public class Inventory : _Base
 {
-    public long ProductId { get; set; }
     public long InventoryId { get; set; }
+    public long ProductId { get; set; }
     public string ProductName { get; set; }
     public string Status { get; set; }
     public string StorageLocation { get; set; }

@@ -1,19 +1,19 @@
 ﻿using ProductNest.Entity;
-using ProductNest.Entity.Manufacturing;
+using ProductNest.Entity.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductNest.DAL.Interface.Manufacturing;
+namespace ProductNest.DAL.Interface;
 
-public interface IBatchRepository : IRepository<Batch>
+public interface IImageFileRepository : IRepository<ImageFile>
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Task<Batch> GetById(Guid id);
+    public Task<ImageFile> GetById(Guid id);
 }

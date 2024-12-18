@@ -1,19 +1,19 @@
 ﻿using ProductNest.Entity;
-using ProductNest.Entity.Manufacturing;
+using ProductNest.Entity.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductNest.DAL.Interface.Manufacturing;
+namespace ProductNest.BLL.Interface;
 
-public interface IBatchRepository : IRepository<Batch>
+public interface IInventoryService : ICrudService<Inventory>
 {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="Id"></param>
     /// <returns></returns>
-    public Task<Batch> GetById(Guid id);
+    public Task<Inventory> GetById(Guid Id);
 }

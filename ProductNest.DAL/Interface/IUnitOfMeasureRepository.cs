@@ -1,4 +1,5 @@
 ﻿using ProductNest.Entity;
+using ProductNest.Entity.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProductNest.DAL.Interface;
-
-public interface IBOMItemRepository : IRepository<BOMItem>
+public interface IUnitOfMeasureRepository : IRepository<UnitOfMeasure>
 {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="code"></param>
     /// <returns></returns>
-    public Task<BOMItem> GetById(Guid id);
+    public Task<UnitOfMeasure> GetById(string code);
 }

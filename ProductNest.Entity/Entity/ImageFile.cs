@@ -19,4 +19,8 @@ public class ImageFile:_Base
     public int Height { get; set; }
     public string Src { get; set; }
     public List<long> VariantIds { get; set; }
+    public ImageFile()
+    {
+        VariantIds = new List<long>();
+    }
 }
