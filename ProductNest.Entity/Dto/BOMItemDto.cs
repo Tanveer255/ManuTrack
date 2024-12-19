@@ -5,7 +5,7 @@ namespace ProductNest.Dto;
 public class BOMItemDto : BOMItem
 {
     public new string MaterialName { get; set; } = string.Empty;
-    public new long InventoryId { get; set; }
+    public new Guid? InventoryId { get; set; }
     public new string UnitOfMeasure { get; set; } = string.Empty;
     public BOMItem MapDtoToModel(BOMItemDto dto)
     {

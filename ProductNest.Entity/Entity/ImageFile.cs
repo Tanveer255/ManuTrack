@@ -10,10 +10,10 @@ namespace ProductNest.Entity.Entity;
 [Table("ImageFile")]
 public class ImageFile:_Base
 {
-    public long ImageFileId { get; set; }
+    public Guid? ImageFileId { get; set; }
     public string Alt { get; set; }
     public int Position { get; set; }
-    public long ProductId { get; set; }
+    public Guid? ProductId { get; set; }
     public string AdminGraphqlApiId { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }

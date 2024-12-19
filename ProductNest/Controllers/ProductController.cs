@@ -23,13 +23,15 @@ namespace ProductNest.Controllers
         private readonly IBOMItemService _bOMItemService;
         private readonly IPriceService _priceService;
         private readonly IImageFileService _imageFileService;
+        private readonly IWarehouseService _warehouseService;
 
         public ProductController(IProductService productService,
             IVariantOptionService variantOptionService,
             IVariantService variantService,
             IBOMItemService bOMItemService,
             IPriceService priceService,
-            IImageFileService imageFileService)
+            IImageFileService imageFileService,
+            IWarehouseService warehouseService)
         {
             _productService = productService;
             _variantOptionService = variantOptionService;
@@ -37,6 +39,7 @@ namespace ProductNest.Controllers
             _bOMItemService = bOMItemService;
             _priceService = priceService;
             _imageFileService = imageFileService;
+            _warehouseService = warehouseService;
         }
         //GET: api/<ProductController>
         [HttpGet]
@@ -84,7 +87,6 @@ namespace ProductNest.Controllers
             {
                 foreach (var material in product.BillOfMaterials)
                 {
-                    material.BomItemId = GenerateId();
                     material.CreatedAt = DateTime.UtcNow;
                     material.UpdatedAt = DateTime.UtcNow;
                     billOfMaterialsAdd.Add(material);
@@ -98,7 +100,7 @@ namespace ProductNest.Controllers
             {
                 foreach (var imageFile in product.ImageFiles)
                 {
-                    imageFile.ProductId = product.ProductId;
+                    imageFile.ProductId = product.Id;
                     imageFile.CreatedAt = DateTime.UtcNow;
                     imageFile.UpdatedAt = DateTime.UtcNow;
                     imageFilesAdd.Add(imageFile);

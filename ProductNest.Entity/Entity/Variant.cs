@@ -12,6 +12,7 @@ public class Variant : _BaseProduct
 {
     public long VariantId { get; set; }
     public long ParentProductId { get; set; }
+    public Guid? ProductId { get; set; }
     public string Price { get; set; }
     public int Position { get; set; }
     public string InventoryPolicy { get; set; }
@@ -28,7 +29,7 @@ public class Variant : _BaseProduct
     public string Sku { get; set; }
     public double Weight { get; set; }
     public string WeightUnit { get; set; }
-    public long InventoryId { get; set; }
+    public Guid? InventoryId { get; set; }
     public int InventoryQuantity { get; set; }
     public int OldInventoryQuantity { get; set; }
     public List<PresentmentPrice> PresentmentPrices { get; set; }

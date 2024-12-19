@@ -23,7 +23,7 @@ public class Product : _BaseProduct
     //[ForeignKey("Price")]
     //public Guid PriceId { get; set; }
     //public Price Price { get; set; }
-    public Price Price { get; set; }
+    //public Price Price { get; set; }
     public List<BOMItem> BillOfMaterials { get; set; }
     public List<Variant> Variants { get; set; }
     public List<VariantOption> Options { get; set; }
@@ -33,7 +33,6 @@ public class Product : _BaseProduct
     {
         CreatedAt = DateTime.Now;
         UpdatedAt = DateTime.Now;
-        Price = new Price();
         BillOfMaterials = new List<BOMItem>();
         Variants = new List<Variant>();
         Options = new List<VariantOption>();

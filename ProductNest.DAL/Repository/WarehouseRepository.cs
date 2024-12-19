@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ProductNest.DAL.Interface;
 using ProductNest.Entity;
 using ProductNest.Entity.Entity;
@@ -19,37 +20,44 @@ public class WarehouseRepository : Repository<Warehouse>, IWarehouseRepository
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
-    public async Task<Warehouse> GetById(Guid id)
+    public async Task<Warehouse> GetByIdAsync(Guid id)
     {
-        Warehouse warehouse = new Warehouse();
         try
         {
-            _logger.LogError("Getting bOMItem by Id");
-            warehouse = (from ware in _unitOfWork.Context.Warehouse
-                       where
-                       ware.Id.Equals(id)
-                       && ware.IsDeleted.Equals(false)
+            _logger.LogInformation("Getting Warehouse by Id: {Id}", id);
 
-                       select new Warehouse
-                       {
-                           WarehouseId = ware.WarehouseId,
-                           Zone = ware.Zone,
-                           Aisle = ware.Aisle,
-                           Location = ware.Location,
-                           Shelf = ware.Shelf,
-                           Rack = ware.Rack,
-                           Bay = ware.Bay,
-                           VariantId = ware.VariantId,
-                           Variant = ware.Variant,
-                           Inventory = ware.Inventory,
-                       }).FirstOrDefault();
+            var warehouse = await (from ware in _unitOfWork.Context.Warehouse
+                                   where ware.Id == id && !ware.IsDeleted
+                                   select new Warehouse
+                                   {
+                                       WarehouseId = ware.WarehouseId,
+                                       Zone = ware.Zone,
+                                       Aisle = ware.Aisle,
+                                       Location = ware.Location,
+                                       Shelf = ware.Shelf,
+                                       Rack = ware.Rack,
+                                       Bay = ware.Bay,
+                                       VariantId = ware.VariantId,
+                                       Variant = ware.Variant,
+                                       Inventory = ware.Inventory,
+                                   }).FirstOrDefaultAsync();
+
+            if (warehouse == null)
+            {
+                _logger.LogWarning("Warehouse with Id: {Id} not found.", id);
+            }
+            else
+            {
+                _logger.LogInformation("Returning Warehouse: {Warehouse}", warehouse);
+            }
+
+            return warehouse;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, ex.Message, ex.InnerException, ex.InnerException != null ? ex.InnerException.Message : string.Empty);
-            throw new Exception(ex.Message, ex.InnerException);
+            _logger.LogError(ex, "Error while fetching Warehouse with Id: {Id}", id);
+            throw; // Re-throw the original exception to preserve the stack trace
         }
-        _logger.LogError("Returning warehouse :" + warehouse);
-        return await Task.FromResult(warehouse);
     }
+
 }

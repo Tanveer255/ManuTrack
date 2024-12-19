@@ -32,7 +32,7 @@ public class WarehouseService : CrudService<Warehouse>, IWarehouseService
     /// <returns></returns>
     public async Task<Warehouse> GetById(Guid id)
     {
-        var result = await _warehouseRepository.GetById(id);
+        var result = await _warehouseRepository.GetByIdAsync(id);
         return result;
     }
     public async Task<List<Warehouse>> GetAllDataAsync()

@@ -14,5 +14,5 @@ public interface IWarehouseRepository : IRepository<Warehouse>
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Task<Warehouse> GetById(Guid id);
+    public Task<Warehouse> GetByIdAsync(Guid id);
 }

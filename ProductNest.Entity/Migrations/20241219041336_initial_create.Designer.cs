@@ -12,8 +12,8 @@ using ProductNest.Entity.Data;
 namespace ProductNest.Entity.Migrations
 {
     [DbContext(typeof(ProductNestDbContext))]
-    [Migration("20241217185608_removePrice_forigenKeyandAddedPriceObjectInProduct")]
-    partial class removePrice_forigenKeyandAddedPriceObjectInProduct
+    [Migration("20241219041336_initial_create")]
+    partial class initial_create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,11 +31,14 @@ namespace ProductNest.Entity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("BomItemId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("BomItemId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("InventoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -49,9 +52,6 @@ namespace ProductNest.Entity.Migrations
 
                     b.Property<Guid?>("ProductId1")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UnitOfMeasure")
                         .IsRequired()
@@ -91,8 +91,8 @@ namespace ProductNest.Entity.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<long>("ImageFileId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("ImageFileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -100,10 +100,7 @@ namespace ProductNest.Entity.Migrations
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<Guid?>("ProductId1")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Src")
@@ -122,7 +119,7 @@ namespace ProductNest.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId1");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ImageFile", (string)null);
                 });
@@ -554,8 +551,8 @@ namespace ProductNest.Entity.Migrations
                     b.Property<long?>("ImageId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("InventoryId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("InventoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("InventoryManagement")
                         .IsRequired()
@@ -668,10 +665,7 @@ namespace ProductNest.Entity.Migrations
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<Guid?>("ProductId1")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -681,12 +675,12 @@ namespace ProductNest.Entity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("VariantOptionId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("VariantOptionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId1");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("VariantOption", (string)null);
                 });
@@ -957,9 +951,6 @@ namespace ProductNest.Entity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PriceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
@@ -1005,8 +996,6 @@ namespace ProductNest.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PriceId");
-
                     b.ToTable("Product", (string)null);
                 });
 
@@ -1021,7 +1010,7 @@ namespace ProductNest.Entity.Migrations
                 {
                     b.HasOne("ProductNest.Entity.Product", null)
                         .WithMany("ImageFiles")
-                        .HasForeignKey("ProductId1");
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Entity.Inventory", b =>
@@ -1069,7 +1058,7 @@ namespace ProductNest.Entity.Migrations
                 {
                     b.HasOne("ProductNest.Entity.Product", null)
                         .WithMany("Options")
-                        .HasForeignKey("ProductId1");
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Entity.Warehouse", b =>
@@ -1154,17 +1143,6 @@ namespace ProductNest.Entity.Migrations
                     b.Navigation("Inventory");
 
                     b.Navigation("Warehouse");
-                });
-
-            modelBuilder.Entity("ProductNest.Entity.Product", b =>
-                {
-                    b.HasOne("ProductNest.Entity.Entity.Price", "Price")
-                        .WithMany()
-                        .HasForeignKey("PriceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Price");
                 });
 
             modelBuilder.Entity("ProductNest.Entity.Entity.Variant", b =>

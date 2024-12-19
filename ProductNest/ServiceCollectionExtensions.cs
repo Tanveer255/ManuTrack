@@ -46,7 +46,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IVariantOptionRepository, VariantOptionRepository>();
         services.AddScoped<IVariantRepository, VariantRepository>();
-        services.AddScoped<IWarehouseRepository, IWarehouseRepository>();
+        services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 
         return services;
     }

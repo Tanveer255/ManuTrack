@@ -10,9 +10,9 @@ namespace ProductNest.Entity;
 
 public class BOMItem : _Base
 {
-    public long BomItemId { get; set; }
+    public Guid? BomItemId { get; set; }
     public string MaterialName { get; set; } = string.Empty;
-    public long InventoryId { get; set; }
+    public Guid? InventoryId { get; set; }
     public string UnitOfMeasure { get; set; } = string.Empty;
     public long ProductId { get; set; }
     public string Version { get; set; }
