@@ -46,6 +46,7 @@ public class Batch : _Base
     public Batch()
     {
         Status = BatchStatus.NotStarted.ToString();
+        BatchId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
     }
 }
 

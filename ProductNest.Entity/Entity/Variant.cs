@@ -34,4 +34,8 @@ public class Variant : _BaseProduct
     public int OldInventoryQuantity { get; set; }
     public List<PresentmentPrice> PresentmentPrices { get; set; }
     public long? ImageId { get; set; }
+    public Variant()
+    {
+        VariantId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
+    }
 }

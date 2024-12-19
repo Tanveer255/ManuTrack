@@ -25,5 +25,6 @@ public class Warehouse : _Base
     public Warehouse()
     {
         Inventory = new List<Inventory>();
+        WarehouseId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
     }
 }

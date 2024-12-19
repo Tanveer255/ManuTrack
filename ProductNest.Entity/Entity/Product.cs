@@ -31,6 +31,7 @@ public class Product : _BaseProduct
     //public Image Image { get; set; }
     public Product()
     {
+        ProductId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
         CreatedAt = DateTime.Now;
         UpdatedAt = DateTime.Now;
         BillOfMaterials = new List<BOMItem>();

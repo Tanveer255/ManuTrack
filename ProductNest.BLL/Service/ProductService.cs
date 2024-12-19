@@ -23,11 +23,11 @@ public class ProductService : CrudService<Product>, IProductService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="productId"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<Product> GetById(Guid productId)
+    public async Task<Product> GetById(Guid id)
     {
-        var products = await _productRepository.GetById(productId);
+        var products = await _productRepository.GetById(id);
         return products;
     }
     public async Task<List<Product>> GetAllDataAsync()

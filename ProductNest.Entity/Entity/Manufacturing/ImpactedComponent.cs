@@ -25,4 +25,8 @@ public class ImpactedComponent : _Base
     [ForeignKey("Inventory")]
     public Guid InventoryId { get; set; }
     public Inventory Inventory { get; set; }
+    public ImpactedComponent()
+    {
+        ImpactedComponentId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
+    }
 }

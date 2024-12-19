@@ -39,5 +39,6 @@ public class Inventory : _Base
     public Inventory()
     {
         Status = StockStatus.Available.ToString();
+        InventoryId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
     }
 }

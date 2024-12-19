@@ -60,8 +60,6 @@ namespace ProductNest.Controllers
 
             // Set default values for tracking
             product.ProductId = GenerateId();
-            product.CreatedAt = DateTime.UtcNow;
-            product.UpdatedAt = DateTime.UtcNow;
             product.Status = ProductStatus.Active.ToString();
 
             if (product.Variants != null && product.Variants.Count > 0)
@@ -69,9 +67,8 @@ namespace ProductNest.Controllers
                 foreach (var variant in product.Variants)
                 {
                     variant.ParentProductId = product.ProductId;
+                    variant.ProductId = product.Id;
                     variant.VariantId = GenerateId();
-                    variant.CreatedAt = DateTime.UtcNow;
-                    variant.UpdatedAt = DateTime.UtcNow;
                     variant.Status = ProductStatus.Active.ToString();
                 }
             }
@@ -82,8 +79,7 @@ namespace ProductNest.Controllers
             {
                 foreach (var material in product.BillOfMaterials)
                 {
-                    material.CreatedAt = DateTime.UtcNow;
-                    material.UpdatedAt = DateTime.UtcNow;
+                    material.ProductId = product.ProductId;
                 }
             }
             // Add ImageFiles if any
@@ -92,8 +88,6 @@ namespace ProductNest.Controllers
                 foreach (var imageFile in product.ImageFiles)
                 {
                     imageFile.ProductId = product.Id;
-                    imageFile.CreatedAt = DateTime.UtcNow;
-                    imageFile.UpdatedAt = DateTime.UtcNow;
                 }
             }
             // Add the product using service layer

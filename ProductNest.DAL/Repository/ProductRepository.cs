@@ -16,7 +16,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
-    public async Task<Product> GetById(Guid productId)
+    public async Task<Product> GetById(Guid id)
     {
         Product product = new Product();
         try
@@ -24,12 +24,13 @@ public class ProductRepository : Repository<Product>, IProductRepository
             _logger.LogError("Getting products by Id");
             product = (from pro in _unitOfWork.Context.Product
                        where
-                       pro.Id.Equals(productId)
-                       && pro.Status == Enum.ProductStatus.Active.ToString()
-                       && pro.IsDeleted.Equals(false)
+                       pro.Id.Equals(id)
+                       //&& pro.Status == Enum.ProductStatus.Active.ToString()
+                       //&& pro.IsDeleted.Equals(false)
 
                        select new Product
                        {
+                           Id = pro.Id,
                            ProductId = pro.ProductId,
                            Name = pro.Name,
                            Description = pro.Description,
@@ -40,6 +41,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
                            ReorderLevel = pro.ReorderLevel,
                            LeadTimeInDays = pro.LeadTimeInDays,
                            BillOfMaterials = pro.BillOfMaterials,
+                           Options = pro.Options,
                            Variants = pro.Variants,
                            ImageFiles = pro.ImageFiles,
                        }).FirstOrDefault();

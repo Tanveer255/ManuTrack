@@ -80,7 +80,7 @@ namespace ProductNest.Entity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BomItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BomItemId = table.Column<long>(type: "bigint", nullable: false),
                     MaterialName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InventoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UnitOfMeasure = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -106,7 +106,7 @@ namespace ProductNest.Entity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ImageFileId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ImageFileId = table.Column<long>(type: "bigint", nullable: false),
                     Alt = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -183,7 +183,7 @@ namespace ProductNest.Entity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    VariantOptionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    VariantOptionId = table.Column<long>(type: "bigint", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false),

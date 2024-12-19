@@ -28,8 +28,8 @@ namespace ProductNest.Entity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BomItemId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("BomItemId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -88,8 +88,8 @@ namespace ProductNest.Entity.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ImageFileId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("ImageFileId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -672,8 +672,8 @@ namespace ProductNest.Entity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("VariantOptionId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("VariantOptionId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

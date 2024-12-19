@@ -13,4 +13,8 @@ public class CompletedPart : _Base
     [ForeignKey("Batch")]
     public Guid BatchId { get; set; }
     public Batch Batch { get; set; }
+    public CompletedPart()
+    {
+        CompletePartId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
+    }
 }

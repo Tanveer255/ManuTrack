@@ -21,5 +21,9 @@ public class Price:_Base
     public decimal UnitPrice { get; set; }
     [Precision(18, 4)]
     public decimal SellingPrice { get; set; }
+    public Price()
+    {
+        PriceId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
+    }
 
 }

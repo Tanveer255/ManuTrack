@@ -10,7 +10,7 @@ namespace ProductNest.Entity.Entity;
 [Table("ImageFile")]
 public class ImageFile:_Base
 {
-    public Guid? ImageFileId { get; set; }
+    public long ImageFileId { get; set; }
     public string Alt { get; set; }
     public int Position { get; set; }
     public Guid? ProductId { get; set; }
@@ -22,5 +22,6 @@ public class ImageFile:_Base
     public ImageFile()
     {
         VariantIds = new List<long>();
+        ImageFileId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
     }
 }
