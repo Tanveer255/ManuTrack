@@ -63,9 +63,7 @@ namespace ProductNest.Controllers
             product.CreatedAt = DateTime.UtcNow;
             product.UpdatedAt = DateTime.UtcNow;
             product.Status = ProductStatus.Active.ToString();
-            await _productService.Add(product);
-            // Add Product Variants if any
-            var VariantsAdd = new List<Variant>();
+
             if (product.Variants != null && product.Variants.Count > 0)
             {
                 foreach (var variant in product.Variants)
@@ -75,11 +73,8 @@ namespace ProductNest.Controllers
                     variant.CreatedAt = DateTime.UtcNow;
                     variant.UpdatedAt = DateTime.UtcNow;
                     variant.Status = ProductStatus.Active.ToString();
-                    VariantsAdd.Add(variant);
                 }
             }
-            if (VariantsAdd.Any())
-            _variantService.Add(VariantsAdd);
 
             // Add BOM items if any
             var billOfMaterialsAdd = new List<BOMItem>();
@@ -89,13 +84,9 @@ namespace ProductNest.Controllers
                 {
                     material.CreatedAt = DateTime.UtcNow;
                     material.UpdatedAt = DateTime.UtcNow;
-                    billOfMaterialsAdd.Add(material);
                 }
             }
-            if (!billOfMaterialsAdd.Any())
-            _bOMItemService.Add(billOfMaterialsAdd);
             // Add ImageFiles if any
-            var imageFilesAdd = new List<ImageFile>();
             if (product.ImageFiles != null && product.ImageFiles.Count > 0)
             {
                 foreach (var imageFile in product.ImageFiles)
@@ -103,13 +94,10 @@ namespace ProductNest.Controllers
                     imageFile.ProductId = product.Id;
                     imageFile.CreatedAt = DateTime.UtcNow;
                     imageFile.UpdatedAt = DateTime.UtcNow;
-                    imageFilesAdd.Add(imageFile);
                 }
             }
-            if(imageFilesAdd.Any())
-                _imageFileService.Add(imageFilesAdd);
             // Add the product using service layer
-           
+            await _productService.Add(product);
 
             // Return a structured response
             return CreatedAtAction(nameof(GetProductById),
@@ -135,10 +123,24 @@ namespace ProductNest.Controllers
         {
         }
 
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(Guid id)
         {
+            try
+            {
+                var product = _productService.GetById(id);
+                if (product == null)
+                {
+                    return NotFound(new { message = "Product not found" });
+                }
+
+                //_productService.Delete(id); // Pass the Guid to the Delete method
+                return Ok(new { message = "Product deleted successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred", error = ex.Message });
+            }
         }
         // Helper function to generate ProductId
         private long GenerateId()
