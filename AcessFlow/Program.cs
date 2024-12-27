@@ -1,7 +1,17 @@
+using AcessFlow.BLL.Interfaces;
+using AcessFlow.DAL.Interface;
+using AcessFlow.Entity.Data;
+using AcessFlow.Entity.Entity.Identity;
+using EBS.DAL.Interface;
+using EBS.DAL.Repository;
+using AcessFlow.BLL.Services;
 using JwtAuthentication.Interface;
 using JwtAuthentication.Model;
 using JwtAuthentication.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -14,6 +24,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddDbContext<AcessFlowDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AcessFlowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+        .AddEntityFrameworkStores<AcessFlowDbContext>();
+
+builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+//Servises...
+builder.Services.AddTransient(typeof(ICrudService<>), typeof(CrudService<>));
 #region For Swagger
 builder.Services
       .AddSwaggerGen(c =>
