@@ -43,10 +43,16 @@ namespace ProductNest.Controllers
         }
         //GET: api/<ProductController>
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
-            return await _productService.GetAllDataAsync();
+            var products = await _productService.GetAllDataAsync();
+
+            if (products == null || !products.Any())
+            {
+                return NotFound("No products available.");
+            }
+            return Ok(products);
         }
 
         // POST: api/products

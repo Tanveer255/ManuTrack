@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProductNest.Entity.Product>
+
+@{
+    ViewData["Title"] = "Products List";
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h1 class="text-2xl font-bold mb-4">Products</h1>
+    <h1 class="text-3xl font-bold underline">
+        Hello world!
+    </h1>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow">
+            <thead class="bg-gray-100 border-b border-gray-200">
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Product ID</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Name</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Description</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">SKU</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Unit Cost</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Stock Level</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Reorder Level</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Lead Time (Days)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.ProductId</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.Name</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.Description</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.SKU</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.UnitCost.ToString("C")</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.StockLevel</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.ReorderLevel</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">@product.LeadTimeInDays</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="d:\devenvirnment\manutrack\manutrackui\wwwroot\js\productnest\product.js"></script>
