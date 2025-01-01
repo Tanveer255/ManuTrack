@@ -20,21 +20,16 @@ public class Product : _BaseProduct
     public int ReorderLevel { get; set; }
     public int LeadTimeInDays { get; set; }
 
-    //[ForeignKey("Price")]
-    //public Guid PriceId { get; set; }
-    //public Price Price { get; set; }
-    //public Price Price { get; set; }
-    public List<BOMItem> BillOfMaterials { get; set; }
+    //public List<BOMItem> BillOfMaterials { get; set; }
     public List<Variant> Variants { get; set; }
     public List<VariantOption> Options { get; set; }
     public List<ImageFile> ImageFiles { get; set; }
-    //public Image Image { get; set; }
     public Product()
     {
         ProductId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
         CreatedAt = DateTime.Now;
         UpdatedAt = DateTime.Now;
-        BillOfMaterials = new List<BOMItem>();
+        //BillOfMaterials = new List<BOMItem>();
         Variants = new List<Variant>();
         Options = new List<VariantOption>();
         ImageFiles = new List<ImageFile>();

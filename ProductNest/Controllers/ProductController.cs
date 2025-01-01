@@ -57,53 +57,188 @@ namespace ProductNest.Controllers
 
         // POST: api/products
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] Product product)
+        public async Task<IActionResult> SaveProduct([FromBody] Product product)
         {
             if (product == null)
             {
                 return BadRequest(new ApiResponse<string>(false, "Product data is null.", null));
             }
 
-            // Set default values for tracking
-            product.ProductId = GenerateId();
-            product.Status = ProductStatus.Active.ToString();
+            // Check if the product exists
+            var existingProduct = await _productService.GetById(product.Id);
 
-            if (product.Variants != null && product.Variants.Count > 0)
+            if (existingProduct != null)
             {
-                foreach (var variant in product.Variants)
-                {
-                    variant.ParentProductId = product.ProductId;
-                    variant.ProductId = product.Id;
-                    variant.VariantId = GenerateId();
-                    variant.Status = ProductStatus.Active.ToString();
-                }
-            }
+                // Update existing product
+                existingProduct.Title = product.Title;
+                existingProduct.BodyHtml = product.BodyHtml;
+                existingProduct.Vendor = product.Vendor;
+                existingProduct.ProductType = product.ProductType;
+                existingProduct.Tags = product.Tags;
+                existingProduct.Status = product.Status;
+                existingProduct.Name = product.Name;
+                existingProduct.Description = product.Description;
+                existingProduct.SKU = product.SKU;
+                existingProduct.UnitOfMeasure = product.UnitOfMeasure;
+                existingProduct.UnitCost = product.UnitCost;
+                existingProduct.StockLevel = product.StockLevel;
+                existingProduct.ReorderLevel = product.ReorderLevel;
+                existingProduct.LeadTimeInDays = product.LeadTimeInDays;
 
-            // Add BOM items if any
-            var billOfMaterialsAdd = new List<BOMItem>();
-            if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
-            {
-                foreach (var material in product.BillOfMaterials)
+                if (product.Variants != null && product.Variants.Count > 0)
                 {
-                    material.ProductId = product.ProductId;
+                    foreach (var variant in product.Variants)
+                    {
+                        var existingVariant = existingProduct.Variants.FirstOrDefault(v => v.VariantId == variant.VariantId);
+                        if (existingVariant != null)
+                        {
+                            // Update variant
+                            existingVariant.Status = variant.Status;
+                        }
+                        else
+                        {
+                            // Add new variant
+                            variant.ParentProductId = existingProduct.ProductId;
+                            variant.VariantId = GenerateId();
+                            variant.Status = ProductStatus.Active.ToString();
+                            existingProduct.Variants.Add(variant);
+                        }
+                    }
                 }
-            }
-            // Add ImageFiles if any
-            if (product.ImageFiles != null && product.ImageFiles.Count > 0)
-            {
-                foreach (var imageFile in product.ImageFiles)
-                {
-                    imageFile.ProductId = product.Id;
-                }
-            }
-            // Add the product using service layer
-            await _productService.Add(product);
 
-            // Return a structured response
-            return CreatedAtAction(nameof(GetProductById),
-                new { id = product.Id },
-                new ApiResponse<Product>(true, "Product created successfully.", product));
+                //if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
+                //{
+                //    foreach (var material in product.BillOfMaterials)
+                //    {
+                //        var existingMaterial = existingProduct.BillOfMaterials.FirstOrDefault(m => m.Id == material.Id);
+                //        if (existingMaterial != null)
+                //        {
+                //            // Update BOM item
+                //            existingMaterial.Name = material.Name;
+                //            existingMaterial.Quantity = material.Quantity;
+                //        }
+                //        else
+                //        {
+                //            // Add new BOM item
+                //            material.ProductId = existingProduct.ProductId;
+                //            existingProduct.BillOfMaterials.Add(material);
+                //        }
+                //    }
+                //}
+
+                if (product.ImageFiles != null && product.ImageFiles.Count > 0)
+                {
+                    foreach (var imageFile in product.ImageFiles)
+                    {
+                        var existingImage = existingProduct.ImageFiles.FirstOrDefault(i => i.Id == imageFile.Id);
+                        if (existingImage != null)
+                        {
+                            // Update ImageFile
+                            existingImage.UpdatedAt = imageFile.UpdatedAt;
+                        }
+                        else
+                        {
+                            // Add new ImageFile
+                            //imageFile.ProductId = existingProduct.ProductId;
+                            existingProduct.ImageFiles.Add(imageFile);
+                        }
+                    }
+                }
+
+                // Update the product using service layer
+                await _productService.Update(existingProduct);
+
+                return Ok(new ApiResponse<Product>(true, "Product updated successfully.", existingProduct));
+            }
+            else
+            {
+                // Create new product
+                product.ProductId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
+                product.Status = ProductStatus.Active.ToString();
+
+                if (product.Variants != null && product.Variants.Count > 0)
+                {
+                    foreach (var variant in product.Variants)
+                    {
+                        variant.ParentProductId = product.ProductId;
+                        variant.VariantId = GenerateId();
+                        variant.Status = ProductStatus.Active.ToString();
+                    }
+                }
+
+                //if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
+                //{
+                //    foreach (var material in product.BillOfMaterials)
+                //    {
+                //        material.ProductId = product.ProductId;
+                //    }
+                //}
+
+                if (product.ImageFiles != null && product.ImageFiles.Count > 0)
+                {
+                    foreach (var imageFile in product.ImageFiles)
+                    {
+                        //imageFile.ProductId = product.ProductId;
+                    }
+                }
+
+                // Add the product using service layer
+                await _productService.Add(product);
+
+                return CreatedAtAction(nameof(GetProductById),
+                    new { id = product.ProductId },
+                    new ApiResponse<Product>(true, "Product created successfully.", product));
+            }
         }
+
+
+        //public async Task<IActionResult> CreateProduct([FromBody] Product product)
+        //{
+        //    if (product == null)
+        //    {
+        //        return BadRequest(new ApiResponse<string>(false, "Product data is null.", null));
+        //    }
+
+        //    // Set default values for tracking
+        //    product.ProductId = GenerateId();
+        //    product.Status = ProductStatus.Active.ToString();
+
+        //    if (product.Variants != null && product.Variants.Count > 0)
+        //    {
+        //        foreach (var variant in product.Variants)
+        //        {
+        //            variant.ParentProductId = product.ProductId;
+        //            variant.ProductId = product.Id;
+        //            variant.VariantId = GenerateId();
+        //            variant.Status = ProductStatus.Active.ToString();
+        //        }
+        //    }
+
+        //    // Add BOM items if any
+        //    var billOfMaterialsAdd = new List<BOMItem>();
+        //    if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
+        //    {
+        //        foreach (var material in product.BillOfMaterials)
+        //        {
+        //            material.ProductId = product.ProductId;
+        //        }
+        //    }
+        //    // Add ImageFiles if any
+        //    if (product.ImageFiles != null && product.ImageFiles.Count > 0)
+        //    {
+        //        foreach (var imageFile in product.ImageFiles)
+        //        {
+        //            imageFile.ProductId = product.Id;
+        //        }
+        //    }
+        //    // Add the product using service layer
+        //    await _productService.Add(product);
+
+        //    // Return a structured response
+        //    return CreatedAtAction(nameof(GetProductById),
+        //        new { id = product.Id },
+        //        new ApiResponse<Product>(true, "Product created successfully.", product));
+        //}
         // GET: api/products/{id} (helper method to return a specific product)
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(Guid id)

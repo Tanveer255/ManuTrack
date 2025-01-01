@@ -40,7 +40,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
                            StockLevel = pro.StockLevel,
                            ReorderLevel = pro.ReorderLevel,
                            LeadTimeInDays = pro.LeadTimeInDays,
-                           BillOfMaterials = pro.BillOfMaterials,
+                           //BillOfMaterials = pro.BillOfMaterials,
                            Options = pro.Options,
                            Variants = pro.Variants,
                            ImageFiles = pro.ImageFiles,

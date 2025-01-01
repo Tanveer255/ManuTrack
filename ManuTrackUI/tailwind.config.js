@@ -2,7 +2,8 @@
 module.exports = {
     content: [
         "./**/*.{razor,html,cshtml}", // Paths to Razor, HTML, and cshtml files
-        "./node_modules/flowbite/**/*.js" // Include Flowbite components
+        "./node_modules/flowbite/**/*.js",// Include Flowbite components
+        './wwwroot/**/*.js',   // Include your JavaScript files
     ],
     theme: {
         extend: {}, // Extend default TailwindCSS theme
