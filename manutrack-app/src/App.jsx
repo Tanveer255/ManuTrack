@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
+import ProductDashboard from './pages/Product/ProductDashboard';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
@@ -24,8 +25,9 @@ const App = () => {
                                 <div className="flex-grow p-4">
                                     <Routes>
                                         <Route path="/" element={<Dashboard />} />
+                                        <Route path="/Product/productDashboard" element={<ProductDashboard />} />
                                         <Route path="/users" element={<Users />} />
-                                        <Route path="/settings" element={<Settings />} />
+                                        <Route path="/settings" element={<Settings />} />S
                                     </Routes>
                                 </div>
                             </div>
