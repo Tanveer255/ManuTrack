@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
@@ -7,6 +7,7 @@ import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { isAuthenticated } from './auth/auth';
+import './index.css';
 
 const App = () => {
     return (
@@ -18,9 +19,9 @@ const App = () => {
                     path="/*"
                     element={
                         isAuthenticated() ? (
-                            <div style={{ display: 'flex' }}>
+                            <div className="flex">
                                 <Sidebar />
-                                <div style={{ flexGrow: 1, padding: '16px' }}>
+                                <div className="flex-grow p-4">
                                     <Routes>
                                         <Route path="/" element={<Dashboard />} />
                                         <Route path="/users" element={<Users />} />
