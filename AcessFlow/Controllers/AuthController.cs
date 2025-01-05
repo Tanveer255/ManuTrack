@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid credentials");
 
         var token = _jwtAuthenticationService.GenerateJwtToken(user.Username);
-        return Ok(token);
+        return Ok(new { token });
     }
 
     [HttpGet("secure")]
@@ -36,7 +36,7 @@ public class AuthController : ControllerBase
     public bool ValidateUser(UserModel user)
     {
         // Hardcoded for demo; use database in production
-        return user.Username == "admin" && user.Password == "admin123";
+        return user.Username == "admin@gmail.com" && user.Password == "admin123";
     }
     public class UserModel {
         public string Username { get; set; }
