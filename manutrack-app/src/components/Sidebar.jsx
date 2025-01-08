@@ -11,7 +11,7 @@ const Sidebar = () => {
     ];
 
     return (
-        <Box sx={{ width: 250, bgcolor: 'primary.main', height: '100vh', color: 'white' }}>
+        <Box sx={{ width: 250, bgcolor: 'bg-white', height: '100vh', color: 'white' }}>
             <List>
                 {menuItems.map((item) => (
                     <ListItem button component={Link} to={item.path} key={item.name}>

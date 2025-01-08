@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { getRequest, deleteRequest } from "../../AppRoute";
 
 const CreateProduct = () => {
     const [product, setProduct] = useState({
@@ -29,10 +29,10 @@ const CreateProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://localhost:7067/Product', product);
+            const response = await postRequest('/Product', product);
 
-            if (response.status === 201) {
-                console.log('Product created:', response.data);
+            if (response) {
+                console.log('Product created:', response);
                 navigate('/productDashboard'); // Redirect to the product dashboard page
             } else {
                 setError('Failed to create product');

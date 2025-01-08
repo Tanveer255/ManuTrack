@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getRequest, deleteRequest } from "../../AppRoute";
 
 const ProductDashboard = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Fetch products when the component mounts
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('https://localhost:7067/Product');
-                setProducts(response.data);
-                debugger;
+                const data = await getRequest('/Product');
+                setProducts(data);
             } catch (error) {
                 console.error('Error fetching products:', error);
             } finally {
@@ -22,10 +20,9 @@ const ProductDashboard = () => {
         fetchProducts();
     }, []);
 
-    // Handle Delete product
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:7067/Product/${id}`);
+            await deleteRequest(`/Product/${id}`);
             setProducts(products.filter(product => product.productId !== id));
         } catch (error) {
             console.error('Error deleting product:', error);
@@ -36,14 +33,12 @@ const ProductDashboard = () => {
         <div className="p-6">
             <h1 className="text-3xl font-semibold text-gray-900 mb-6">Product Dashboard</h1>
 
-            {/* Add Product Button */}
             <div className="mb-4">
                 <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                     Add New Product
                 </button>
             </div>
 
-            {/* Loading Spinner */}
             {isLoading ? (
                 <div className="flex justify-center">
                     <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent border-solid rounded-full animate-spin"></div>
