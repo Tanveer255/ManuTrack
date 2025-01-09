@@ -10,31 +10,33 @@ import Signup from './pages/Signup';
 import { isAuthenticated } from './auth/auth';
 import './index.css';
 
+// Layout for authenticated routes (with sidebar)
+const AuthenticatedLayout = () => (
+    <div className="flex">
+        <Sidebar />
+        <div className="flex-grow p-4">
+            <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/Product/productDashboard" element={<ProductDashboard />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/settings" element={<Settings />} />
+            </Routes>
+        </div>
+    </div>
+);
+
 const App = () => {
     return (
         <Router>
             <Routes>
+                {/* Unauthenticated routes */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+
+                {/* Authenticated routes */}
                 <Route
                     path="/*"
-                    element={
-                        isAuthenticated() ? (
-                            <div className="flex">
-                                <Sidebar />
-                                <div className="flex-grow p-4">
-                                    <Routes>
-                                        <Route path="/" element={<Dashboard />} />
-                                        <Route path="/Product/productDashboard" element={<ProductDashboard />} />
-                                        <Route path="/users" element={<Users />} />
-                                        <Route path="/settings" element={<Settings />} />S
-                                    </Routes>
-                                </div>
-                            </div>
-                        ) : (
-                            <Navigate to="/login" />
-                        )
-                    }
+                    element={isAuthenticated() ? <AuthenticatedLayout /> : <Navigate to="/login" />}
                 />
             </Routes>
         </Router>

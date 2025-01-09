@@ -7,7 +7,9 @@ import path from 'path';
 export default defineConfig({
     plugins: [react()],
     server: {
+            open: 'microsoft-edge', // Open the app in Edge
             port: 60118,
+
         },
         resolve: {
             alias: {

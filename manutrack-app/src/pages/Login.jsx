@@ -18,7 +18,6 @@ const Login = () => {
             });
 
             if (response.status === 200) {
-                debugger;
                 localStorage.setItem('token', response.token);
                 console.log('Token saved, navigating to dashboard...');
                 navigate('/'); // Redirect to dashboard
