@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:7067';
+const BASE_URL = 'https://localhost:7067';
 
 const AppRoute = axios.create({
     baseURL: BASE_URL,
     headers: {
-        'Content-Type': 'application/json',
+        'Accept': '*/*', // Accept any response content type
+        'Content-Type': 'application/json', // Send data as JSON
     },
 });
+
 
 // Generic GET method
 export const getRequest = async (endpoint) => {

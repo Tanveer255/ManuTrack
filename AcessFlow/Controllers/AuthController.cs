@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid credentials");
 
         var token = _jwtAuthenticationService.GenerateJwtToken(user.Username);
-        return Ok(new { token });
+        return Ok(new { token, status = 200 });
     }
 
     [HttpGet("secure")]
