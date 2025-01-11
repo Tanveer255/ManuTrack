@@ -25,5 +25,4 @@ public class Price:_Base
     {
         PriceId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
     }
-
 }

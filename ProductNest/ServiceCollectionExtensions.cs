@@ -22,6 +22,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IBOMItemService, BOMItemService>();
         services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
         services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
+        services.AddScoped<IUnitOfMeasureService, UnitOfMeasureService>();
         services.AddScoped<IImageFileService, ImageFileService>();
         services.AddScoped<IInventoryService, InventoryService>();
         services.AddScoped<IPresentmentPriceService, PresentmentPriceService>();

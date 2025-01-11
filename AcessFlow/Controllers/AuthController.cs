@@ -1,4 +1,5 @@
-﻿using JwtAuthentication.Interface;
+﻿using AcessFlow.Entity.Common;
+using JwtAuthentication.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,9 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid credentials");
 
         var token = _jwtAuthenticationService.GenerateJwtToken(user.Username);
+        //return CreatedAtAction(nameof(Login),
+        //     new { id = user.Username },
+        //     new ApiResponse<UserModel>(true, "token created successfully.", user));
         return Ok(new { token, status = 200 });
     }
 

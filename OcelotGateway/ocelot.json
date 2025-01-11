@@ -13,6 +13,18 @@
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
     {
+      "DownstreamPathTemplate": "/api/unitOfMeasure/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5143
+        }
+      ],
+      "UpstreamPathTemplate": "/unitOfMeasure/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/auth/login",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [

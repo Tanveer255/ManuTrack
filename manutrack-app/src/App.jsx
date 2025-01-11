@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { isAuthenticated } from './auth/auth';
 import './index.css';
+import CreateProduct from './pages/Product/CreateProduct';
 
 // Layout for authenticated routes (with sidebar)
 const AuthenticatedLayout = () => (
@@ -18,6 +19,7 @@ const AuthenticatedLayout = () => (
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/Product/productDashboard" element={<ProductDashboard />} />
+                <Route path="/create-product" element={<CreateProduct />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/settings" element={<Settings />} />
             </Routes>

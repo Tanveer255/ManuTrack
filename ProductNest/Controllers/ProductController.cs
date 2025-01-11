@@ -8,6 +8,7 @@ using ProductNest.Entity.Commaon.Model;
 using ProductNest.Entity.Data;
 using ProductNest.Entity.Entity;
 using ProductNest.Enum;
+using System.Drawing;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -55,7 +56,7 @@ namespace ProductNest.Controllers
             return Ok(products);
         }
 
-        // POST: api/products
+        // POST: api/product
         [HttpPost]
         public async Task<IActionResult> SaveProduct([FromBody] Product product)
         {
@@ -70,12 +71,16 @@ namespace ProductNest.Controllers
             if (existingProduct != null)
             {
                 // Update existing product
+                existingProduct.IsDeleted = product.IsDeleted;
+                existingProduct.IsDeleted = product.IsDeleted;
+                existingProduct.UpdatedAt = product.UpdatedAt;
                 existingProduct.Title = product.Title;
                 existingProduct.BodyHtml = product.BodyHtml;
                 existingProduct.Vendor = product.Vendor;
                 existingProduct.ProductType = product.ProductType;
                 existingProduct.Tags = product.Tags;
                 existingProduct.Status = product.Status;
+                existingProduct.AdminGraphqlApiId = product.AdminGraphqlApiId;
                 existingProduct.Name = product.Name;
                 existingProduct.Description = product.Description;
                 existingProduct.SKU = product.SKU;
@@ -153,6 +158,7 @@ namespace ProductNest.Controllers
             else
             {
                 // Create new product
+                product.Id = new Guid();
                 product.ProductId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
                 product.Status = ProductStatus.Active.ToString();
 
@@ -160,24 +166,17 @@ namespace ProductNest.Controllers
                 {
                     foreach (var variant in product.Variants)
                     {
+                        variant.Id =  new Guid();
                         variant.ParentProductId = product.ProductId;
                         variant.VariantId = GenerateId();
                         variant.Status = ProductStatus.Active.ToString();
                     }
                 }
-
-                //if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
-                //{
-                //    foreach (var material in product.BillOfMaterials)
-                //    {
-                //        material.ProductId = product.ProductId;
-                //    }
-                //}
-
                 if (product.ImageFiles != null && product.ImageFiles.Count > 0)
                 {
                     foreach (var imageFile in product.ImageFiles)
                     {
+                        imageFile.Id = new Guid();
                         //imageFile.ProductId = product.ProductId;
                     }
                 }
@@ -192,53 +191,6 @@ namespace ProductNest.Controllers
         }
 
 
-        //public async Task<IActionResult> CreateProduct([FromBody] Product product)
-        //{
-        //    if (product == null)
-        //    {
-        //        return BadRequest(new ApiResponse<string>(false, "Product data is null.", null));
-        //    }
-
-        //    // Set default values for tracking
-        //    product.ProductId = GenerateId();
-        //    product.Status = ProductStatus.Active.ToString();
-
-        //    if (product.Variants != null && product.Variants.Count > 0)
-        //    {
-        //        foreach (var variant in product.Variants)
-        //        {
-        //            variant.ParentProductId = product.ProductId;
-        //            variant.ProductId = product.Id;
-        //            variant.VariantId = GenerateId();
-        //            variant.Status = ProductStatus.Active.ToString();
-        //        }
-        //    }
-
-        //    // Add BOM items if any
-        //    var billOfMaterialsAdd = new List<BOMItem>();
-        //    if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
-        //    {
-        //        foreach (var material in product.BillOfMaterials)
-        //        {
-        //            material.ProductId = product.ProductId;
-        //        }
-        //    }
-        //    // Add ImageFiles if any
-        //    if (product.ImageFiles != null && product.ImageFiles.Count > 0)
-        //    {
-        //        foreach (var imageFile in product.ImageFiles)
-        //        {
-        //            imageFile.ProductId = product.Id;
-        //        }
-        //    }
-        //    // Add the product using service layer
-        //    await _productService.Add(product);
-
-        //    // Return a structured response
-        //    return CreatedAtAction(nameof(GetProductById),
-        //        new { id = product.Id },
-        //        new ApiResponse<Product>(true, "Product created successfully.", product));
-        //}
         // GET: api/products/{id} (helper method to return a specific product)
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(Guid id)

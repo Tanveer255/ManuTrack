@@ -1,7 +1,5 @@
 ﻿using ProductNest.Entity.Entity;
 using ProductNest.Enum;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -19,7 +17,6 @@ public class Product : _BaseProduct
     public int StockLevel { get; set; }
     public int ReorderLevel { get; set; }
     public int LeadTimeInDays { get; set; }
-
     //public List<BOMItem> BillOfMaterials { get; set; }
     public List<Variant> Variants { get; set; }
     public List<VariantOption> Options { get; set; }
