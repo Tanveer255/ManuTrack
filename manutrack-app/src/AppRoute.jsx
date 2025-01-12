@@ -4,9 +4,12 @@ const BASE_URL = 'https://localhost:7067';
 
 const AppRoute = axios.create({
     baseURL: BASE_URL,
+    https: true,
     headers: {
-        'Accept': '*/*', // Accept any response content type
-        'Content-Type': 'application/json', // Send data as JSON
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        'Access-Control-Allow-Headers': 'Content-Type',
     },
 });
 
@@ -21,6 +24,7 @@ export const getRequest = async (endpoint) => {
         throw error;
     }
 };
+
 
 // Generic POST method
 export const postRequest = async (endpoint, data) => {

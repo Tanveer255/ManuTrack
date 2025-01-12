@@ -16,14 +16,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", policy =>
+    options.AddPolicy("AllowAllOrigins", builder =>
     {
-        policy.WithOrigins("http://localhost:60118") // Replace with your frontend URL
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
     });
 });
+
 
 var app = builder.Build();
 
@@ -40,24 +40,25 @@ app.UseAuthorization();
 
 app.MapControllers();
 // Use CORS
-app.UseCors("AllowFrontend");
+app.UseCors("AllowAllOrigins");
+
 // Configure Ocelot middleware
 app.UseOcelot().Wait();
-app.Use(async (context, next) =>
-{
-    if (context.Request.Method == HttpMethods.Options)
-    {
-        context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-        context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        context.Response.StatusCode = (int)HttpStatusCode.OK;
-        await context.Response.CompleteAsync();
-    }
-    else
-    {
-        await next();
-    }
-});
+//app.Use(async (context, next) =>
+//{
+//    if (context.Request.Method == HttpMethods.Options)
+//    {
+//        context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+//        context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//        context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//        context.Response.StatusCode = (int)HttpStatusCode.OK;
+//        await context.Response.CompleteAsync();
+//    }
+//    else
+//    {
+//        await next();
+//    }
+//});
 
 
 

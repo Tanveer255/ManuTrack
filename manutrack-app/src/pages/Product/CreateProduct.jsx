@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postRequest } from '../../AppRoute';
+import { postRequest, getRequest } from '../../AppRoute';
 
 const CreateProduct = () => {
     const navigate = useNavigate();
@@ -62,6 +62,26 @@ const CreateProduct = () => {
         return first.flatMap((value) => restCombinations.map((comb) => [value, ...comb]));
     };
 
+    // State to hold Unit of Measure options
+    const [units, setUnits] = useState([]); 
+
+    // Fetch Unit of Measure options from API
+    const fetchUnits = async () => {
+        try {
+            const data = await getRequest('/unitOfmeasure',{ timeout: 5000 }); // Directly fetch the data
+            console.log('Fetched Units:', data); // Log the result for debugging
+            setUnits(data); // Set the fetched units in state
+        } catch (error) {
+            console.error('Failed to fetch Unit of Measure:', error);
+        }
+    };
+
+
+    useEffect(() => {
+        fetchUnits();
+    }, []);
+
+
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -112,6 +132,24 @@ const CreateProduct = () => {
                         className="w-full border px-3 py-2 rounded"
                         required
                     />
+                </div>
+                {/* Unit of Measure Dropdown */}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium mb-1">Unit of Measure</label>
+                    <select
+                        name="unitOfMeasure"
+                        value={product.unitOfMeasure}
+                        onChange={handleInputChange}
+                        className="w-full border px-3 py-2 rounded"
+                        required
+                    >
+                        <option value="" disabled>Select Unit of Measure</option>
+                        {units.map((unit) => (
+                            <option key={unit.code} value={unit.code}>
+                                {unit.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Unit Cost</label>

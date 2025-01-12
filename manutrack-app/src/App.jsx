@@ -18,7 +18,7 @@ const AuthenticatedLayout = () => (
         <div className="flex-grow p-4">
             <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/Product/productDashboard" element={<ProductDashboard />} />
+                <Route path="/Product/ProductDashboard" element={<ProductDashboard />} />
                 <Route path="/create-product" element={<CreateProduct />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/settings" element={<Settings />} />
