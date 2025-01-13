@@ -40,9 +40,11 @@
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7067",
     "Cors": {
-      "AllowAnyOrigin": true,
+      "AllowAnyOrigin": false,
+      "AllowedOrigins": [ "http://localhost:60118" ],
       "AllowAnyMethod": true,
       "AllowAnyHeader": true
     }
   }
+
 }

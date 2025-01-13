@@ -8,7 +8,16 @@ export default defineConfig({
     plugins: [react()],
     server: {
             open: 'microsoft-edge', // Open the app in Edge
-            port: 60118,
+        port: 60118,
+        proxy: {
+            '/api': { // Proxy for API Gateway
+                target: 'https://localhost:7067', // Ocelot API Gateway URL
+                changeOrigin: true, // Changes the origin of the host header to the target URL
+                secure: false, // Set to false if you're using self-signed SSL
+                rewrite: (path) => path.replace(/^\/api/, '') // Remove '/gateway' from the proxied request
+            }
+        }
+
 
         },
         resolve: {

@@ -68,7 +68,7 @@ const CreateProduct = () => {
     // Fetch Unit of Measure options from API
     const fetchUnits = async () => {
         try {
-            const data = await getRequest('/unitOfmeasure',{ timeout: 5000 }); // Directly fetch the data
+            const data = await getRequest('/unitOfmeasure'); // Directly fetch the data
             console.log('Fetched Units:', data); // Log the result for debugging
             setUnits(data); // Set the fetched units in state
         } catch (error) {
