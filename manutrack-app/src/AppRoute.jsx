@@ -5,15 +5,12 @@ const BASE_URL = 'https://localhost:7067';
 const AppRoute = axios.create({
     baseURL: BASE_URL,
     https: true,
+    withCredentials: true, // Ensure cookies and credentials are sent (if needed)
     headers: {
+        // 'Authorization': `Bearer ${token}`, // Uncomment if using authentication
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Authorization': 'Bearer your-token',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-        'Access-Control-Allow-Headers': 'Content-Type',
     },
 });
-
 
 // Generic GET method
 export const getRequest = async (endpoint) => {
@@ -25,7 +22,6 @@ export const getRequest = async (endpoint) => {
         throw error;
     }
 };
-
 
 // Generic POST method
 export const postRequest = async (endpoint, data) => {

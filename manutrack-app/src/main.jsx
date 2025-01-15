@@ -22,10 +22,17 @@ const theme = createTheme({
 // Use createRoot for React 18
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// Conditionally wrap in StrictMode only in development
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 root.render(
-    <React.StrictMode>
-        <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+        {isDevelopment ? (
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        ) : (
             <App />
-        </ThemeProvider>
-    </React.StrictMode>
+        )}
+    </ThemeProvider>
 );

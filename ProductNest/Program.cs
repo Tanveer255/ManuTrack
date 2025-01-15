@@ -76,6 +76,16 @@ builder.Services.AddDbContext<ProductNestDbContext>(options =>
 builder.Services
     .AddAllCustomServices();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader().
+               WithOrigins("http://localhost:60118");
+    });
+});
 
 var app = builder.Build();
 
@@ -85,7 +95,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

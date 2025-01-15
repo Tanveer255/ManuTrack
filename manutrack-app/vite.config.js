@@ -7,22 +7,20 @@ import path from 'path';
 export default defineConfig({
     plugins: [react()],
     server: {
-            open: 'microsoft-edge', // Open the app in Edge
+        open: 'microsoft-edge', // Open the app in Edge
         port: 60118,
         proxy: {
-            '/api': { // Proxy for API Gateway
-                target: 'https://localhost:7067', // Ocelot API Gateway URL
-                changeOrigin: true, // Changes the origin of the host header to the target URL
-                secure: false, // Set to false if you're using self-signed SSL
-                rewrite: (path) => path.replace(/^\/api/, '') // Remove '/gateway' from the proxied request
-            }
-        }
-
-
-        },
-        resolve: {
-            alias: {
-              '@': path.resolve(__dirname, 'src'), // Ensures '@' maps to the 'src' folder
+            '/api': {
+                target: 'https://localhost:7067', // Your backend URL
+                changeOrigin: true, // Ensure the origin header is updated to match the target
+                secure: false, // If using HTTPs locally, set to false for self-signed certificates
+                rewrite: (path) => path.replace(/^\/api/, ''), // Optional: remove '/api' from the request path if needed
             },
-          },
+        },
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src'), // Ensures '@' maps to the 'src' folder
+        },
+    },
 });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postRequest, getRequest } from '../../AppRoute';
+import axios from 'axios';
 
 const CreateProduct = () => {
     const navigate = useNavigate();
@@ -65,16 +66,27 @@ const CreateProduct = () => {
     // State to hold Unit of Measure options
     const [units, setUnits] = useState([]); 
 
-    // Fetch Unit of Measure options from API
     const fetchUnits = async () => {
         try {
-            const data = await getRequest('/unitOfmeasure'); // Directly fetch the data
-            console.log('Fetched Units:', data); // Log the result for debugging
-            setUnits(data); // Set the fetched units in state
+            // Make the GET request to the API
+            const response = await axios.get('/api/UnitOfMeasure');
+            // Log the result for debugging
+            console.log('Fetched Units:', response.data);
+
+            // Ensure response data is an array before setting state
+            if (Array.isArray(response.data)) {
+                setUnits(response.data);
+            } else {
+                console.error('Fetched data is not an array');
+                setUnits([]); // Set to empty array if data is not an array
+            }
         } catch (error) {
+            // Handle error
             console.error('Failed to fetch Unit of Measure:', error);
+            setUnits([]); // Fallback to empty array if fetch fails
         }
     };
+
 
 
     useEffect(() => {
@@ -86,7 +98,7 @@ const CreateProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await postRequest('/product', product); // Adjust endpoint as needed
+            await postRequest('/api/product', product); // Adjust endpoint as needed
             alert('Product created successfully');
             navigate('/');
         } catch (error) {
