@@ -111,25 +111,6 @@ namespace ProductNest.Controllers
                     }
                 }
 
-                //if (product.BillOfMaterials != null && product.BillOfMaterials.Count > 0)
-                //{
-                //    foreach (var material in product.BillOfMaterials)
-                //    {
-                //        var existingMaterial = existingProduct.BillOfMaterials.FirstOrDefault(m => m.Id == material.Id);
-                //        if (existingMaterial != null)
-                //        {
-                //            // Update BOM item
-                //            existingMaterial.Name = material.Name;
-                //            existingMaterial.Quantity = material.Quantity;
-                //        }
-                //        else
-                //        {
-                //            // Add new BOM item
-                //            material.ProductId = existingProduct.ProductId;
-                //            existingProduct.BillOfMaterials.Add(material);
-                //        }
-                //    }
-                //}
 
                 if (product.ImageFiles != null && product.ImageFiles.Count > 0)
                 {

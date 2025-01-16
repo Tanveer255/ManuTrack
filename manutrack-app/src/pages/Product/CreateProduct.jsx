@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postRequest, getRequest } from '../../AppRoute';
 import axios from 'axios';
+import { postRequest, getRequest } from '../../AppRoute';
 
 const CreateProduct = () => {
     const navigate = useNavigate();
 
     const [product, setProduct] = useState({
+        id: '',
+        isDeleted: false,
+        createdAt: '',
+        updatedAt: '',
+        title: '',
+        bodyHtml: '',
+        vendor: '',
+        productType: '',
+        tags: '',
+        status: '',
+        adminGraphqlApiId: '',
+        productId: '',
         name: '',
         description: '',
         sku: '',
@@ -17,17 +29,25 @@ const CreateProduct = () => {
         leadTimeInDays: 0,
         options: [],
         variants: [],
+        imageFiles: [],
     });
 
-    const [currentOption, setCurrentOption] = useState({ name: '', values: '' }); // Track current option input
+    const [currentOption, setCurrentOption] = useState({ name: '', values: '' });
+    const [currentImage, setCurrentImage] = useState(null);
+    const [units, setUnits] = useState([]);
 
-    // Handle form input changes
+    //const handleInputChange = (e) => {
+    //    const { name, value } = e.target;
+    //    setProduct({ ...product, [name]: value });
+    //};
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setProduct({ ...product, [name]: value });
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
+        }));
     };
 
-    // Add option to product
     const handleAddOption = () => {
         if (currentOption.name && currentOption.values) {
             const valuesArray = currentOption.values.split(',').map((v) => v.trim());
@@ -39,7 +59,6 @@ const CreateProduct = () => {
         }
     };
 
-    // Generate variants based on options
     const generateVariants = () => {
         if (product.options.length === 0) return;
 
@@ -55,7 +74,6 @@ const CreateProduct = () => {
         setProduct({ ...product, variants });
     };
 
-    // Helper function to create combinations of option values
     const createCombinations = (arrays) => {
         if (arrays.length === 0) return [[]];
         const [first, ...rest] = arrays;
@@ -63,36 +81,38 @@ const CreateProduct = () => {
         return first.flatMap((value) => restCombinations.map((comb) => [value, ...comb]));
     };
 
-    // State to hold Unit of Measure options
-    const [units, setUnits] = useState([]); 
-
     const fetchUnits = async () => {
         try {
-            // Make the GET request to the API
             const response = await axios.get('/api/UnitOfMeasure');
-            // Log the result for debugging
-            console.log('Fetched Units:', response.data);
-
-            // Ensure response data is an array before setting state
             if (Array.isArray(response.data)) {
                 setUnits(response.data);
             } else {
-                console.error('Fetched data is not an array');
-                setUnits([]); // Set to empty array if data is not an array
+                setUnits([]);
             }
         } catch (error) {
-            // Handle error
             console.error('Failed to fetch Unit of Measure:', error);
-            setUnits([]); // Fallback to empty array if fetch fails
+            setUnits([]);
         }
     };
 
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        setCurrentImage(file);
+    };
 
+    const addImageFile = () => {
+        if (currentImage) {
+            setProduct({
+                ...product,
+                imageFiles: [...product.imageFiles, currentImage],
+            });
+            setCurrentImage(null);
+        }
+    };
 
     useEffect(() => {
         fetchUnits();
     }, []);
-
 
     // Handle form submission
     const handleSubmit = async (e) => {
@@ -105,6 +125,29 @@ const CreateProduct = () => {
             alert('Failed to create product');
         }
     };
+
+    //const handleSubmit = async (e) => {
+    //    e.preventDefault();
+    //    try {
+    //        const formData = new FormData();
+    //        formData.append('product', JSON.stringify(product));
+    //        product.imageFiles.forEach((file, index) => {
+    //            formData.append(`imageFiles[${index}]`, file);
+    //        });
+
+    //        await axios.post('https://localhost:7067/api/product', formData, {
+    //            headers: {
+    //                'Content-Type': 'multipart/form-data',
+    //            },
+    //        });
+
+    //        alert('Product created successfully');
+    //        navigate('/');
+    //    } catch (error) {
+    //        alert('Failed to create product');
+    //        console.error(error);
+    //    }
+    //};
 
     return (
         <div className="p-6 bg-white shadow rounded">
@@ -133,7 +176,6 @@ const CreateProduct = () => {
                         className="w-full border px-3 py-2 rounded"
                     />
                 </div>
-                {/* Other product fields */}
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">SKU</label>
                     <input
@@ -145,7 +187,6 @@ const CreateProduct = () => {
                         required
                     />
                 </div>
-                {/* Unit of Measure Dropdown */}
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Unit of Measure</label>
                     <select
@@ -155,13 +196,26 @@ const CreateProduct = () => {
                         className="w-full border px-3 py-2 rounded"
                         required
                     >
-                        <option value="" disabled>Select Unit of Measure</option>
+                        <option value="" disabled>
+                            Select Unit of Measure
+                        </option>
                         {units.map((unit) => (
                             <option key={unit.code} value={unit.code}>
                                 {unit.name}
                             </option>
                         ))}
                     </select>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium mb-1">Tags</label>
+                    <input
+                        type="text"
+                        name="tags"
+                        value={product.tags}
+                        onChange={handleInputChange}
+                        className="w-full border px-3 py-2 rounded"
+                        placeholder="Comma-separated tags"
+                    />
                 </div>
                 <div className="mb-4">
                     <label className="block text-sm font-medium mb-1">Unit Cost</label>
@@ -174,8 +228,6 @@ const CreateProduct = () => {
                         required
                     />
                 </div>
-
-                {/* Option input */}
                 <div className="mb-4">
                     <h3 className="text-lg font-medium mb-2">Options</h3>
                     <div className="flex gap-2 mb-2">
@@ -193,7 +245,11 @@ const CreateProduct = () => {
                             onChange={(e) => setCurrentOption({ ...currentOption, values: e.target.value })}
                             className="border px-3 py-2 rounded w-1/2"
                         />
-                        <button type="button" onClick={handleAddOption} className="px-4 py-2 bg-blue-600 text-white rounded">
+                        <button
+                            type="button"
+                            onClick={handleAddOption}
+                            className="px-4 py-2 bg-blue-600 text-white rounded"
+                        >
                             Add Option
                         </button>
                     </div>
@@ -204,36 +260,41 @@ const CreateProduct = () => {
                             </li>
                         ))}
                     </ul>
-                </div>
-
-                {/* Generate variants button */}
-                <div className="mb-4">
                     <button
                         type="button"
                         onClick={generateVariants}
-                        className="px-4 py-2 bg-green-600 text-white rounded"
+                        className="px-4 py-2 bg-green-600 text-white rounded mt-2"
                     >
                         Generate Variants
                     </button>
                 </div>
-
-                {/* Display generated variants */}
-                {product.variants.length > 0 && (
-                    <div className="mb-4">
-                        <h3 className="text-lg font-medium mb-2">Generated Variants</h3>
-                        <ul className="list-disc ml-5">
-                            {product.variants.map((variant, index) => (
-                                <li key={index}>
-                                    {variant.optionValues.join(' / ')} - SKU: {variant.sku}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-
-                <button type="submit" className="px-6 py-2 bg-blue-600 text-white rounded">
-                    Submit Product
-                </button>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium mb-1">Stock Level</label>
+                    <input
+                        type="number"
+                        name="stockLevel"
+                        value={product.stockLevel}
+                        onChange={handleInputChange}
+                        className="w-full border px-3 py-2 rounded"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium mb-1">Upload Image</label>
+                    <input type="file" onChange={handleImageUpload} className="w-full border px-3 py-2 rounded" />
+                    <button
+                        type="button"
+                        onClick={addImageFile}
+                        className="px-4 py-2 bg-green-600 text-white rounded mt-2"
+                    >
+                        Add Image
+                    </button>
+                </div>
+                <div className="mt-4">
+                    <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+                        Create Product
+                    </button>
+                </div>
             </form>
         </div>
     );
