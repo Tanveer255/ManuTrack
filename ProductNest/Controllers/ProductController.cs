@@ -139,7 +139,6 @@ namespace ProductNest.Controllers
             else
             {
                 // Create new product
-                product.Id = new Guid();
                 product.ProductId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
                 product.Status = ProductStatus.Active.ToString();
 
@@ -147,7 +146,6 @@ namespace ProductNest.Controllers
                 {
                     foreach (var variant in product.Variants)
                     {
-                        variant.Id =  new Guid();
                         variant.ParentProductId = product.ProductId;
                         variant.VariantId = GenerateId();
                         variant.Status = ProductStatus.Active.ToString();
@@ -157,7 +155,6 @@ namespace ProductNest.Controllers
                 {
                     foreach (var imageFile in product.ImageFiles)
                     {
-                        imageFile.Id = new Guid();
                         //imageFile.ProductId = product.ProductId;
                     }
                 }

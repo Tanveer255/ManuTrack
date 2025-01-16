@@ -118,7 +118,7 @@ const CreateProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await postRequest('/api/product', product); // Adjust endpoint as needed
+            await postRequest('/api/Product', product); // Adjust endpoint as needed
             alert('Product created successfully');
             navigate('/');
         } catch (error) {
