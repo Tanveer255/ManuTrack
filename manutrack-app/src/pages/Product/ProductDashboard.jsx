@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getRequest } from '../../AppRoute';
 
 const ProductDashboard = () => {
     const navigate = useNavigate();
@@ -19,6 +20,16 @@ const ProductDashboard = () => {
             console.error('Error fetching products:', error);
         }
     };
+
+    // Fetch products from API
+    //const fetchProducts = async () => {
+    //    try {
+    //        const data = await getRequest('api/Product'); // Adjust the endpoint if needed
+    //        setProducts(data); // Assuming `data` is the array of products
+    //    } catch (error) {
+    //        console.error('Error fetching products:', error);
+    //    }
+    //};
 
     useEffect(() => {
         fetchProducts();

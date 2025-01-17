@@ -72,7 +72,6 @@ namespace ProductNest.Controllers
             {
                 // Update existing product
                 existingProduct.IsDeleted = product.IsDeleted;
-                existingProduct.IsDeleted = product.IsDeleted;
                 existingProduct.UpdatedAt = product.UpdatedAt;
                 existingProduct.Title = product.Title;
                 existingProduct.BodyHtml = product.BodyHtml;
@@ -148,6 +147,7 @@ namespace ProductNest.Controllers
                     {
                         variant.ParentProductId = product.ProductId;
                         variant.VariantId = GenerateId();
+                        //variant.InventoryId =new Guid();
                         variant.Status = ProductStatus.Active.ToString();
                     }
                 }

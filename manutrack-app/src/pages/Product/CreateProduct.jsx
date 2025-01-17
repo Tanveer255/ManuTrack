@@ -2,35 +2,164 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { postRequest, getRequest } from '../../AppRoute';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateProduct = () => {
     const navigate = useNavigate();
 
-    const [product, setProduct] = useState({
-        id: '',
-        isDeleted: false,
-        createdAt: '',
-        updatedAt: '',
-        title: '',
-        bodyHtml: '',
-        vendor: '',
-        productType: '',
-        tags: '',
-        status: '',
-        adminGraphqlApiId: '',
-        productId: '',
-        name: '',
-        description: '',
-        sku: '',
-        unitOfMeasure: '',
-        unitCost: 0,
-        stockLevel: 0,
-        reorderLevel: 0,
-        leadTimeInDays: 0,
-        options: [],
-        variants: [],
-        imageFiles: [],
-    });
+    const [product, setProduct] = useState(
+    //{
+        
+        //// From _Base
+        //id: uuidv4(), // Id (Guid, string in React)
+        //createdAt: new Date().toISOString(), // CreatedAt (DateTime, Date object in React)
+        //updatedAt: new Date().toISOString(), // UpdatedAt (DateTime, Date object in React)
+        //isDeleted: false, // IsDeleted (boolean)
+
+        //// From _BaseProduct
+        //title: '', // Title (string)
+        //bodyHtml: '', // BodyHtml (string)
+        //vendor: '', // Vendor (string)
+        //productType: '', // ProductType (string)
+        //tags: '', // Tags (string)
+        //status: 'Active', // Status (string) - default value
+        //adminGraphqlApiId: '', // AdminGraphqlApiId (string)
+
+        //// From Product
+        //productId: '', // ProductId (long)
+        //name: '', // Name (string)
+        //description: '', // Description (string)
+        //sku: '', // SKU (string)
+        //unitOfMeasure: '', // UnitOfMeasure (string)
+        //unitCost: 0, // UnitCost (decimal)
+        //stockLevel: 0, // StockLevel (int)
+        //reorderLevel: 0, // ReorderLevel (int)
+        //leadTimeInDays: 0, // LeadTimeInDays (int)
+        //variants: [], // Variants (List<Variant>)
+        //options: [], // Options (List<VariantOption>)
+        //imageFiles: [], // ImageFiles (List<ImageFile>)
+    //}
+
+
+        {
+            "id": uuidv4(),
+            "createdAt": "2025-01-17T20:07:11.627Z",
+            "updatedAt": "2025-01-17T20:07:11.627Z",
+            "isDeleted": true,
+            "title": "string",
+            "bodyHtml": "string",
+            "vendor": "string",
+            "productType": "string",
+            "tags": "string",
+            "status": "string",
+            "adminGraphqlApiId": "string",
+            "productId": 0,
+            "name": "string",
+            "description": "string",
+            "sku": "string",
+            "unitOfMeasure": "string",
+            "unitCost": 0,
+            "stockLevel": 0,
+            "reorderLevel": 0,
+            "leadTimeInDays": 0,
+            "variants": [
+                {
+                    "id": uuidv4(),
+                    "createdAt": "2025-01-17T20:07:11.627Z",
+                    "updatedAt": "2025-01-17T20:07:11.627Z",
+                    "isDeleted": true,
+                    "title": "string",
+                    "bodyHtml": "string",
+                    "vendor": "string",
+                    "productType": "string",
+                    "tags": "string",
+                    "status": "string",
+                    "adminGraphqlApiId": "string",
+                    "variantId": 0,
+                    "parentProductId": 0,
+                    "productId": uuidv4(),
+                    "price": "string",
+                    "position": 0,
+                    "inventoryPolicy": "string",
+                    "compareAtPrice": "string",
+                    "option1": "string",
+                    "option2": "string",
+                    "option3": "string",
+                    "taxable": true,
+                    "barcode": "string",
+                    "fulfillmentService": "string",
+                    "grams": 0,
+                    "inventoryManagement": "string",
+                    "requiresShipping": true,
+                    "sku": "string",
+                    "weight": 0,
+                    "weightUnit": "string",
+                    "inventoryId": uuidv4(),
+                    "inventoryQuantity": 0,
+                    "oldInventoryQuantity": 0,
+                    "presentmentPrices": [
+                        {
+                            "id": uuidv4(),
+                            "createdAt": "2025-01-17T20:07:11.627Z",
+                            "updatedAt": "2025-01-17T20:07:11.627Z",
+                            "isDeleted": true,
+                            "predentPriceId": 0,
+                            "price": {
+                                "id": uuidv4(),
+                                "createdAt": "2025-01-17T20:07:11.627Z",
+                                "updatedAt": "2025-01-17T20:07:11.627Z",
+                                "isDeleted": true,
+                                "priceId": 0,
+                                "amount": 0,
+                                "currencyCode": 0,
+                                "productId": 0,
+                                "unitPrice": 0,
+                                "sellingPrice": 0
+                            },
+                            "compareAtPrice": "string"
+                        }
+                    ],
+                    "imageId": 0
+                }
+            ],
+            "options": [
+                {
+                    "id": uuidv4(),
+                    "createdAt": "2025-01-17T20:07:11.627Z",
+                    "updatedAt": "2025-01-17T20:07:11.627Z",
+                    "isDeleted": true,
+                    "variantOptionId": 0,
+                    "productId": uuidv4(),
+                    "name": "string",
+                    "position": 0,
+                    "values": [
+                        "string"
+                    ]
+                }
+            ],
+            "imageFiles": [
+                {
+                    "id": uuidv4(),
+                    "createdAt": "2025-01-17T20:07:11.627Z",
+                    "updatedAt": "2025-01-17T20:07:11.627Z",
+                    "isDeleted": true,
+                    "imageFileId": 0,
+                    "alt": "string",
+                    "position": 0,
+                    "productId": uuidv4(),
+                    "adminGraphqlApiId": "string",
+                    "width": 0,
+                    "height": 0,
+                    "src": "string",
+                    "variantIds": [
+                        0
+                    ]
+                }
+            ]
+        }
+
+    );
+
 
     const [currentOption, setCurrentOption] = useState({ name: '', values: '' });
     const [currentImage, setCurrentImage] = useState(null);
@@ -118,13 +247,20 @@ const CreateProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await postRequest('/api/Product', product); // Adjust endpoint as needed
+            console.log('Sending data:', product,); // Log the payload
+            axios.post('/api/Product', product, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }); // Adjust endpoint as needed
             alert('Product created successfully');
-            navigate('/');
+            navigate('/product/productDashboard');
         } catch (error) {
+            console.error('Error during product creation:', error.response); // Log full error response
             alert('Failed to create product');
         }
     };
+
 
     //const handleSubmit = async (e) => {
     //    e.preventDefault();
