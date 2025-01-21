@@ -8,43 +8,10 @@ const CreateProduct = () => {
     const navigate = useNavigate();
 
     const [product, setProduct] = useState(
-    //{
-        
-        //// From _Base
-        //id: uuidv4(), // Id (Guid, string in React)
-        //createdAt: new Date().toISOString(), // CreatedAt (DateTime, Date object in React)
-        //updatedAt: new Date().toISOString(), // UpdatedAt (DateTime, Date object in React)
-        //isDeleted: false, // IsDeleted (boolean)
-
-        //// From _BaseProduct
-        //title: '', // Title (string)
-        //bodyHtml: '', // BodyHtml (string)
-        //vendor: '', // Vendor (string)
-        //productType: '', // ProductType (string)
-        //tags: '', // Tags (string)
-        //status: 'Active', // Status (string) - default value
-        //adminGraphqlApiId: '', // AdminGraphqlApiId (string)
-
-        //// From Product
-        //productId: '', // ProductId (long)
-        //name: '', // Name (string)
-        //description: '', // Description (string)
-        //sku: '', // SKU (string)
-        //unitOfMeasure: '', // UnitOfMeasure (string)
-        //unitCost: 0, // UnitCost (decimal)
-        //stockLevel: 0, // StockLevel (int)
-        //reorderLevel: 0, // ReorderLevel (int)
-        //leadTimeInDays: 0, // LeadTimeInDays (int)
-        //variants: [], // Variants (List<Variant>)
-        //options: [], // Options (List<VariantOption>)
-        //imageFiles: [], // ImageFiles (List<ImageFile>)
-    //}
-
-
         {
             "id": uuidv4(),
-            "createdAt": "2025-01-17T20:07:11.627Z",
-            "updatedAt": "2025-01-17T20:07:11.627Z",
+            "createdAt": new Date().toISOString(),
+            "updatedAt": new Date().toISOString(),
             "isDeleted": true,
             "title": "string",
             "bodyHtml": "string",
@@ -65,8 +32,8 @@ const CreateProduct = () => {
             "variants": [
                 {
                     "id": uuidv4(),
-                    "createdAt": "2025-01-17T20:07:11.627Z",
-                    "updatedAt": "2025-01-17T20:07:11.627Z",
+                    "createdAt": new Date().toISOString(),
+                    "updatedAt": new Date().toISOString(),
                     "isDeleted": true,
                     "title": "string",
                     "bodyHtml": "string",
@@ -100,14 +67,14 @@ const CreateProduct = () => {
                     "presentmentPrices": [
                         {
                             "id": uuidv4(),
-                            "createdAt": "2025-01-17T20:07:11.627Z",
-                            "updatedAt": "2025-01-17T20:07:11.627Z",
+                            "createdAt": new Date().toISOString(),
+                            "updatedAt": new Date().toISOString(),
                             "isDeleted": true,
                             "predentPriceId": 0,
                             "price": {
                                 "id": uuidv4(),
-                                "createdAt": "2025-01-17T20:07:11.627Z",
-                                "updatedAt": "2025-01-17T20:07:11.627Z",
+                                "createdAt": new Date().toISOString(),
+                                "updatedAt": new Date().toISOString(),
                                 "isDeleted": true,
                                 "priceId": 0,
                                 "amount": 0,
@@ -125,8 +92,8 @@ const CreateProduct = () => {
             "options": [
                 {
                     "id": uuidv4(),
-                    "createdAt": "2025-01-17T20:07:11.627Z",
-                    "updatedAt": "2025-01-17T20:07:11.627Z",
+                    "createdAt": new Date().toISOString(),
+                    "updatedAt": new Date().toISOString(),
                     "isDeleted": true,
                     "variantOptionId": 0,
                     "productId": uuidv4(),
@@ -140,8 +107,8 @@ const CreateProduct = () => {
             "imageFiles": [
                 {
                     "id": uuidv4(),
-                    "createdAt": "2025-01-17T20:07:11.627Z",
-                    "updatedAt": "2025-01-17T20:07:11.627Z",
+                    "createdAt": new Date().toISOString(),
+                    "updatedAt": new Date().toISOString(),
                     "isDeleted": true,
                     "imageFileId": 0,
                     "alt": "string",
@@ -261,29 +228,6 @@ const CreateProduct = () => {
         }
     };
 
-
-    //const handleSubmit = async (e) => {
-    //    e.preventDefault();
-    //    try {
-    //        const formData = new FormData();
-    //        formData.append('product', JSON.stringify(product));
-    //        product.imageFiles.forEach((file, index) => {
-    //            formData.append(`imageFiles[${index}]`, file);
-    //        });
-
-    //        await axios.post('https://localhost:7067/api/product', formData, {
-    //            headers: {
-    //                'Content-Type': 'multipart/form-data',
-    //            },
-    //        });
-
-    //        alert('Product created successfully');
-    //        navigate('/');
-    //    } catch (error) {
-    //        alert('Failed to create product');
-    //        console.error(error);
-    //    }
-    //};
 
     return (
         <div className="p-6 bg-white shadow rounded">

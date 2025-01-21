@@ -32,7 +32,7 @@ public class ProductService : CrudService<Product>, IProductService
     }
     public async Task<List<Product>> GetAllDataAsync()
     {
-        var products = await _unitOfWork.Context.Product.ToListAsync();
+        var products = await _unitOfWork.Context.Product.OrderByDescending(p=>p.CreatedAt).ToListAsync();
         return products;
     }
 }

@@ -147,7 +147,6 @@ namespace ProductNest.Controllers
                     {
                         variant.ParentProductId = product.ProductId;
                         variant.VariantId = GenerateId();
-                        //variant.InventoryId =new Guid();
                         variant.Status = ProductStatus.Active.ToString();
                     }
                 }
