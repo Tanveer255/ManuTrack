@@ -1,0 +1,10 @@
+﻿global using ProductNest.Entity;
+global using ProductNest.Entity.Manufacturing;
+global using ProductNest.Entity.Entity;
+global using ProductNest.DAL.Interface;
+global using System.Linq.Expressions;
+global using ProductNest.Entity.Data;
+global using Microsoft.Extensions.Logging;
+global using ProductNest.DAL.Interface.Manufacturing;
+global using Microsoft.EntityFrameworkCore;
+global using ProductNest.Entity.Commaon.Interface;

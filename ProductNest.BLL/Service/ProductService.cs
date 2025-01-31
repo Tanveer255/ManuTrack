@@ -1,11 +1,4 @@
-﻿using ProductNest.Entity;
-using ProductNest.BLL.Interface;
-using ProductNest.DAL.Interface;
-using Microsoft.AspNetCore.Http;
-using ProductNest.DAL.Repository;
-using Microsoft.EntityFrameworkCore;
-
-namespace ProductNest.BLL.Service;
+﻿namespace ProductNest.BLL.Service;
 
 public class ProductService : CrudService<Product>, IProductService
 {

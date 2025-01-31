@@ -1,6 +1,4 @@
-﻿using ProductNest.Entity;
-
-namespace ProductNest.Dto;
+﻿namespace ProductNest.Dto;
 
 public class BOMItemDto : BOMItem
 {

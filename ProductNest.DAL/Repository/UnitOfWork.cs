@@ -1,8 +1,4 @@
-﻿using ProductNest.DAL.Interface;
-using Microsoft.Extensions.Logging;
-using ProductNest.Entity.Data;
-
-namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.DAL.Repository;
 
 /// <summary>
 /// Class of UnitOfWork.

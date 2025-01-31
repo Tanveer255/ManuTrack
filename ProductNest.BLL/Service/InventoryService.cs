@@ -1,14 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using ProductNest.BLL.Interface;
-using ProductNest.DAL.Interface;
-using ProductNest.Entity.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProductNest.BLL.Service;
+﻿namespace ProductNest.BLL.Service;
 
 public class InventoryService : CrudService<Inventory>, IInventoryService
 {

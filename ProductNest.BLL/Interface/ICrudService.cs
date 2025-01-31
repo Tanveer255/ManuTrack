@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace ProductNest.BLL.Interface;
+﻿namespace ProductNest.BLL.Interface;
 
 public interface ICrudService<T>
 {

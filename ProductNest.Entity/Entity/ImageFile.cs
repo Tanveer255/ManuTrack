@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProductNest.Entity.Entity;
+﻿namespace ProductNest.Entity.Entity;
 
 [Table("ImageFile")]
 public class ImageFile:_Base

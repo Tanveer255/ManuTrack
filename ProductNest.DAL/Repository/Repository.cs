@@ -1,10 +1,4 @@
-﻿using ProductNest.DAL.Interface;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Linq.Expressions;
-using ProductNest.Entity.Commaon.Interface;
-
-namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.DAL.Repository;
 
 /// <summary>
 /// Repository class.

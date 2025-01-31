@@ -1,7 +1,4 @@
-﻿using AcessFlow.Entity.Data;
-using System;
-
-namespace EBS.DAL.Interface
+﻿namespace EBS.DAL.Interface
 {
     /// <summary>
     /// Unit Of Work interface.

@@ -1,16 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using ProductNest.BLL.Interface;
-using ProductNest.DAL.Interface;
-using ProductNest.Entity;
-using ProductNest.Entity.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProductNest.BLL.Service;
+﻿namespace ProductNest.BLL.Service;
 public class VariantService : CrudService<Variant>, IVariantService
 {
     private readonly IVariantRepository _variantRepository;

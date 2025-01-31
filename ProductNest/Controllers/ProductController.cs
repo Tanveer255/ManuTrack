@@ -1,14 +1,4 @@
-﻿using JwtAuthentication.Interface;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ProductNest.BLL.Interface;
-using ProductNest.Entity;
-using ProductNest.Entity.Commaon.Model;
-using ProductNest.Entity.Data;
-using ProductNest.Entity.Entity;
-using ProductNest.Enum;
-using System.Drawing;
+﻿
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

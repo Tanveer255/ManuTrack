@@ -1,14 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using ProductNest.DAL.Interface.Manufacturing;
-using ProductNest.DAL.Interface;
-using ProductNest.Entity.Manufacturing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProductNest.DAL.Repository.Manufacturing;
+﻿namespace ProductNest.DAL.Repository.Manufacturing;
 
 public class CompletedPartRepository : Repository<CompletedPart>, ICompletedPartRepository
 {

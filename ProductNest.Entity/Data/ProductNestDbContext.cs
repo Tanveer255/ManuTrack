@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using ProductNest.Entity.Entity;
-using ProductNest.Entity.Manufacturing;
-
-namespace ProductNest.Entity.Data;
+﻿namespace ProductNest.Entity.Data;
 
 public class ProductNestDbContext : DbContext
 {

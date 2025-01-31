@@ -1,14 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using ProductNest.BLL.Interface.Manufacturing;
-using ProductNest.DAL.Interface.Manufacturing;
-using ProductNest.DAL.Interface;
-using ProductNest.Entity.Manufacturing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿
 
 namespace ProductNest.BLL.Service.Manufacturing;
 public class ImpactedComponentService : CrudService<ImpactedComponent>, IImpactedComponentService

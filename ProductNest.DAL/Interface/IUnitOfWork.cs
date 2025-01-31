@@ -1,6 +1,4 @@
-﻿using ProductNest.Entity.Data;
-
-namespace ProductNest.DAL.Interface;
+﻿namespace ProductNest.DAL.Interface;
 
 /// <summary>
 /// Unit Of Work interface.

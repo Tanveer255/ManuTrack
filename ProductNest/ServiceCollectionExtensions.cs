@@ -1,13 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using ProductNest.BLL.Interface;
-using ProductNest.BLL.Interface.Manufacturing;
-using ProductNest.BLL.Service;
-using ProductNest.BLL.Service.Manufacturing;
-using ProductNest.DAL.Interface;
-using ProductNest.DAL.Interface.Manufacturing;
-using ProductNest.DAL.Repository;
-using ProductNest.DAL.Repository.Manufacturing;
+﻿
 
 namespace ProductNest;
 

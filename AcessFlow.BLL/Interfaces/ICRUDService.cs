@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-
-namespace AcessFlow.BLL.Interfaces;
+﻿namespace AcessFlow.BLL.Interfaces;
 
 /// <summary>
 /// Crud services interface.

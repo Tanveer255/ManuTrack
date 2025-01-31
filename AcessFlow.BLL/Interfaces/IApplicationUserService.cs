@@ -1,11 +1,4 @@
-﻿using AcessFlow.Entity.Entity.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AcessFlow.BLL.Interfaces
+﻿namespace AcessFlow.BLL.Interfaces
 {
     public interface IApplicationUserService : ICrudService<ApplicationUser>
     {

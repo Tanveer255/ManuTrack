@@ -1,15 +1,4 @@
-﻿using AcessFlow.DAL.Interface;
-using AcessFlow.Entity.Interfaces;
-using EBS.DAL.Interface;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-
-namespace EBS.DAL.Repository
+﻿namespace EBS.DAL.Repository
 {
     /// <summary>
     /// Repository class.

@@ -1,7 +1,4 @@
-﻿using ProductNest.Entity;
-using System.Collections.Generic;
-
-namespace ProductNest.Dto;
+﻿namespace ProductNest.Dto;
 
 public class ProductDto : Product
 {

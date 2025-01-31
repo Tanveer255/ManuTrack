@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace ProductNest.DAL.Interface;
+﻿namespace ProductNest.DAL.Interface;
 
 /// <summary>
 /// IRepository interface.

@@ -1,12 +1,4 @@
-﻿using AcessFlow.BLL.Interfaces;
-using AcessFlow.DAL.Interface;
-using EBS.DAL.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-
-namespace AcessFlow.BLL.Services;
+﻿namespace AcessFlow.BLL.Services;
 
 /// <summary>
 /// CRUD service class use to manage the crud operations in db.

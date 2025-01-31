@@ -1,9 +1,4 @@
-﻿using ProductNest.Entity.Entity;
-using ProductNest.Enum;
-using System.ComponentModel.DataAnnotations.Schema;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace ProductNest.Entity;
+﻿namespace ProductNest.Entity;
 
 [Table("Product")]
 public class Product : _BaseProduct

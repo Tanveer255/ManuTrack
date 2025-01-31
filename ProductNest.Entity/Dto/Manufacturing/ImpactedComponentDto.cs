@@ -1,8 +1,4 @@
-﻿using ProductNest.Entity.Manufacturing;
-using ProductNest.Enum.Manufacturing;
-using System;
-
-namespace ProductNest.Dto.Manufacturing;
+﻿namespace ProductNest.Dto.Manufacturing;
 
 public class ImpactedComponentDto : ImpactedComponent
 {

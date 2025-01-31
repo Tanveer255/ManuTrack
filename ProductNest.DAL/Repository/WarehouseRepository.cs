@@ -1,15 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using ProductNest.DAL.Interface;
-using ProductNest.Entity;
-using ProductNest.Entity.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.DAL.Repository;
 public class WarehouseRepository : Repository<Warehouse>, IWarehouseRepository
 {
     private readonly IUnitOfWork _unitOfWork;

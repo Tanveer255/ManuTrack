@@ -1,9 +1,4 @@
-﻿using AcessFlow.Entity.Data;
-using EBS.DAL.Interface;
-using Microsoft.Extensions.Logging;
-using System;
-
-namespace EBS.DAL.Repository
+﻿namespace EBS.DAL.Repository
 {
     /// <summary>
     /// Class of UnitOfWork.

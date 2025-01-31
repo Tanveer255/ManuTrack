@@ -1,19 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using ProductNest.BLL.Interface;
-using ProductNest.BLL.Interface.Manufacturing;
-using ProductNest.DAL.Interface;
-using ProductNest.DAL.Interface.Manufacturing;
-using ProductNest.DAL.Repository;
-using ProductNest.Entity;
-using ProductNest.Entity.Manufacturing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProductNest.BLL.Service.Manufacturing;
+﻿namespace ProductNest.BLL.Service.Manufacturing;
 
 public class BatchService : CrudService<Batch>, IBatchService
 {

@@ -1,9 +1,4 @@
-﻿using ProductNest.Entity.Manufacturing;
-using ProductNest.Entity;
-using ProductNest.Enum.Manufacturing;
-using System;
-
-namespace ProductNest.Dto.Manufacturing;
+﻿namespace ProductNest.Dto.Manufacturing;
 
 public class ProductBatchDto : Batch
 {

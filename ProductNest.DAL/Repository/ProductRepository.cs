@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using ProductNest.DAL.Interface;
-using ProductNest.Entity;
-using System;
-using Enums = ProductNest.Entity.Enum;
+﻿
 namespace ProductNest.DAL.Repository;
 
 public class ProductRepository : Repository<Product>, IProductRepository

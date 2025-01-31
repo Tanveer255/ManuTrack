@@ -1,8 +1,4 @@
-﻿using ProductNest.BLL.Interface;
-using ProductNest.DAL.Interface;
-using System.Linq.Expressions;
-
-namespace ProductNest.BLL.Service;
+﻿namespace ProductNest.BLL.Service;
 
 /// <summary>
 /// CRUD service class use to manage the crud operations in db.
