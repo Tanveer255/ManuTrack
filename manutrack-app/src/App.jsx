@@ -12,10 +12,10 @@ import Acount from "./pages/Acount/Acount";
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-    //useEffect(() => {
-    //  const token = localStorage.getItem("token");
-    //  setIsLoggedIn(!!token);
-    //}, []);
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      setIsLoggedIn(!!token);
+    }, []);
 
     const handleLogin = () => {
         setIsLoggedIn(true);

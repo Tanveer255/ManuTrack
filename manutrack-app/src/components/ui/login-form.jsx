@@ -26,7 +26,7 @@ export function LoginForm({ className, handleLogin, ...props }) {
 
   const loginUser = (data) => {
     axios
-      .post("/Users/login", data)
+        .post("/auth/login", data)
       .then((res) => {
         toast.success("User Login successfully");
         localStorage.setItem("token", res.data.token.result);

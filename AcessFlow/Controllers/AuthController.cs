@@ -17,16 +17,13 @@ public class AuthController : ControllerBase
         _jwtAuthenticationService = jwtAuthenticationService;
     }
 
-    [HttpPost("login")]
+    [HttpPost(nameof(Login))]
     public IActionResult Login([FromBody] UserModel user)
     {
         if (!ValidateUser(user))
             return Unauthorized("Invalid credentials");
 
         var token = _jwtAuthenticationService.GenerateJwtToken(user.Username);
-        //return CreatedAtAction(nameof(Login),
-        //     new { id = user.Username },
-        //     new ApiResponse<UserModel>(true, "token created successfully.", user));
         return Ok(new { token, status = 200 });
     }
 
