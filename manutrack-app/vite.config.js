@@ -10,13 +10,13 @@ export default defineConfig({
       },
 
     },
-    //server: {
-    //    proxy: {
-    //        '/api': {
-    //            target: 'https://localhost:7067',
-    //            changeOrigin: true,
-    //            secure: false,
-    //        },
-    //    },
-    //}
+    server: {
+        proxy: {
+            '/api': {
+                target: 'https://localhost:7067',
+                changeOrigin: true,
+                secure: false,
+            },
+        },
+    }
 })

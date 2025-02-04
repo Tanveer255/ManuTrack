@@ -41,7 +41,7 @@
     "BaseUrl": "https://localhost:7067",
     "Cors": {
       "AllowAnyOrigin": false,
-      "AllowedOrigins": [ "http://localhost:60118" ],
+      "AllowedOrigins": [ "http://localhost:5173" ],
       "AllowAnyMethod": true,
       "AllowAnyHeader": true
     }
