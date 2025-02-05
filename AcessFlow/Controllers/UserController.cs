@@ -1,4 +1,5 @@
 ﻿
+using EBS.DAL.Interface;
 using static AcessFlow.Controllers.AuthController;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,11 +12,16 @@ namespace AcessFlow.Controllers
     {
         private readonly IJwtAuthenticationService _jwtAuthenticationService;
         private readonly IApplicationUserService _applicationUserService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserController(IJwtAuthenticationService jwtAuthenticationService, IApplicationUserService applicationUserService)
+        public UserController(IJwtAuthenticationService jwtAuthenticationService,
+            IApplicationUserService applicationUserService,
+            IUnitOfWork unitOfWork
+            )
         {
             _jwtAuthenticationService = jwtAuthenticationService;
             _applicationUserService = applicationUserService;
+            _unitOfWork = unitOfWork;
         }
         // GET: api/<UserController>
         [HttpGet]
@@ -43,6 +49,16 @@ namespace AcessFlow.Controllers
             
             return true;
         }
+        [HttpPost(nameof(Signup))]
+        public IActionResult Signup([FromBody] ApplicationUser user)
+        {
+            if (!ValidateUser(user))
+                return Unauthorized("email  is already used  credentials");
+            user.Id = Guid.NewGuid().ToString();
+            var result = _applicationUserService.Add(user);
+            _unitOfWork.Commit();
+            return Ok(new { result, status = 200 });
+        }
         // GET api/<UserController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -64,8 +80,16 @@ namespace AcessFlow.Controllers
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(Guid id)
         {
+            var user =await _applicationUserService.GetSingle(x => x.Id.Equals(id));
+            if (user == null)
+            {
+                 return Ok(false); ;
+            }
+           await _applicationUserService.Delete(user);
+            _unitOfWork.Commit();
+            return Ok(true);
         }
     }
 }

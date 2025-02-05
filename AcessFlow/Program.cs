@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using AcessFlow;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,10 +31,10 @@ builder.Services.AddDbContext<AcessFlowDbContext>(options => options.UseSqlServe
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<AcessFlowDbContext>();
 
-builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-//Servises...
-builder.Services.AddTransient(typeof(ICrudService<>), typeof(CrudService<>));
+//builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+//builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+////Servises...
+//builder.Services.AddTransient(typeof(ICrudService<>), typeof(CrudService<>));
 #region For Swagger
 builder.Services
       .AddSwaggerGen(c =>
@@ -89,6 +90,8 @@ builder.Services.AddAuthentication(auth =>
     };
 #pragma warning restore CS8604 // Possible null reference argument.
 });
+
+builder.Services.AddAllCustomServices();
 
 var app = builder.Build();
 
