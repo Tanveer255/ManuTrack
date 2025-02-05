@@ -11,4 +11,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SettingService.BLL\SettingService.BLL.csproj" />
+    <ProjectReference Include="..\SettingService.DAL\SettingService.DAL.csproj" />
+    <ProjectReference Include="..\SettingService.Entity\SettingService.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

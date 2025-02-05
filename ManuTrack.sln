@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingService.DAL", "Setti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingService", "SettingService\SettingService.csproj", "{DDC47382-1AF4-4BBB-AC3D-3E50A33CF884}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingService.Entity", "SettingService.Entity\SettingService.Entity.csproj", "{EB94A2A0-9482-4B8B-B134-C7862B9029BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{DDC47382-1AF4-4BBB-AC3D-3E50A33CF884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC47382-1AF4-4BBB-AC3D-3E50A33CF884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC47382-1AF4-4BBB-AC3D-3E50A33CF884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB94A2A0-9482-4B8B-B134-C7862B9029BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB94A2A0-9482-4B8B-B134-C7862B9029BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB94A2A0-9482-4B8B-B134-C7862B9029BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB94A2A0-9482-4B8B-B134-C7862B9029BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,5 +160,6 @@ Global
 		{DDA449A5-4EF1-44A9-BDB7-476B7207D66A} = {E9D48284-80D2-4602-821B-6B36487281D8}
 		{F1288CE4-EAD8-4061-855C-DFB2B3C90759} = {E9D48284-80D2-4602-821B-6B36487281D8}
 		{DDC47382-1AF4-4BBB-AC3D-3E50A33CF884} = {E9D48284-80D2-4602-821B-6B36487281D8}
+		{EB94A2A0-9482-4B8B-B134-C7862B9029BD} = {E9D48284-80D2-4602-821B-6B36487281D8}
 	EndGlobalSection
 EndGlobal
