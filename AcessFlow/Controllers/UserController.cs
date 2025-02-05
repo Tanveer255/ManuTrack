@@ -54,7 +54,7 @@ namespace AcessFlow.Controllers
         {
             if (!ValidateUser(user))
                 return Unauthorized("email  is already used  credentials");
-            user.Id = Guid.NewGuid().ToString();
+            //user.Id = Guid.NewGuid();
             var result = _applicationUserService.Add(user);
             _unitOfWork.Commit();
             return Ok(new { result, status = 200 });

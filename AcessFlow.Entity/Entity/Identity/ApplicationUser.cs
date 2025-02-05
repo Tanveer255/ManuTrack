@@ -1,12 +1,13 @@
-﻿namespace AcessFlow.Entity.Entity.Identity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-    public class ApplicationUser : IdentityUser
-    {
-    public ApplicationUser()
-    {
-        Id = Guid.NewGuid().ToString(); // Use Guid instead of string
-    }
+namespace AcessFlow.Entity.Entity.Identity;
 
+    public class ApplicationUser : IdentityUser<Guid>
+    {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public override Guid Id { get; set; }
     public string FirstName { get; set; }
         public string LastName { get; set; }
         public int UsernameChangeLimit { get; set; } = 10;

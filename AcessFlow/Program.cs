@@ -25,16 +25,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddDbContext<AcessFlowDbContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<AcessFlowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<AcessFlowDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<AcessFlowDbContext>()
+    .AddDefaultTokenProviders();
 
-//builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-//builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-////Servises...
-//builder.Services.AddTransient(typeof(ICrudService<>), typeof(CrudService<>));
 #region For Swagger
 builder.Services
       .AddSwaggerGen(c =>
@@ -62,7 +57,6 @@ builder.Services
 # endregion
 builder.Services.AddAuthorization();
 
-builder.Services.AddSingleton<IJwtAuthenticationService, JwtAuthenticationService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
 builder.Services.AddAuthentication(auth =>

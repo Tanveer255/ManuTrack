@@ -20,7 +20,6 @@ public class UserRolesController : Controller
         foreach (ApplicationUser user in users)
         {
             var thisViewModel = new UserRolesViewModel();
-            thisViewModel.UserId = user.Id;
             thisViewModel.Email = user.Email;
             thisViewModel.FirstName = user.FirstName;
             thisViewModel.LastName = user.LastName;

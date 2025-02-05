@@ -1,49 +1,62 @@
-﻿namespace AcessFlow.Entity.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Data;
 
-public class AcessFlowDbContext : IdentityDbContext<ApplicationUser>
+namespace AcessFlow.Entity.Data;
+
+public class AcessFlowDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     public AcessFlowDbContext(DbContextOptions<AcessFlowDbContext> options)
         : base(options)
     {
-            
     }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.HasDefaultSchema("Identity");
+
+        // Configure ApplicationUser and IdentityRole<Guid>
         builder.Entity<ApplicationUser>(entity =>
         {
-            entity.ToTable(name: "User");
+            entity.ToTable("User");
         });
 
-        builder.Entity<IdentityRole>(entity =>
+        builder.Entity<IdentityRole<Guid>>(entity =>
         {
-            entity.ToTable(name: "Role");
+            entity.ToTable("Role");
         });
-        builder.Entity<IdentityUserRole<string>>(entity =>
+
+        // Configure IdentityUserRole<Guid>
+        builder.Entity<IdentityUserRole<Guid>>(entity =>
         {
+            entity.HasKey(r => new { r.UserId, r.RoleId });
             entity.ToTable("UserRoles");
         });
 
-        builder.Entity<IdentityUserClaim<string>>(entity =>
+        // Configure IdentityUserLogin<Guid>
+        builder.Entity<IdentityUserLogin<Guid>>(entity =>
+        {
+            entity.HasKey(l => l.UserId);
+            entity.ToTable("UserLogins");
+        });
+
+        // Configure IdentityUserClaim<Guid>
+        builder.Entity<IdentityUserClaim<Guid>>(entity =>
         {
             entity.ToTable("UserClaims");
         });
 
-        builder.Entity<IdentityUserLogin<string>>(entity =>
-        {
-            entity.ToTable("UserLogins");
-        });
-
-        builder.Entity<IdentityRoleClaim<string>>(entity =>
+        // Configure IdentityRoleClaim<Guid>
+        builder.Entity<IdentityRoleClaim<Guid>>(entity =>
         {
             entity.ToTable("RoleClaims");
-
         });
 
-        builder.Entity<IdentityUserToken<string>>(entity =>
+        // Configure IdentityUserToken<Guid>
+        builder.Entity<IdentityUserToken<Guid>>(entity =>
         {
+            entity.HasKey(t => t.UserId);
             entity.ToTable("UserTokens");
         });
     }
+
 }
