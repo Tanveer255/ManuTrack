@@ -22,19 +22,6 @@ public class ProductNestDbContext : DbContext
     public DbSet<Warehouse> Warehouse { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Product>().ToTable("Product");
-        modelBuilder.Entity<Variant>().ToTable("Variant");
-        modelBuilder.Entity<BOMItem>().ToTable("BOMItem");
-        modelBuilder.Entity<CompletedPart>().ToTable("CompletedPart");
-        modelBuilder.Entity<Inventory>().ToTable("Inventory");
-        modelBuilder.Entity<ImpactedComponent>().ToTable("ImpactedComponent");
-        modelBuilder.Entity<ImageFile>().ToTable("ImageFile");
-        modelBuilder.Entity<Batch>().ToTable("Batch");
-        modelBuilder.Entity<Price>().ToTable("Price");
-        modelBuilder.Entity<PresentmentPrice>().ToTable("PresentmentPrice");
-        modelBuilder.Entity<VariantOption>().ToTable("VariantOption");
-        modelBuilder.Entity<Warehouse>().ToTable("Warehouse");
-
         modelBuilder.Entity<Batch>()
         .HasOne(b => b.Warehouse)
         .WithMany()

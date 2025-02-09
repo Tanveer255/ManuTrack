@@ -1,18 +1,14 @@
 ﻿namespace ProductNest.BLL.Service.Manufacturing;
 
-public class BatchService : CrudService<Batch>, IBatchService
+public class BatchService(
+    IBatchRepository batchRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<Batch>(batchRepository, unitOfWork), IBatchService
 {
-    private readonly IBatchRepository _batchRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public BatchService(IBatchRepository batchRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(batchRepository, unitOfWork)
-    {
-        _batchRepository = batchRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IBatchRepository _batchRepository = batchRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

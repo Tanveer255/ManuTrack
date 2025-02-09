@@ -2,19 +2,15 @@
 
 namespace ProductNest.BLL.Service;
 
-public class ImageFileService : CrudService<ImageFile>, IImageFileService
+public class ImageFileService(
+    IImageFileRepository imageFileRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<ImageFile>(imageFileRepository, unitOfWork), IImageFileService
 {
-    private readonly IImageFileRepository _imageFileRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public ImageFileService(IImageFileRepository imageFileRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(imageFileRepository, unitOfWork)
-    {
-        _imageFileRepository = imageFileRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IImageFileRepository _imageFileRepository= imageFileRepository;
+    private readonly IUnitOfWork _unitOfWork =unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

@@ -1,6 +1,4 @@
-﻿
-
-namespace ProductNest.Entity;
+﻿namespace ProductNest.Entity;
 
 public class _Base
 {

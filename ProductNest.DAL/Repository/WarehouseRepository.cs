@@ -1,14 +1,11 @@
 ﻿namespace ProductNest.DAL.Repository;
-public class WarehouseRepository : Repository<Warehouse>, IWarehouseRepository
+public class WarehouseRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<WarehouseRepository> logger
+    ) : Repository<Warehouse>(unitOfWork, logger), IWarehouseRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<WarehouseRepository> _logger;
-    public WarehouseRepository(IUnitOfWork unitOfWork, ILogger<WarehouseRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<WarehouseRepository> _logger = logger;
     public async Task<Warehouse> GetByIdAsync(Guid id)
     {
         try

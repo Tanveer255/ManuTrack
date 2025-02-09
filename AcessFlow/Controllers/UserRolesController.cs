@@ -1,6 +1,4 @@
-﻿
-
-namespace AcessFlow.Controllers;
+﻿namespace AcessFlow.Controllers;
 
 [Authorize]
 public class UserRolesController : Controller
@@ -16,10 +14,10 @@ public class UserRolesController : Controller
     public async Task<IActionResult> Index()
     {
         var users = await _userManager.Users.ToListAsync();
-        var userRolesViewModel = new List<UserRolesViewModel>();
+        var userRolesViewModel = new List<UserRoles>();
         foreach (ApplicationUser user in users)
         {
-            var thisViewModel = new UserRolesViewModel();
+            var thisViewModel = new UserRoles();
             thisViewModel.Email = user.Email;
             thisViewModel.FirstName = user.FirstName;
             thisViewModel.LastName = user.LastName;
@@ -38,10 +36,10 @@ public class UserRolesController : Controller
             return View("NotFound");
         }
         ViewBag.UserName = user.UserName;
-        var model = new List<ManageUserRolesViewModel>();
+        var model = new List<ManageUserRoles>();
         foreach (var role in _roleManager.Roles)
         {
-            var userRolesViewModel = new ManageUserRolesViewModel
+            var userRolesViewModel = new ManageUserRoles
             {
                 RoleId = role.Id,
                 RoleName = role.Name
@@ -59,7 +57,7 @@ public class UserRolesController : Controller
         return View(model);
     }
     [HttpPost]
-    public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
+    public async Task<IActionResult> Manage(List<ManageUserRoles> model, string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
         if (user == null)

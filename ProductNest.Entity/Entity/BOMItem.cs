@@ -1,12 +1,10 @@
-﻿
-
-namespace ProductNest.Entity;
+﻿namespace ProductNest.Entity;
 
 /// <summary>
 ///  Sub-model for a Bill of Materials (BOM) item
 /// </summary>
 /// 
-[Table("BOMItem")]
+[Table(nameof(BOMItem))]
 
 public class BOMItem : _Base
 {

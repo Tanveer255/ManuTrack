@@ -1,18 +1,14 @@
 ﻿namespace ProductNest.BLL.Service;
 
-public class BOMItemService : CrudService<BOMItem>, IBOMItemService
+public class BOMItemService(
+    IBOMItemRepository bOMItemRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<BOMItem>(bOMItemRepository, unitOfWork), IBOMItemService
 {
-    private readonly IBOMItemRepository _bOMItemRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public BOMItemService(IBOMItemRepository bOMItemRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(bOMItemRepository, unitOfWork)
-    {
-        _bOMItemRepository = bOMItemRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IBOMItemRepository _bOMItemRepository = bOMItemRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

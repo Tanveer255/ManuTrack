@@ -1,17 +1,13 @@
 ﻿namespace ProductNest.BLL.Service;
-public class PriceService : CrudService<Price>, IPriceService
+public class PriceService(
+    IPriceRepository priceRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<Price>(priceRepository, unitOfWork), IPriceService
 {
-    private readonly IPriceRepository _priceRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public PriceService(IPriceRepository priceRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(priceRepository, unitOfWork)
-    {
-        _priceRepository = priceRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IPriceRepository _priceRepository = priceRepository;
+    private readonly IUnitOfWork _unitOfWork =unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

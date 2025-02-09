@@ -6,7 +6,7 @@ namespace ProductNest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
         private readonly IVariantOptionService _variantOptionService;
@@ -16,7 +16,7 @@ namespace ProductNest.Controllers
         private readonly IImageFileService _imageFileService;
         private readonly IWarehouseService _warehouseService;
 
-        public ProductController(IProductService productService,
+        public ProductsController(IProductService productService,
             IVariantOptionService variantOptionService,
             IVariantService variantService,
             IBOMItemService bOMItemService,

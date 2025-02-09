@@ -1,17 +1,13 @@
 ﻿namespace ProductNest.BLL.Service;
-public class UnitOfMeasureService : CrudService<UnitOfMeasure>, IUnitOfMeasureService
+public class UnitOfMeasureService(
+    IUnitOfMeasureRepository unitOfMeasureRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<UnitOfMeasure>(unitOfMeasureRepository, unitOfWork), IUnitOfMeasureService
 {
-    private readonly IUnitOfMeasureRepository _unitOfMeasureRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public UnitOfMeasureService(IUnitOfMeasureRepository unitOfMeasureRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(unitOfMeasureRepository, unitOfWork)
-    {
-        _unitOfMeasureRepository = unitOfMeasureRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IUnitOfMeasureRepository _unitOfMeasureRepository = unitOfMeasureRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

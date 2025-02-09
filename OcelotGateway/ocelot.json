@@ -1,7 +1,10 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/product/{everything}",
+      /////////////////////////////////////////////////////
+      //             Product Nest                        //
+      /////////////////////////////////////////////////////
+      "DownstreamPathTemplate": "/api/products/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,11 +12,11 @@
           "Port": 5143
         }
       ],
-      "UpstreamPathTemplate": "/product/{everything}",
+      "UpstreamPathTemplate": "/products/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
     {
-      "DownstreamPathTemplate": "/api/unitOfMeasure/{everything}",
+      "DownstreamPathTemplate": "/api/unitOfMeasures/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -21,11 +24,50 @@
           "Port": 5143
         }
       ],
-      "UpstreamPathTemplate": "/unitOfMeasure/{everything}",
+      "UpstreamPathTemplate": "/unitOfMeasures/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/user/{everything}",
+      "DownstreamPathTemplate": "/api/manufacturing/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5143
+        }
+      ],
+      "UpstreamPathTemplate": "/manufacturing/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/imageFiles/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5143
+        }
+      ],
+      "UpstreamPathTemplate": "/imageFiles/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/warehouses/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5143
+        }
+      ],
+      "UpstreamPathTemplate": "/warehouses/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    /////////////////////////////////////////////////////
+    //             Acess Flow                         //
+    /////////////////////////////////////////////////////
+    {
+      "DownstreamPathTemplate": "/api/users/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -33,9 +75,24 @@
           "Port": 7129
         }
       ],
-      "UpstreamPathTemplate": "/user/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST","Delete" ]
+      "UpstreamPathTemplate": "/users/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/manageUserRoles/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7129
+        }
+      ],
+      "UpstreamPathTemplate": "/manageUserRoles/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
     }
+    /////////////////////////////////////////////////////
+    //             Setting                            //
+    /////////////////////////////////////////////////////
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7067",

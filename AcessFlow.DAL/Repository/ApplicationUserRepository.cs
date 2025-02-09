@@ -1,15 +1,12 @@
 ﻿namespace AcessFlow.DAL.Repository;
 
-public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
+public sealed class ApplicationUserRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<ApplicationUserRepository> logger
+    ) : Repository<ApplicationUser>(unitOfWork, logger), IApplicationUserRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<ApplicationUserRepository> _logger;
-    public ApplicationUserRepository(IUnitOfWork unitOfWork, ILogger<ApplicationUserRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork =unitOfWork;
+    private readonly ILogger<ApplicationUserRepository> _logger = logger;
     public async Task<ApplicationUser> GetById(Guid id)
     {
         var user = new ApplicationUser();

@@ -1,6 +1,6 @@
 ﻿namespace ProductNest.Entity.Entity;
 
-[Table("Option")]
+[Table(nameof(VariantOption))]
 public class VariantOption:_Base
 {
     public long VariantOptionId { get; set; }

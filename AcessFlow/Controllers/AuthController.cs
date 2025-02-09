@@ -1,6 +1,4 @@
-﻿
-
-namespace AcessFlow.Controllers;
+﻿namespace AcessFlow.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

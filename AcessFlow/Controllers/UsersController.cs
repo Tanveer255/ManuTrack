@@ -8,13 +8,13 @@ namespace AcessFlow.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IJwtAuthenticationService _jwtAuthenticationService;
         private readonly IApplicationUserService _applicationUserService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserController(IJwtAuthenticationService jwtAuthenticationService,
+        public UsersController(IJwtAuthenticationService jwtAuthenticationService,
             IApplicationUserService applicationUserService,
             IUnitOfWork unitOfWork
             )
@@ -29,16 +29,16 @@ namespace AcessFlow.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-        [HttpPost("login")]
+        [HttpPost(nameof(Login))]
         public IActionResult Login([FromBody] ApplicationUser user)
         {
             if (!ValidateUser(user))
                 return Unauthorized("Invalid credentials");
 
-            var token = _jwtAuthenticationService.GenerateJwtToken(user.FirstName);
+            var token = _jwtAuthenticationService.GenerateJwtToken(user.UserName);
             return Ok(new { token, status = 200 });
         }
-        [HttpPost("validate")]
+        [HttpPost(nameof(ValidateUser))]
         public bool ValidateUser(ApplicationUser user)
         {
             var userEntity = _applicationUserService.GetSingle(x => x.Email == user.Email);

@@ -1,17 +1,13 @@
 ﻿namespace ProductNest.BLL.Service;
-public class VariantService : CrudService<Variant>, IVariantService
+public class VariantService(
+    IVariantRepository variantRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<Variant>(variantRepository, unitOfWork), IVariantService
 {
-    private readonly IVariantRepository _variantRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public VariantService(IVariantRepository variantRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(variantRepository, unitOfWork)
-    {
-        _variantRepository = variantRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IVariantRepository _variantRepository = variantRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

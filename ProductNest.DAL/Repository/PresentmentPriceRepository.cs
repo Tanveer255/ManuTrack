@@ -1,15 +1,12 @@
 ﻿namespace ProductNest.DAL.Repository;
 
-public class PresentmentPriceRepository : Repository<PresentmentPrice>, IPresentmentPriceRepository
+public class PresentmentPriceRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<PresentmentPriceRepository> logger
+    ) : Repository<PresentmentPrice>(unitOfWork, logger), IPresentmentPriceRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<PresentmentPriceRepository> _logger;
-    public PresentmentPriceRepository(IUnitOfWork unitOfWork, ILogger<PresentmentPriceRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<PresentmentPriceRepository> _logger = logger;
     public async Task<PresentmentPrice> GetById(Guid id)
     {
         PresentmentPrice presentmentPrice = new PresentmentPrice();

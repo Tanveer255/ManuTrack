@@ -1,14 +1,11 @@
 ﻿namespace ProductNest.DAL.Repository;
-public class UnitOfMeasureRepository : Repository<UnitOfMeasure>, IUnitOfMeasureRepository
+public class UnitOfMeasureRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<UnitOfMeasureRepository> logger
+    ) : Repository<UnitOfMeasure>(unitOfWork, logger), IUnitOfMeasureRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<UnitOfMeasureRepository> _logger;
-    public UnitOfMeasureRepository(IUnitOfWork unitOfWork, ILogger<UnitOfMeasureRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<UnitOfMeasureRepository> _logger = logger;
     public async Task<UnitOfMeasure> GetById(string code)
     {
         var unitOfMeasure = new UnitOfMeasure();

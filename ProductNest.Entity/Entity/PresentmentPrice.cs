@@ -1,6 +1,6 @@
 ﻿namespace ProductNest.Entity.Entity;
 
-[Table("PresentmentPrice")]
+[Table(nameof(PresentmentPrice))]
 public class PresentmentPrice: _Base
 {
     public long PredentPriceId { get; set; }

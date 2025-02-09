@@ -1,6 +1,6 @@
 ﻿namespace AcessFlow.Entity.Entity.Identity;
 
-public class ManageUserRolesViewModel
+public class ManageUserRoles
 {
     public string RoleId { get; set; }
     public string RoleName { get; set; }

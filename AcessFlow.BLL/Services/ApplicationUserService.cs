@@ -1,18 +1,13 @@
 ﻿namespace AcessFlow.BLL.Services;
 
-public class ApplicationUserService: CrudService<ApplicationUser>, IApplicationUserService
+public sealed class ApplicationUserService(IApplicationUserRepository applicationUserRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<ApplicationUser>(applicationUserRepository,unitOfWork), IApplicationUserService
 {
-    private readonly IApplicationUserRepository _applicationUserRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public ApplicationUserService(IApplicationUserRepository applicationUserRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(applicationUserRepository, unitOfWork)
-    {
-        _applicationUserRepository = applicationUserRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IApplicationUserRepository _applicationUserRepository = applicationUserRepository;
+    private readonly IUnitOfWork _unitOfWork =unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

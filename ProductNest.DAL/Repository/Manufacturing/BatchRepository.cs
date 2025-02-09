@@ -2,16 +2,12 @@
 
 namespace ProductNest.DAL.Repository.Manufacturing;
 
-public class BatchRepository : Repository<Batch>, IBatchRepository
+public class BatchRepository(IUnitOfWork unitOfWork,
+    ILogger<BatchRepository> logger
+    ) : Repository<Batch>(unitOfWork, logger), IBatchRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<BatchRepository> _logger;
-    public BatchRepository(IUnitOfWork unitOfWork, ILogger<BatchRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork =unitOfWork;
+    private readonly ILogger<BatchRepository> _logger = logger;
     public async Task<Batch> GetById(Guid Id)
     {
         Batch batch = new Batch();

@@ -1,15 +1,12 @@
 ﻿namespace ProductNest.DAL.Repository;
 
-public class InventoryRepository : Repository<Inventory>, IInventoryRepository
+public class InventoryRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<InventoryRepository> logger
+    ) : Repository<Inventory>(unitOfWork, logger), IInventoryRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<InventoryRepository> _logger;
-    public InventoryRepository(IUnitOfWork unitOfWork, ILogger<InventoryRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<InventoryRepository> _logger = logger;
     public async Task<Inventory> GetById(Guid id)
     {
         Inventory inventory = new Inventory();

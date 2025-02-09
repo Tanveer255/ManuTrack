@@ -1,16 +1,13 @@
 ﻿namespace ProductNest.DAL.Repository;
 
 
-public class ImageFileRepository : Repository<ImageFile>, IImageFileRepository
+public class ImageFileRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<ImageFileRepository> logger
+    ) : Repository<ImageFile>(unitOfWork, logger), IImageFileRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<ImageFileRepository> _logger;
-    public ImageFileRepository(IUnitOfWork unitOfWork, ILogger<ImageFileRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<ImageFileRepository> _logger = logger;
     public async Task<ImageFile> GetById(Guid id)
     {
         ImageFile imageFile = new ImageFile();

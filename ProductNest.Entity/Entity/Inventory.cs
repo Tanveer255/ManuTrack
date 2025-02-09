@@ -1,6 +1,6 @@
 ﻿namespace ProductNest.Entity.Entity;
 
-[Table("Inventory")]
+[Table(nameof(Inventory))]
 public class Inventory : _Base
 {
     public long InventoryId { get; set; }

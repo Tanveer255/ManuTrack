@@ -1,19 +1,15 @@
 ﻿
 
 namespace ProductNest.BLL.Service.Manufacturing;
-public class ImpactedComponentService : CrudService<ImpactedComponent>, IImpactedComponentService
+public class ImpactedComponentService(
+    IImpactedComponentRepository impactedComponentRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<ImpactedComponent>(impactedComponentRepository, unitOfWork), IImpactedComponentService
 {
-    private readonly IImpactedComponentRepository _impactedComponentRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public ImpactedComponentService(IImpactedComponentRepository impactedComponentRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(impactedComponentRepository, unitOfWork)
-    {
-        _impactedComponentRepository = impactedComponentRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IImpactedComponentRepository _impactedComponentRepository = impactedComponentRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

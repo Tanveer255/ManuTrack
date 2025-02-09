@@ -1,15 +1,12 @@
 ﻿namespace ProductNest.DAL.Repository;
 
-public class BOMItemRepository : Repository<BOMItem>, IBOMItemRepository
+public class BOMItemRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<BOMItemRepository> logger
+    ) : Repository<BOMItem>(unitOfWork, logger), IBOMItemRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<BOMItemRepository> _logger;
-    public BOMItemRepository(IUnitOfWork unitOfWork, ILogger<BOMItemRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<BOMItemRepository> _logger = logger;
     public async Task<BOMItem> GetById(Guid id)
     {
         BOMItem bOMItem = new BOMItem();

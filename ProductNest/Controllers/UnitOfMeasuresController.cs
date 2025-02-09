@@ -5,10 +5,10 @@ namespace ProductNest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UnitOfMeasureController : ControllerBase
+    public class UnitOfMeasuresController : ControllerBase
     {
         private readonly IUnitOfMeasureService _unitOfMeasureService;
-        public UnitOfMeasureController(IUnitOfMeasureService unitOfMeasureService)
+        public UnitOfMeasuresController(IUnitOfMeasureService unitOfMeasureService)
         {
             _unitOfMeasureService = unitOfMeasureService;    
         }

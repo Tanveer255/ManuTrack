@@ -2,7 +2,7 @@
 
 namespace ProductNest.Entity.Manufacturing;
 
-[Table("Batch")]
+[Table(nameof(Batch))]
 public class Batch : _Base
 {
     public long BatchId { get; set; }

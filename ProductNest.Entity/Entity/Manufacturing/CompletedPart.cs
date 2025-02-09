@@ -2,7 +2,7 @@
 
 namespace ProductNest.Entity.Manufacturing;
 
-[Table("CompletedPart")]
+[Table(nameof(CompletedPart))]
 public class CompletedPart : _Base
 {
     public long CompletePartId { get; set; }

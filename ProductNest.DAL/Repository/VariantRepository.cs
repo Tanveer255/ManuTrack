@@ -1,14 +1,11 @@
 ﻿namespace ProductNest.DAL.Repository;
-public class VariantRepository : Repository<Variant>, IVariantRepository
+public class VariantRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<VariantRepository> logger
+    ) : Repository<Variant>(unitOfWork,logger), IVariantRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<VariantRepository> _logger;
-    public VariantRepository(IUnitOfWork unitOfWork, ILogger<VariantRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<VariantRepository> _logger = logger;
     public async Task<Variant> GetById(Guid id)
     {
         Variant variant = new Variant();

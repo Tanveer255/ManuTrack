@@ -1,6 +1,4 @@
-﻿
-
-namespace ProductNest.Entity.Entity;
+﻿namespace ProductNest.Entity.Entity;
 
 public abstract class _BaseProduct:_Base
 {

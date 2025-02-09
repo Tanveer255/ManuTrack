@@ -1,14 +1,11 @@
 ﻿namespace ProductNest.DAL.Repository.Manufacturing;
-public class ImpactedComponentRepository : Repository<ImpactedComponent>, IImpactedComponentRepository
+public class ImpactedComponentRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<ImpactedComponentRepository> logger
+    ) : Repository<ImpactedComponent>(unitOfWork, logger), IImpactedComponentRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<ImpactedComponentRepository> _logger;
-    public ImpactedComponentRepository(IUnitOfWork unitOfWork, ILogger<ImpactedComponentRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<ImpactedComponentRepository> _logger = logger;
     public async Task<ImpactedComponent> GetById(Guid Id)
     {
         ImpactedComponent impactedComponent = new ImpactedComponent();

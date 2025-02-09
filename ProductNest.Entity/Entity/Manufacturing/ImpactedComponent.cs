@@ -2,7 +2,7 @@
 
 namespace ProductNest.Entity.Manufacturing;
 
-[Table("ImpactedComponent")]
+[Table(nameof(ImpactedComponent))]
 public class ImpactedComponent : _Base
 {
     public long ImpactedComponentId { get; set; }

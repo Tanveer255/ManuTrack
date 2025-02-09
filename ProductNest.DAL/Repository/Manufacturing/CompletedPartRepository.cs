@@ -1,15 +1,11 @@
 ﻿namespace ProductNest.DAL.Repository.Manufacturing;
 
-public class CompletedPartRepository : Repository<CompletedPart>, ICompletedPartRepository
+public class CompletedPartRepository(IUnitOfWork unitOfWork,
+    ILogger<CompletedPartRepository> logger
+    ) : Repository<CompletedPart>(unitOfWork, logger), ICompletedPartRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<CompletedPartRepository> _logger;
-    public CompletedPartRepository(IUnitOfWork unitOfWork, ILogger<CompletedPartRepository> logger)
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<CompletedPartRepository> _logger = logger;
     public async Task<CompletedPart> GetById(Guid Id)
     {
         CompletedPart completedPart = new CompletedPart();

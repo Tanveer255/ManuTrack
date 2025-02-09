@@ -1,5 +1,5 @@
 ﻿namespace ProductNest.Entity.Entity;
-
+[Table(nameof(UnitOfMeasure))]
 public class UnitOfMeasure
 {
     [Key]

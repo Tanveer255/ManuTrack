@@ -1,5 +1,5 @@
 ﻿namespace ProductNest.Entity.Entity;
-
+[Table(nameof(Warehouse))]
 public class Warehouse : _Base
 {
     public long WarehouseId { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace ProductNest.Entity.Entity;
 
-[Table("ImageFile")]
+[Table(nameof(ImageFile))]
 public class ImageFile:_Base
 {
     public long ImageFileId { get; set; }

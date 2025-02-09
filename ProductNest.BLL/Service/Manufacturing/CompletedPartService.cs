@@ -1,18 +1,18 @@
-﻿namespace ProductNest.BLL.Service.Manufacturing;
+﻿using Microsoft.AspNetCore.Http;
+using ProductNest.DAL.Interface.Manufacturing;
+using ProductNest.DAL.Repository.Manufacturing;
 
-public class CompletedPartService : CrudService<CompletedPart>, ICompletedPartService
+namespace ProductNest.BLL.Service.Manufacturing;
+
+public class CompletedPartService(
+    ICompletedPartRepository completedPartRepository,
+         IUnitOfWork unitOfWork,
+IHttpContextAccessor httpContextAccessor
+    ) : CrudService<CompletedPart>(completedPartRepository, unitOfWork), ICompletedPartService
 {
-    private readonly ICompletedPartRepository _completedPartRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public CompletedPartService(ICompletedPartRepository completedPartRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(completedPartRepository, unitOfWork)
-    {
-        _completedPartRepository = completedPartRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly ICompletedPartRepository _completedPartRepository = completedPartRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>

@@ -1,18 +1,14 @@
 ﻿namespace ProductNest.BLL.Service;
 
-public class WarehouseService : CrudService<Warehouse>, IWarehouseService
+public class WarehouseService(
+    IWarehouseRepository warehouseRepository,
+         IUnitOfWork unitOfWork,
+         IHttpContextAccessor httpContextAccessor
+    ) : CrudService<Warehouse>(warehouseRepository, unitOfWork), IWarehouseService
 {
-    private readonly IWarehouseRepository _warehouseRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly HttpContext _httpContext;
-    public WarehouseService(IWarehouseRepository warehouseRepository,
-         IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
-        : base(warehouseRepository, unitOfWork)
-    {
-        _warehouseRepository = warehouseRepository;
-        _unitOfWork = unitOfWork;
-        _httpContext = httpContextAccessor.HttpContext;
-    }
+    private readonly IWarehouseRepository _warehouseRepository = warehouseRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext;
     /// <summary>
     /// 
     /// </summary>
