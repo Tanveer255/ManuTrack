@@ -6,8 +6,11 @@ namespace ProductNest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WarehousesController : ControllerBase
+    public class WarehousesController(
+        IWarehouseService warehouseService
+        ) : ControllerBase
     {
+        private readonly IWarehouseService _warehouseService = warehouseService;
         // GET: api/<WarehousesController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,8 +27,22 @@ namespace ProductNest.Controllers
 
         // POST api/<WarehousesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Warehouse>> Post([FromBody] Warehouse warehouse)
         {
+            try
+            {
+                var result = await _warehouseService.AddUpdate(warehouse);
+                if (result != null)
+                    return Ok(result);
+
+                return BadRequest("Failed to add or update the image file.");
+            }
+            catch (Exception exception)
+            {
+
+                // Log the exception (consider using a logging framework like Serilog)
+                return StatusCode(500, $"Internal server error: {exception.Message}");
+            }
         }
 
         // PUT api/<WarehousesController>/5

@@ -19,6 +19,26 @@ public class WarehouseService(
         var result = await _warehouseRepository.GetByIdAsync(id);
         return result;
     }
+    public async Task<Warehouse> AddUpdate(Warehouse warehouse)
+    {
+        var warehouseExist = await WareHouseExist(warehouse.Id);
+        if (warehouseExist)
+        {
+            await _warehouseRepository.Add(warehouse);
+            _unitOfWork.Commit();
+            return warehouse;
+        }
+        await _warehouseRepository.Update(warehouse);
+        _unitOfWork.Commit();
+        return warehouse;
+    }
+    public async Task<bool> WareHouseExist(Guid id)
+    {
+        var result = await _unitOfWork.Context.Warehouse.FindAsync(id);
+        if (result != null)
+            return true;
+        return false;
+    }
     public async Task<List<Warehouse>> GetAllDataAsync()
     {
         var result = await _unitOfWork.Context.Warehouse.ToListAsync();

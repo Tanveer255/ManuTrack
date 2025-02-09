@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,9 +8,14 @@ namespace ProductNest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ImageFilesController(IImageFileRepository imageFileRepository,IUnitOfWork unitOfWork) : ControllerBase
+    public class ImageFilesController(
+        IImageFileRepository imageFileRepository,
+        IUnitOfWork unitOfWork,
+        IImageFileService imageFileService
+        ) : ControllerBase
     {
         private readonly IImageFileRepository _imageFileRepository = imageFileRepository;
+        private readonly IImageFileService _imageFileService = imageFileService;
         private readonly IUnitOfWork _unitofwork = unitOfWork;
         // GET: api/<ImageFilesController>
         [HttpGet]
@@ -27,12 +34,23 @@ namespace ProductNest.Controllers
 
         // POST api/<ImageFilesController>
         [HttpPost]
-        public void Post([FromBody] ImageFile value)
+        public async Task<ActionResult<ImageFile>> Post([FromBody] ImageFile file)
         {
+            try
+            {
+                var result = await _imageFileService.AddUpdate(file);
+                if (result != null)
+                    return Ok(result);
 
-            _imageFileRepository.Add(value);
-            _unitofwork.Commit();
+                return BadRequest("Failed to add or update the image file.");
+            }
+            catch (Exception exception)
+            {
+                // Log the exception (consider using a logging framework like Serilog)
+                return StatusCode(500, $"Internal server error: {exception.Message}");
+            }
         }
+
 
         // PUT api/<ImageFilesController>/5
         [HttpPut("{id}")]

@@ -7,5 +7,6 @@ public interface IWarehouseService : ICrudService<Warehouse>
     /// <param name="Id"></param>
     /// <returns></returns>
     public Task<Warehouse> GetById(Guid Id);
+    public Task<Warehouse> AddUpdate(Warehouse warehouse);
     public Task<List<Warehouse>> GetAllDataAsync();
 }

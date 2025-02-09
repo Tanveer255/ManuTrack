@@ -7,6 +7,7 @@ public interface IImageFileService : ICrudService<ImageFile>
     /// <param name="Id"></param>
     /// <returns></returns>
     public Task<ImageFile> GetById(Guid Id);
+    public Task<ImageFile> AddUpdate(ImageFile file);
     public Task<List<ImageFile>> GetAllDataAsync();
 }
 
