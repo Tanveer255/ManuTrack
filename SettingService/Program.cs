@@ -6,6 +6,11 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+// Configure logging
+builder.Logging.ClearProviders(); // Optional: Clears default providers
+builder.Logging.AddConsole();     // Console logging
+builder.Logging.AddDebug();       // Debug output
+
 
 var app = builder.Build();
 
@@ -20,6 +25,13 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = "swagger"; // This will make it accessible at '/swagger'
     });
 }
+// Example of using ILogger in a request pipeline
+app.Use(async (context, next) =>
+{
+    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("Request to {Path}", context.Request.Path);
+    await next();
+});
 
 app.UseHttpsRedirection();
 

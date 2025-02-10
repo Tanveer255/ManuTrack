@@ -24,7 +24,10 @@ builder.Services.AddCors(options =>
                WithOrigins("http://localhost:5173");
     });
 });
-
+// Configure logging
+builder.Logging.ClearProviders(); // Optional: Clears default providers
+builder.Logging.AddConsole();     // Console logging
+builder.Logging.AddDebug();       // Debug output
 
 var app = builder.Build();
 
@@ -34,6 +37,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// Example of using ILogger in a request pipeline
+app.Use(async (context, next) =>
+{
+    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("Request to {Path}", context.Request.Path);
+    await next();
+});
 
 app.UseHttpsRedirection();
 
