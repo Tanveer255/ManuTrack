@@ -6,8 +6,9 @@ namespace AcessFlow.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmailController : ControllerBase
+    public class EmailController(IEmailService emailService) : ControllerBase
     {
+        private readonly IEmailService _emailService = emailService;
         // GET: api/<EmailController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,8 +25,13 @@ namespace AcessFlow.Controllers
 
         // POST api/<EmailController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<SendGridRequest>> Post([FromBody] SendGridRequest value)
         {
+            var result =  await _emailService.SendEmailAsync(value.ToEmail, value.Subject, value.Message);
+            if (result)
+                return Ok(new { Message = "Email sent successfully" });
+
+            return BadRequest(new { Message = "Failed to send email" });
         }
 
         // PUT api/<EmailController>/5
