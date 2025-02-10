@@ -24,4 +24,23 @@ public class BatchService(
         var batches = await _unitOfWork.Context.Batchs.ToListAsync();
         return batches;
     }
+    public async Task<Batch> AddUpdate(Batch batch) {
+        var result = await BatchExist(batch.Id);
+        if (result)
+        {
+            await _batchRepository.Add(batch);
+            _unitOfWork.Commit();
+            return batch;
+        }
+        await _batchRepository.Update(batch);
+        _unitOfWork.Commit();
+        return batch;
+    }
+    public async Task<bool> BatchExist(Guid id)
+    {
+        var result = await _unitOfWork.Context.Batchs.FindAsync(id);
+        if (result != null)
+            return true;
+        return false;
+    }
 }

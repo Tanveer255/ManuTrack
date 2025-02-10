@@ -10,4 +10,5 @@ public interface IBatchService : ICrudService<Batch>
     /// <returns></returns>
     public Task<Batch> GetById(Guid id);
     public Task<List<Batch>> GetAllDataAsync();
+    public Task<Batch> AddUpdate(Batch batch);
 }

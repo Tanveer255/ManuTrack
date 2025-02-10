@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProductNest.Entity.Manufacturing;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,8 +7,10 @@ namespace ProductNest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ManufacturingController : ControllerBase
+    public class ManufacturingController(IBatchRepository batchRepository,IBatchService batchService) : ControllerBase
     {
+        private readonly IBatchRepository _batchRepository = batchRepository;
+        private readonly IBatchService _batchService = batchService;
         // GET: api/<BatchesController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,8 +27,21 @@ namespace ProductNest.Controllers
 
         // POST api/<BatchesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Batch>> Post([FromBody] Batch batch)
         {
+            try
+            {
+                var result = await _batchService.AddUpdate(batch);
+                if (result != null)
+                    return Ok(result);
+
+                return BadRequest("Failed to add or update the image file.");
+            }
+            catch (Exception exception)
+            {
+                // Log the exception (consider using a logging framework like Serilog)
+                return StatusCode(500, $"Internal server error: {exception.Message}");
+            }
         }
 
         // PUT api/<BatchesController>/5
