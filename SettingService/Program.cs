@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SettingService.Entity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,7 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Logging.ClearProviders(); // Optional: Clears default providers
 builder.Logging.AddConsole();     // Console logging
 builder.Logging.AddDebug();       // Debug output
-
+builder.Services.AddDbContext<SettingServiceDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

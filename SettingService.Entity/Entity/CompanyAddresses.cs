@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SettingService.Entity.Common.Interface;
 
 namespace SettingService.Entity.Entity;
-
+[Table(nameof(CompanyAddresses))]
 public class CompanyAddresses :BaseEntity
 {
     [Key]
