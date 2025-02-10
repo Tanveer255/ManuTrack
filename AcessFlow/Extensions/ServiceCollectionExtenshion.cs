@@ -16,6 +16,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IApplicationUserService, ApplicationUserService>();
         services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
         services.AddSingleton<IJwtAuthenticationService, JwtAuthenticationService>();
+        // Register Email Service
+        services.AddScoped<IEmailService, EmailService>();
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
