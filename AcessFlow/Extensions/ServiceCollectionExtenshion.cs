@@ -6,7 +6,7 @@ using EBS.DAL.Repository;
 using JwtAuthentication.Service;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace AcessFlow;
+namespace AcessFlow.Extensions;
 
 public static class ServiceCollectionExtensions
 {
@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
         services.AddTransient<IApplicationUserService, ApplicationUserService>();
-        services.AddTransient<IApplicationUserRepository,ApplicationUserRepository>();
+        services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
         services.AddSingleton<IJwtAuthenticationService, JwtAuthenticationService>();
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

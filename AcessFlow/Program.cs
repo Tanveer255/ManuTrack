@@ -16,7 +16,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using AcessFlow;
+using AcessFlow.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

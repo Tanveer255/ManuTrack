@@ -1,6 +1,4 @@
-﻿
-
-namespace ProductNest;
+﻿namespace ProductNest.Extensions;
 
 public static class ServiceCollectionExtensions
 {
