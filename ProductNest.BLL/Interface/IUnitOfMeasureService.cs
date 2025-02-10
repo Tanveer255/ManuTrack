@@ -10,4 +10,5 @@ public interface IUnitOfMeasureService : ICrudService<UnitOfMeasure>
     /// <returns></returns>
     public Task<UnitOfMeasure> GetById(string code);
     public Task<List<UnitOfMeasure>> GetAllDataAsync();
+    public Task<UnitOfMeasure> AddUpdate(UnitOfMeasure uom);
 }

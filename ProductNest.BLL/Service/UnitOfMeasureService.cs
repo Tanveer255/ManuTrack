@@ -23,4 +23,24 @@ public class UnitOfMeasureService(
         var result = await _unitOfWork.Context.UnitOfMeasures.ToListAsync();
         return result;
     }
+    public async Task<UnitOfMeasure> AddUpdate(UnitOfMeasure uom)
+    {
+        var result = await UnitOfMeasureExist(uom.Code);
+        if (result)
+        {
+            await _unitOfMeasureRepository.Add(uom);
+            _unitOfWork.Commit();
+            return uom;
+        }
+        await _unitOfMeasureRepository.Update(uom);
+        _unitOfWork.Commit();
+        return uom;
+    }
+    public async Task<bool> UnitOfMeasureExist(string code)
+    {
+        var result = await _unitOfWork.Context.UnitOfMeasures.FindAsync(code);
+        if (result != null)
+            return true;
+        return false;
+    }
 }

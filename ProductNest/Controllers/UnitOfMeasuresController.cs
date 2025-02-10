@@ -29,8 +29,20 @@ namespace ProductNest.Controllers
 
         // POST api/<UnitOfMeasureController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<UnitOfMeasure>> Post([FromBody] UnitOfMeasure uom)
         {
+            try
+            {
+                var result = await _unitOfMeasureService.AddUpdate(uom);
+                if (result != null)
+                    return Ok(result);
+                return BadRequest("Failed to add or update the image file.");
+            }
+            catch (Exception exception)
+            {
+                // Log the exception (consider using a logging framework like Serilog)
+                return StatusCode(500, $"Internal server error: {exception.Message}");
+            }
         }
 
         // PUT api/<UnitOfMeasureController>/5
