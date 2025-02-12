@@ -8,5 +8,6 @@
         /// <param name="Id"></param>
         /// <returns></returns>
         public Task<ApplicationUser> GetById(Guid Id);
+        public bool ValidateUser(string email);
     }
 }

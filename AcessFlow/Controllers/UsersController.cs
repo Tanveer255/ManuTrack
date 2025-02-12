@@ -1,5 +1,8 @@
 ﻿
+using AcessFlow.Entity.DTO;
 using EBS.DAL.Interface;
+using System.Security.Cryptography;
+using System.Text;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AcessFlow.Controllers
@@ -28,35 +31,40 @@ namespace AcessFlow.Controllers
             return new string[] { "value1", "value2" };
         }
         [HttpPost(nameof(Login))]
-        public IActionResult Login([FromBody] ApplicationUser user)
+        public IActionResult Login([FromBody] User user)
         {
-            if (!ValidateUser(user))
+            var exist = _applicationUserService.ValidateUser(user.Email);
+            if (exist)
                 return Unauthorized("Invalid credentials");
 
             var token = _jwtAuthenticationService.GenerateJwtToken(user.UserName);
             return Ok(new { token, status = 200 });
         }
-        [HttpPost(nameof(ValidateUser))]
-        public bool ValidateUser(ApplicationUser user)
-        {
-            var userEntity = _applicationUserService.GetSingle(x => x.Email == user.Email);
-            if (userEntity == null)
-            {
-                return false;
-            }
-            
-            return true;
-        }
+
         // POST api/<UserController>
-        [HttpPost(nameof(Signup))]
-        public IActionResult Signup([FromBody] ApplicationUser user)
+        [HttpPost(nameof(Register))]
+        public async Task<ActionResult> Register([FromBody] User user)
         {
-            if (!ValidateUser(user))
-                return Unauthorized("email  is already used  credentials");
-            //user.Id = Guid.NewGuid();
-            var result = _applicationUserService.Add(user);
-            _unitOfWork.Commit();
-            return Ok(new { result, status = 200 });
+            // Check if the user already exists
+            var exist = _applicationUserService.ValidateUser(user.Email);
+            if (exist) return BadRequest("Username is taken.");
+
+            using var hmac = new HMACSHA512();
+
+            var newUser = new ApplicationUser()
+            {
+                FirstName = user.FirstName.ToLower(),
+                PasswordHash = user.Password,
+            };
+
+            // Add user and save changes
+           await _applicationUserService.Add(newUser);
+           _unitOfWork.Commit(); // Assuming Commit is async
+
+            // Generate JWT token
+            var token = _jwtAuthenticationService.GenerateJwtToken(newUser.UserName);
+
+            return Ok(new { token, status = 200 });
         }
         // GET api/<UserController>/5
         [HttpGet("{id}")]

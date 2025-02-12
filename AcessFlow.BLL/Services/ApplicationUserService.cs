@@ -1,4 +1,6 @@
-﻿namespace AcessFlow.BLL.Services;
+﻿using AcessFlow.BLL.Interfaces;
+
+namespace AcessFlow.BLL.Services;
 
 public sealed class ApplicationUserService(IApplicationUserRepository applicationUserRepository,
          IUnitOfWork unitOfWork,
@@ -17,5 +19,15 @@ public sealed class ApplicationUserService(IApplicationUserRepository applicatio
     {
         var result = await _applicationUserRepository.GetById(id);
         return result;
+    }
+    public bool ValidateUser(string email)
+    {
+        var exist =  _unitOfWork.Context.Users.Find(email);
+        if (exist != null)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
