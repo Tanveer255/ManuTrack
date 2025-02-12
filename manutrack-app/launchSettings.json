@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Vite React App": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\nodejs\\npm.cmd",
+      "commandLineArgs": "run dev",
+      "workingDirectory": "$(ProjectDir)",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5173/",
+      "environmentVariables": {
+        "NODE_ENV": "development"
+      }
+    }
+  }
+}
