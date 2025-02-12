@@ -42,8 +42,8 @@ namespace AcessFlow.Controllers
         }
 
         // POST api/<UserController>
-        [HttpPost(nameof(Register))]
-        public async Task<ActionResult> Register([FromBody] UserDTO user)
+        [HttpPost(nameof(Signup))]
+        public async Task<ActionResult> Signup([FromBody] UserDTO user)
         {
             // Check if the user already exists
             var exist = _applicationUserService.ValidateUser(user.Email);
