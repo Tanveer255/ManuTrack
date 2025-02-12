@@ -2,6 +2,45 @@
   "Routes": [
     {
       /////////////////////////////////////////////////////
+      //             Acess Flow                         //
+      /////////////////////////////////////////////////////
+      {
+        "DownstreamPathTemplate": "/api/users/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5161
+          }
+        ],
+        "UpstreamPathTemplate": "api/users/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
+      },
+      {
+        "DownstreamPathTemplate": "/api/manageUserRoles/{everything}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7129
+          }
+        ],
+        "UpstreamPathTemplate": "/manageUserRoles/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
+      },
+      {
+        "DownstreamPathTemplate": "/api/email/{everything}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 7129
+          }
+        ],
+        "UpstreamPathTemplate": "/email/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
+      },
+      /////////////////////////////////////////////////////
       //             Product Nest                        //
       /////////////////////////////////////////////////////
       "DownstreamPathTemplate": "/api/products/{everything}",
@@ -62,45 +101,6 @@
       ],
       "UpstreamPathTemplate": "/warehouses/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST" ]
-    },
-    /////////////////////////////////////////////////////
-    //             Acess Flow                         //
-    /////////////////////////////////////////////////////
-    {
-      "DownstreamPathTemplate": "/api/users/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7129
-        }
-      ],
-      "UpstreamPathTemplate": "/users/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/manageUserRoles/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7129
-        }
-      ],
-      "UpstreamPathTemplate": "/manageUserRoles/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/email/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7129
-        }
-      ],
-      "UpstreamPathTemplate": "/email/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "Delete" ]
     }
     /////////////////////////////////////////////////////
     //             Setting                            //

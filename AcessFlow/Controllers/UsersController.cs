@@ -31,7 +31,7 @@ namespace AcessFlow.Controllers
             return new string[] { "value1", "value2" };
         }
         [HttpPost(nameof(Login))]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromBody] LoginDTO user)
         {
             var exist = _applicationUserService.ValidateUser(user.Email);
             if (exist)
@@ -43,7 +43,7 @@ namespace AcessFlow.Controllers
 
         // POST api/<UserController>
         [HttpPost(nameof(Register))]
-        public async Task<ActionResult> Register([FromBody] User user)
+        public async Task<ActionResult> Register([FromBody] UserDTO user)
         {
             // Check if the user already exists
             var exist = _applicationUserService.ValidateUser(user.Email);

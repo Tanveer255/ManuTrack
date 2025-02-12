@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AcessFlow.Entity.DTO;
 
-public record User
+public record UserDTO
 {
     public  Guid Id { get; set; }
     public string FirstName { get; set; }
