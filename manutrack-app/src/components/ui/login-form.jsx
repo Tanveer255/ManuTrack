@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, data, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export function LoginForm({ className, handleLogin, ...props }) {
@@ -23,7 +23,7 @@ export function LoginForm({ className, handleLogin, ...props }) {
     } = useForm();
 
     let navigate = useNavigate();
-
+    console.log(data);
     const loginUser = (data) => {
         axios
             .post("https://localhost:7067/auth/Login", data)
@@ -53,15 +53,15 @@ export function LoginForm({ className, handleLogin, ...props }) {
                         <div className="flex flex-col gap-6">
                             {/* Username Field */}
                             <div className="grid gap-2">
-                                <Label htmlFor="username">Email</Label>
+                                <Label htmlFor="email">Email</Label>
                                 <Input
                                     type="text"
-                                    id="username"
+                                    id="email"
                                     placeholder="Enter your username"
-                                    {...register("username", { required: "Username is required" })}
-                                    className={`${errors.username ? "bg-red-500 bg-opacity-50" : ""}`}
+                                    {...register("email", { required: "Username is required" })}
+                                    className={`${errors.email ? "bg-red-500 bg-opacity-50" : ""}`}
                                 />
-                                {errors.username && <span className="text-red-500 text-sm">{errors.username.message}</span>}
+                                {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
                             </div>
 
                             {/* Password Field */}
