@@ -23,7 +23,7 @@ public sealed class ApplicationUserService(IApplicationUserRepository applicatio
     }
     public bool ExistUser(string email)
     {
-        var exist =  _unitOfWork.Context.Users.Find(email);
+        var exist =  _unitOfWork.Context.Users.Where(e=>e.Email.Equals(email)).FirstOrDefault();
         if (exist != null)
         {
             return true;
