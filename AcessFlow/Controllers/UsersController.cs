@@ -41,24 +41,30 @@ namespace AcessFlow.Controllers
                 return Unauthorized(new { message = "Invalid credentials" });
             }
 
-            var token = _jwtAuthenticationService.GenerateJwtToken(user.UserName);
+            var token = _jwtAuthenticationService.GenerateJwtToken(user.Email);
             return Ok(new { token, status = 200 });
         }
 
         // POST api/<UserController>
         [HttpPost(nameof(Signup))]
-        public async Task<ActionResult> Signup([FromBody] UserDTO user)
+        public async Task<ActionResult> Signup([FromBody] UserDTO userRequest)
         {
             // Check if the user already exists
-            var exist = _applicationUserService.ExistUser(user.Email);
+            var exist = _applicationUserService.ExistUser(userRequest.Email);
             if (exist) return BadRequest("Username is taken.");
 
-            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            userRequest.Password = BCrypt.Net.BCrypt.HashPassword(userRequest.Password);
 
             var newUser = new ApplicationUser()
             {
-                FirstName = user.FirstName.ToLower(),
-                PasswordHash = user.Password,
+                FirstName = userRequest.FirstName,
+                LastName = userRequest.LastName,
+                NormalizedUserName = $"{userRequest.FirstName} {userRequest.LastName}",
+                Email = userRequest.Email,
+                EmailConfirmed = true,
+                PhoneNumber = userRequest.PhoneNumber,
+                PhoneNumberConfirmed = true,
+                PasswordHash = userRequest.Password,
             };
 
             // Add user and save changes
@@ -66,7 +72,7 @@ namespace AcessFlow.Controllers
            _unitOfWork.Commit(); // Assuming Commit is async
 
             // Generate JWT token
-            var token = _jwtAuthenticationService.GenerateJwtToken(newUser.UserName);
+            var token = _jwtAuthenticationService.GenerateJwtToken(newUser.Email);
 
             return Ok(new { token, status = 200 });
         }

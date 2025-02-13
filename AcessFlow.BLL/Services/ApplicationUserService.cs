@@ -1,5 +1,6 @@
 ﻿using AcessFlow.BLL.Interfaces;
 using AcessFlow.Entity.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace AcessFlow.BLL.Services;
 
@@ -33,7 +34,7 @@ public sealed class ApplicationUserService(IApplicationUserRepository applicatio
     }
     public async Task<ApplicationUser> GetUserByEmail(string email)
     {
-        var user = await _unitOfWork.Context.Users.FindAsync(email);
+        var user = await _unitOfWork.Context.Users.Where(e=>e.Email.Equals(email)).FirstOrDefaultAsync();
         if (user== null)
             return null;
         return user;
