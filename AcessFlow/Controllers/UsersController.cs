@@ -1,6 +1,8 @@
 ﻿
 using AcessFlow.Entity.DTO;
 using EBS.DAL.Interface;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,11 +33,13 @@ namespace AcessFlow.Controllers
             return new string[] { "value1", "value2" };
         }
         [HttpPost(nameof(Login))]
-        public IActionResult Login([FromBody] LoginDTO user)
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
-            var exist = _applicationUserService.ValidateUser(user.Email);
-            if (exist)
-                return Unauthorized("Invalid credentials");
+            var user = await _applicationUserService.GetUserByEmail(loginDTO.Email);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(loginDTO.PassWord, user.PasswordHash))
+            {
+                return Unauthorized(new { message = "Invalid credentials" });
+            }
 
             var token = _jwtAuthenticationService.GenerateJwtToken(user.UserName);
             return Ok(new { token, status = 200 });
@@ -46,10 +50,10 @@ namespace AcessFlow.Controllers
         public async Task<ActionResult> Signup([FromBody] UserDTO user)
         {
             // Check if the user already exists
-            var exist = _applicationUserService.ValidateUser(user.Email);
+            var exist = _applicationUserService.ExistUser(user.Email);
             if (exist) return BadRequest("Username is taken.");
 
-            using var hmac = new HMACSHA512();
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
             var newUser = new ApplicationUser()
             {

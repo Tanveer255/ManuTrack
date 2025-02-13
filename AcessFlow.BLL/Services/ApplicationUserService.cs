@@ -1,4 +1,5 @@
 ﻿using AcessFlow.BLL.Interfaces;
+using AcessFlow.Entity.DTO;
 
 namespace AcessFlow.BLL.Services;
 
@@ -20,7 +21,7 @@ public sealed class ApplicationUserService(IApplicationUserRepository applicatio
         var result = await _applicationUserRepository.GetById(id);
         return result;
     }
-    public bool ValidateUser(string email)
+    public bool ExistUser(string email)
     {
         var exist =  _unitOfWork.Context.Users.Find(email);
         if (exist != null)
@@ -29,5 +30,12 @@ public sealed class ApplicationUserService(IApplicationUserRepository applicatio
         }
 
         return false;
+    }
+    public async Task<ApplicationUser> GetUserByEmail(string email)
+    {
+        var user = await _unitOfWork.Context.Users.FindAsync(email);
+        if (user== null)
+            return null;
+        return user;
     }
 }

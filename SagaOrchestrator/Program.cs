@@ -9,9 +9,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //// Configure logging
-//builder.Logging.ClearProviders(); // Optional: Clears default providers
-//builder.Logging.AddConsole();     // Console logging
-//builder.Logging.AddDebug();       // Debug output
+builder.Logging.ClearProviders(); // Optional: Clears default providers
+builder.Logging.AddConsole();     // Console logging
+builder.Logging.AddDebug();       // Debug output
 
 
 // Configure Serilog

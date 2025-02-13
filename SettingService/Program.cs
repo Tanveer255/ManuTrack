@@ -15,6 +15,10 @@ builder.Logging.AddConsole();     // Console logging
 builder.Logging.AddDebug();       // Debug output
 builder.Services.AddDbContext<SettingServiceDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configure logging
+builder.Logging.ClearProviders(); // Optional: Clears default providers
+builder.Logging.AddConsole();     // Console logging
+builder.Logging.AddDebug();       // Debug output
 
 var app = builder.Build();
 

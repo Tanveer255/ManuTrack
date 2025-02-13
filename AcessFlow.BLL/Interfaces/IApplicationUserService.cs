@@ -1,4 +1,6 @@
-﻿namespace AcessFlow.BLL.Interfaces
+﻿using AcessFlow.Entity.DTO;
+
+namespace AcessFlow.BLL.Interfaces
 {
     public interface IApplicationUserService : ICrudService<ApplicationUser>
     {
@@ -8,6 +10,7 @@
         /// <param name="Id"></param>
         /// <returns></returns>
         public Task<ApplicationUser> GetById(Guid Id);
-        public bool ValidateUser(string email);
+        public bool ExistUser(string email);
+        public Task<ApplicationUser> GetUserByEmail(string email);
     }
 }
