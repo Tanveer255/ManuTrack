@@ -28,3 +28,9 @@ public class SendGridSettings {
 
     public static string FromEmail { get; set; }
 }
+public class ReCaptchaSettings
+{
+    public static string SiteKey { get; set; }
+    public static string SecretKey { get; set; }
+    public static string Url { get; set; }
+}
