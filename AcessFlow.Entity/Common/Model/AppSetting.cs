@@ -18,19 +18,25 @@ public class AppSetting
 
     public static string ReCaptchaUrl { get; set; }
 
-    public SendGridSettings sendGridSettings { get; set; }
+    public SendGridSetting sendGridSettings { get; set; }
+    public ReCaptchaSetting ReCaptchaSettings { get; set; }
+    public Application applications { get; set; }
     public static string ApplicationEmailValidationEnabled { get; set; }
 }
-public class SendGridSettings {
+public class SendGridSetting {
     public static string EmailApiKey { get; set; }
 
     public static string ValidationApiKey { get; set; }
 
     public static string FromEmail { get; set; }
 }
-public class ReCaptchaSettings
+public class ReCaptchaSetting
 {
     public static string SiteKey { get; set; }
     public static string SecretKey { get; set; }
     public static string Url { get; set; }
+}
+public  class Application
+{
+    public bool EmailValidationEnabled { get; set; }
 }
