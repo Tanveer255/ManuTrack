@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using AcessFlow.Extensions;
 using Serilog;
+using AcessFlow.Entity.Common.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +59,7 @@ builder.Services
 # endregion
 builder.Services.AddAuthorization();
 
+builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
 builder.Services.AddAuthentication(auth =>

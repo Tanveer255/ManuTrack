@@ -18,11 +18,13 @@ public class AppSetting
 
     public static string ReCaptchaUrl { get; set; }
 
-    public static string SendGridEmailApiKey { get; set; }
-
-    public static string SendGridValidationApiKey { get; set; }
-
-    public static string SendGridFromEmail { get; set; }
-
+    public SendGridSettings sendGridSettings { get; set; }
     public static string ApplicationEmailValidationEnabled { get; set; }
+}
+public class SendGridSettings {
+    public static string EmailApiKey { get; set; }
+
+    public static string ValidationApiKey { get; set; }
+
+    public static string FromEmail { get; set; }
 }
