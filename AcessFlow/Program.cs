@@ -93,14 +93,18 @@ builder.Services.AddAuthentication(auth =>
 builder.Services.AddAllCustomServices();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader().
-               WithOrigins("http://localhost:5173");
-    });
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // React frontend
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
 });
+
+
+
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -120,5 +124,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 // Use CORS
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowFrontend");
 app.Run();

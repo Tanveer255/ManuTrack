@@ -14,14 +14,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Add CORS service
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", builder =>
+    options.AddPolicy("AllowLocalhost", policy =>
     {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader().
-               WithOrigins("http://localhost:5173");
+        policy.WithOrigins("http://localhost:5173") // Allow your frontend origin
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // If your frontend uses cookies or auth headers
     });
 });
 // Configure logging
@@ -50,8 +51,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-// Use CORS
-app.UseCors("AllowAllOrigins");
+
+
+// Enable CORS for the Ocelot API Gateway
+app.UseCors("AllowLocalhost");
 
 // Configure Ocelot middleware
 app.UseOcelot().Wait();

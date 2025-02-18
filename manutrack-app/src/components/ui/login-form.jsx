@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Link, data, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export function LoginForm({ className, handleLogin, ...props }) {
@@ -23,22 +23,34 @@ export function LoginForm({ className, handleLogin, ...props }) {
     } = useForm();
 
     let navigate = useNavigate();
-    console.log(data);
+
+    // Function to login the user
     const loginUser = (data) => {
+        // Adjusting API endpoint to '/Users/Login'
         axios
-            .post("https://localhost:7067/auth/Login", data)
+            .post("https://localhost:7067/Users/Login", data)
             .then((res) => {
                 toast.success("User logged in successfully");
+
+                // Storing the token in localStorage
                 localStorage.setItem("token", res.data.token);
+
+                // Redirecting the user to the home page
                 navigate("/");
+
+                // Triggering the handleLogin function passed as a prop (this could update app state)
                 handleLogin();
+
+                // Resetting the form
                 reset();
             })
             .catch((err) => {
+                // Handling errors from the API response
                 const errorMessage = err.response?.data?.message || "Login failed. Please try again.";
                 toast.error(errorMessage);
             });
     };
+
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
@@ -51,14 +63,14 @@ export function LoginForm({ className, handleLogin, ...props }) {
                 <CardContent>
                     <form onSubmit={handleSubmit(loginUser)}>
                         <div className="flex flex-col gap-6">
-                            {/* Username Field */}
+                            {/* Email Field */}
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email</Label>
                                 <Input
-                                    type="text"
+                                    type="email" // changed from text to email for better input validation
                                     id="email"
-                                    placeholder="Enter your username"
-                                    {...register("email", { required: "Username is required" })}
+                                    placeholder="Enter your email"
+                                    {...register("email", { required: "Email is required" })}
                                     className={`${errors.email ? "bg-red-500 bg-opacity-50" : ""}`}
                                 />
                                 {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}

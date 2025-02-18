@@ -19,6 +19,16 @@ builder.Services.AddDbContext<SettingServiceDbContext>(options =>
 builder.Logging.ClearProviders(); // Optional: Clears default providers
 builder.Logging.AddConsole();     // Console logging
 builder.Logging.AddDebug();       // Debug output
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") // Allow your frontend origin
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // If your frontend uses cookies or auth headers
+    });
+});
 
 var app = builder.Build();
 
@@ -40,7 +50,7 @@ app.Use(async (context, next) =>
     logger.LogInformation("Request to {Path}", context.Request.Path);
     await next();
 });
-
+app.UseCors("AllowLocalhost");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

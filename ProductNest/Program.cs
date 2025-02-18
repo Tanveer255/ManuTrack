@@ -71,12 +71,12 @@ builder.Services
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", builder =>
+    options.AddPolicy("AllowLocalhost", policy =>
     {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader().
-               WithOrigins("http://localhost:60118");
+        policy.WithOrigins("http://localhost:5173") // Allow your frontend origin
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // If your frontend uses cookies or auth headers
     });
 });
 
@@ -99,7 +99,8 @@ app.Use(async (context, next) =>
     logger.LogInformation("Request to {Path}", context.Request.Path);
     await next();
 });
-app.UseCors("AllowAllOrigins");
+// Enable CORS for the Ocelot API Gateway
+app.UseCors("AllowLocalhost");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

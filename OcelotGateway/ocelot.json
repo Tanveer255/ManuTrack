@@ -5,15 +5,15 @@
       //             Access Flow                         //
       /////////////////////////////////////////////////////
       "DownstreamPathTemplate": "/api/users/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5161
+          "Port": 7129
         }
       ],
       "UpstreamPathTemplate": "/users/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "OPTIONS" ]
     },
     {
       "DownstreamPathTemplate": "/api/manageUserRoles/{everything}",
@@ -107,13 +107,13 @@
     /////////////////////////////////////////////////////
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7067",
-    "Cors": {
-      "AllowAnyOrigin": false,
-      "AllowedOrigins": [ "http://localhost:5173" ],
-      "AllowAnyMethod": true,
-      "AllowAnyHeader": true
-    }
+    "BaseUrl": "https://localhost:7067"
+  },
+  "CorsOptions": {
+    "AllowedOrigins": [ "http://localhost:5173" ],
+    "AllowAnyMethod": true,
+    "AllowAnyHeader": true,
+    "AllowCredentials": true
   }
 }
   
