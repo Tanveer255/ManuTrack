@@ -20,8 +20,8 @@ public class AppSetting
 
     public SendGridSetting sendGridSettings { get; set; }
     public ReCaptchaSetting ReCaptchaSettings { get; set; }
-    public Application applications { get; set; }
-    public static string ApplicationEmailValidationEnabled { get; set; }
+   // public JwtSettings JwtSettings { get; set; }
+    public bool EmailValidationEnabled { get; set; }
 }
 public class SendGridSetting {
     public static string EmailApiKey { get; set; }
@@ -35,8 +35,4 @@ public class ReCaptchaSetting
     public static string SiteKey { get; set; }
     public static string SecretKey { get; set; }
     public static string Url { get; set; }
-}
-public  class Application
-{
-    public bool EmailValidationEnabled { get; set; }
 }
