@@ -13,15 +13,15 @@
         }
       ],
       "UpstreamPathTemplate": "/users/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "OPTIONS" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
     },
     {
       "DownstreamPathTemplate": "/api/manageUserRoles/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5161
+          "Port": 7129
         }
       ],
       "UpstreamPathTemplate": "/manageUserRoles/{everything}",
