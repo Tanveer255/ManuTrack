@@ -8,6 +8,9 @@ import { Toaster } from "react-hot-toast";
 import { SidebarProvider } from "./components/ui/sidebar";
 import SignUp from "./pages/SignUp/SignUp";
 import Acount from "./pages/Acount/Acount";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -28,6 +31,7 @@ function App() {
 
     return (
         <>
+            <ToastContainer />
             <BrowserRouter>
                 {isLoggedIn ? (
                     <SidebarProvider>
