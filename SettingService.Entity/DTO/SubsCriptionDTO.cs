@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace SettingService.Entity.DTO;
 
-public class PaymentDTO
+public class SubsCriptionDTO
 {
-    public Guid PaymentMethodId { get; set; }
-    public string CustommerId { get; set; }
+    public Guid Id { get; set; }
+    public string CustomerId { get; set; }
+    public string ProductId { get; set; }
 }
