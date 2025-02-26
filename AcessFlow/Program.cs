@@ -63,6 +63,7 @@ builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSett
 builder.Services.Configure<SendGridSetting>(builder.Configuration.GetSection("SendGrid"));
 builder.Services.Configure<ReCaptchaSetting>(builder.Configuration.GetSection("ReCaptcha"));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.AddAuthentication(auth =>
 {
