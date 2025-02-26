@@ -19,6 +19,7 @@ using System.Text;
 using AcessFlow.Extensions;
 using Serilog;
 using AcessFlow.Entity.Common.Model;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +65,8 @@ builder.Services.Configure<SendGridSetting>(builder.Configuration.GetSection("Se
 builder.Services.Configure<ReCaptchaSetting>(builder.Configuration.GetSection("ReCaptcha"));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+// Load Stripe Secret Key
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"]; 
 
 builder.Services.AddAuthentication(auth =>
 {
