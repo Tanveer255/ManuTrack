@@ -13,6 +13,7 @@ public class BaseEntity
     public bool IsDeleted { get; set; } // To mark active/inactive status
     public BaseEntity()
     {
+        CreatedAt = DateTime.UtcNow;
         IsActive = false;
         IsDeleted = false;
     }
