@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ReferenceService.Data;
+using ReferenceService.Extenshions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,8 @@ builder.Services.AddDbContext<ReferenceServiceDbContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services
+    .AddAllCustomServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

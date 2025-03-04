@@ -101,6 +101,21 @@
       ],
       "UpstreamPathTemplate": "/warehouses/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    /////////////////////////////////////////////////////
+    //             ReferenceService                     //
+    /////////////////////////////////////////////////////
+    {
+      "DownstreamPathTemplate": "/api/country/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5058
+        }
+      ],
+      "UpstreamPathTemplate": "/country/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
     }
     /////////////////////////////////////////////////////
     //             Setting                              //
