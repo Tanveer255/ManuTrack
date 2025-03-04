@@ -1,4 +1,13 @@
-﻿namespace ProductNest.DAL.Repository.Manufacturing;
+﻿namespace ProductNest.Repository.Manufacturing;
+public interface ICompletedPartRepository : IRepository<CompletedPart>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<CompletedPart> GetById(Guid id);
+}
 
 public class CompletedPartRepository(IUnitOfWork unitOfWork,
     ILogger<CompletedPartRepository> logger

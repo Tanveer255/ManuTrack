@@ -15,10 +15,11 @@ global using System.Text;
 global using Microsoft.AspNetCore.Mvc.Infrastructure;
 global using ProductNest.BLL.Service;
 global using ProductNest.Service.Manufacturing;
-global using ProductNest.DAL.Interface;
-global using ProductNest.DAL.Interface.Manufacturing;
-global using ProductNest.DAL.Repository;
-global using ProductNest.DAL.Repository.Manufacturing;
+global using ProductNest.Repository;
+global using ProductNest.Repository.Manufacturing;
 global using System.Linq.Expressions;
 global using Microsoft.AspNetCore.Http;
 global using ProductNest.Entity.Manufacturing;
+global using Microsoft.Extensions.Logging;
+global using ProductNest.Entity.Commaon.Interface;
+

@@ -1,4 +1,13 @@
-﻿namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.Repository;
+public interface IPresentmentPriceRepository : IRepository<PresentmentPrice>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<PresentmentPrice> GetById(Guid id);
+}
 
 public class PresentmentPriceRepository(
     IUnitOfWork unitOfWork,

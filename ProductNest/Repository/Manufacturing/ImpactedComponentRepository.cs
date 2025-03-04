@@ -1,4 +1,13 @@
-﻿namespace ProductNest.DAL.Repository.Manufacturing;
+﻿namespace ProductNest.Repository.Manufacturing;
+public interface IImpactedComponentRepository : IRepository<ImpactedComponent>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<ImpactedComponent> GetById(Guid id);
+}
 public class ImpactedComponentRepository(
     IUnitOfWork unitOfWork,
     ILogger<ImpactedComponentRepository> logger

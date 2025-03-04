@@ -1,5 +1,13 @@
-﻿namespace ProductNest.DAL.Repository;
-
+﻿namespace ProductNest.Repository;
+public interface IInventoryRepository : IRepository<Inventory>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<Inventory> GetById(Guid id);
+}
 public class InventoryRepository(
     IUnitOfWork unitOfWork,
     ILogger<InventoryRepository> logger

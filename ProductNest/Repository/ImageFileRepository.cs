@@ -1,6 +1,14 @@
-﻿namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.Repository;
 
-
+public interface IImageFileRepository : IRepository<ImageFile>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<ImageFile> GetById(Guid id);
+}
 public class ImageFileRepository(
     IUnitOfWork unitOfWork,
     ILogger<ImageFileRepository> logger

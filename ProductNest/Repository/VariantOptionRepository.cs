@@ -1,4 +1,13 @@
-﻿namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.Repository;
+public interface IVariantOptionRepository : IRepository<VariantOption>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<VariantOption> GetById(Guid id);
+}
 public class VariantOptionRepository(
     IUnitOfWork unitOfWork,
     ILogger<VariantOptionRepository> logger

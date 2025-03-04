@@ -1,6 +1,13 @@
-﻿
-
-namespace ProductNest.DAL.Repository.Manufacturing;
+﻿namespace ProductNest.Repository.Manufacturing;
+public interface IBatchRepository : IRepository<Batch>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<Batch> GetById(Guid id);
+}
 
 public class BatchRepository(IUnitOfWork unitOfWork,
     ILogger<BatchRepository> logger

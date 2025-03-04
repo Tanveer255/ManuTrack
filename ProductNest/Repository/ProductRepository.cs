@@ -1,5 +1,14 @@
-﻿
-namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.Repository;
+public interface IProductRepository : IRepository<Product>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="productId"></param>
+    /// <returns></returns>
+    public Task<Product> GetById(Guid productId);
+}
+
 
 public class ProductRepository(
     IUnitOfWork unitOfWork,

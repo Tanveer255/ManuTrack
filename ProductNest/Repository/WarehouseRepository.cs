@@ -1,4 +1,13 @@
-﻿namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.Repository;
+public interface IWarehouseRepository : IRepository<Warehouse>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<Warehouse> GetByIdAsync(Guid id);
+}
 public class WarehouseRepository(
     IUnitOfWork unitOfWork,
     ILogger<WarehouseRepository> logger

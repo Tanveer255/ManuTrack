@@ -1,4 +1,13 @@
-﻿namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.Repository;
+public interface IUnitOfMeasureRepository : IRepository<UnitOfMeasure>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    public Task<UnitOfMeasure> GetById(string code);
+}
 public class UnitOfMeasureRepository(
     IUnitOfWork unitOfWork,
     ILogger<UnitOfMeasureRepository> logger

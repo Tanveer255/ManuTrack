@@ -1,4 +1,13 @@
-﻿namespace ProductNest.DAL.Repository;
+﻿namespace ProductNest.Repository;
+public interface IBOMItemRepository : IRepository<BOMItem>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<BOMItem> GetById(Guid id);
+}
 
 public class BOMItemRepository(
     IUnitOfWork unitOfWork,

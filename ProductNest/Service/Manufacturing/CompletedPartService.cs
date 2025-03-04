@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using ProductNest.DAL.Interface.Manufacturing;
-using ProductNest.DAL.Repository.Manufacturing;
-
-namespace ProductNest.Service.Manufacturing;
+﻿namespace ProductNest.Service.Manufacturing;
 public interface ICompletedPartService : ICrudService<CompletedPart>
 {
     /// <summary>
