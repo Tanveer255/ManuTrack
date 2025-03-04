@@ -1,5 +1,13 @@
 ﻿namespace ProductNest.BLL.Service;
-
+public interface IPresentmentPriceService : ICrudService<PresentmentPrice>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    public Task<PresentmentPrice> GetById(Guid Id);
+}
 public class PresentmentPriceService(
     IPresentmentPriceRepository presentmentPriceRepository,
          IUnitOfWork unitOfWork,

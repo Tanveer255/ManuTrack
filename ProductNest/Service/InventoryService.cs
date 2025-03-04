@@ -1,5 +1,13 @@
 ﻿namespace ProductNest.BLL.Service;
-
+public interface IInventoryService : ICrudService<Inventory>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    public Task<Inventory> GetById(Guid Id);
+}
 public class InventoryService(
     IInventoryRepository inventoryRepository,
          IUnitOfWork unitOfWork,

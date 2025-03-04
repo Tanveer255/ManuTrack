@@ -2,8 +2,17 @@
 using ProductNest.DAL.Interface.Manufacturing;
 using ProductNest.DAL.Repository.Manufacturing;
 
-namespace ProductNest.BLL.Service.Manufacturing;
-
+namespace ProductNest.Service.Manufacturing;
+public interface ICompletedPartService : ICrudService<CompletedPart>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<CompletedPart> GetById(Guid id);
+    public Task<List<CompletedPart>> GetAllDataAsync();
+}
 public class CompletedPartService(
     ICompletedPartRepository completedPartRepository,
          IUnitOfWork unitOfWork,
