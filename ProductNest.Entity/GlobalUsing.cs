@@ -1,9 +1,0 @@
-﻿global using Microsoft.EntityFrameworkCore;
-global using ProductNest.Entity.Entity;
-global using ProductNest.Entity.Manufacturing;
-global using ProductNest.Enum.Manufacturing;
-global using ProductNest.Entity;
-global using ProductNest.Entity.Enum.Manufacturing;
-global using System.ComponentModel.DataAnnotations.Schema;
-global using System.ComponentModel.DataAnnotations;
-global using ProductNest.Enum;
