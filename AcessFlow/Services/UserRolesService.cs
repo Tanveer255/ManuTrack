@@ -1,10 +1,15 @@
-﻿using System;
+﻿using AcessFlow.DAL.Interface;
+using EBS.DAL.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AcessFlow.BLL.Services;
+public interface IUserRolesService : ICrudService<UserRoles>
+{
+}
 
 internal sealed class UserRolesService(
     IUnitOfWork unitOfWork,IUserRolesRepository userRolesRepository

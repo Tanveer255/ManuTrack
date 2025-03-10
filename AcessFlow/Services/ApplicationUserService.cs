@@ -1,9 +1,18 @@
-﻿using AcessFlow.BLL.Interfaces;
-using AcessFlow.Entity.DTO;
-using Microsoft.EntityFrameworkCore;
+﻿using AcessFlow.DAL.Interface;
+using EBS.DAL.Interface;
 
 namespace AcessFlow.BLL.Services;
-
+public interface IApplicationUserService : ICrudService<ApplicationUser>
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    public Task<ApplicationUser> GetById(Guid Id);
+    public bool ExistUser(string email);
+    public Task<ApplicationUser> GetUserByEmail(string email);
+}
 public sealed class ApplicationUserService(IApplicationUserRepository applicationUserRepository,
          IUnitOfWork unitOfWork,
          IHttpContextAccessor httpContextAccessor

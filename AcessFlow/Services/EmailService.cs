@@ -4,7 +4,10 @@ using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-
+public interface IEmailService
+{
+    Task<bool> SendEmailAsync(string toEmail, string subject, string message);
+}
 public class EmailService : IEmailService
 {
     private readonly string _sendGridApiKey;

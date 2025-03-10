@@ -15,7 +15,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AcessFlow.BLL\AcessFlow.BLL.csproj" />
     <ProjectReference Include="..\AcessFlow.DAL\AcessFlow.DAL.csproj" />
     <ProjectReference Include="..\AcessFlow.Entity\AcessFlow.Entity.csproj" />
     <ProjectReference Include="..\JwtAuthentication\JwtAuthentication.csproj" />
