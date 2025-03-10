@@ -1,8 +1,4 @@
 ﻿using AcessFlow.BLL.Services;
-using AcessFlow.DAL.Interface;
-using AcessFlow.DAL.Repository;
-using EBS.DAL.Interface;
-using EBS.DAL.Repository;
 using JwtAuthentication.Service;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 

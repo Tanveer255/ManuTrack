@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AcessFlow.DAL.Repository;
+namespace AcessFlow.Repository;
+public interface IUserRolesRepository : IRepository<UserRoles>
+{
+}
 
 internal sealed class UserRolesRepository(
     IUnitOfWork unitOfWork,

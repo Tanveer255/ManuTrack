@@ -1,8 +1,4 @@
-﻿using AcessFlow.DAL.Interface;
-using EBS.DAL.Interface;
-using System.Linq.Expressions;
-
-namespace AcessFlow.BLL.Services;
+﻿namespace AcessFlow.BLL.Services;
 /// <summary>
 /// Crud services interface.
 /// </summary>

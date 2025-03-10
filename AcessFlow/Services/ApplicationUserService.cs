@@ -1,7 +1,4 @@
-﻿using AcessFlow.DAL.Interface;
-using EBS.DAL.Interface;
-
-namespace AcessFlow.BLL.Services;
+﻿namespace AcessFlow.BLL.Services;
 public interface IApplicationUserService : ICrudService<ApplicationUser>
 {
     /// <summary>

@@ -1,18 +1,17 @@
-﻿namespace EBS.DAL.Interface
+﻿namespace EBS.DAL.Interface;
+
+/// <summary>
+/// Unit Of Work interface.
+/// </summary>
+public interface IUnitOfWork : IDisposable
 {
     /// <summary>
-    /// Unit Of Work interface.
+    /// Gets context property.
     /// </summary>
-    public interface IUnitOfWork : IDisposable
-    {
-        /// <summary>
-        /// Gets context property.
-        /// </summary>
-        public AcessFlowDbContext Context { get; }
+    public AcessFlowDbContext Context { get; }
 
-        /// <summary>
-        /// Commit.
-        /// </summary>
-        public void Commit();
-    }
+    /// <summary>
+    /// Commit.
+    /// </summary>
+    public void Commit();
 }
