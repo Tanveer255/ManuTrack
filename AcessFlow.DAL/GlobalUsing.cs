@@ -1,9 +1,0 @@
-﻿global using AcessFlow.Entity.Entity.Identity;
-global using System.Linq.Expressions;
-global using AcessFlow.Entity.Data;
-global using AcessFlow.DAL.Interface;
-global using EBS.DAL.Interface;
-global using EBS.DAL.Repository;
-global using Microsoft.Extensions.Logging;
-global using AcessFlow.Entity.Interfaces;
-global using Microsoft.EntityFrameworkCore;
