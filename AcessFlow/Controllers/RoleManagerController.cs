@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.Controllers;
+﻿namespace AcessFlowService.Controllers;
 [Authorize]
 public class RoleManagerController : Controller
 {

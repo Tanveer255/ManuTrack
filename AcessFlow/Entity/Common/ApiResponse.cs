@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.Entity.Common;
+﻿namespace AcessFlowService.Entity.Common;
 
 public class ApiResponse<T>
 {

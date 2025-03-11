@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.Entity.Interfaces
+﻿namespace AcessFlowService.Entity.Interfaces
 {
     public interface IHasSoftDelete
     {

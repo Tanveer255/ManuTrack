@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AcessFlow.Repository;
+namespace AcessFlowService.Repository;
 public interface IManageUserRolesRepository : IRepository<ManageUserRoles>
 {
 }

@@ -17,7 +17,7 @@
 
       4. You are allowed to share/distribute under the TANVEER brand name.
 
-      5. You are allowed to put a screenshot or a link on your blog posts or any other wAcessFlowites.
+      5. You are allowed to put a screenshot or a link on your blog posts or any other wAcessFlowServiceites.
 
 
  => YOU ARE NOT ALLOWED
@@ -26,7 +26,7 @@
 
       2. You are not allowed to sell, resale, rent, lease, license, or sub-license.
 
-      3. You are not allowed to upload to any third party wAcessFlowites without our permission.
+      3. You are not allowed to upload to any third party wAcessFlowServiceites without our permission.
 
 
  => This app using Flowbite Community Edition: https://flowbite.com/

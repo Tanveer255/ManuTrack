@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Data;
 
-namespace AcessFlow.Entity.Data;
+namespace AcessFlowService.Entity.Data;
 
-public class AcessFlowDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+public class AcessFlowServiceDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
-    public AcessFlowDbContext(DbContextOptions<AcessFlowDbContext> options)
+    public AcessFlowServiceDbContext(DbContextOptions<AcessFlowServiceDbContext> options)
         : base(options)
     {
     }

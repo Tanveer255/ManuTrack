@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace AcessFlow.Entity.Migrations
+namespace AcessFlowService.Entity.Migrations
 {
     /// <inheritdoc />
     public partial class updateSchema : Migration

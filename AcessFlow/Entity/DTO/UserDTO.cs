@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AcessFlow.Entity.DTO;
+namespace AcessFlowService.Entity.DTO;
 
 public record UserDTO
 {

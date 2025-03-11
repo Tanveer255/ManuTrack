@@ -1,6 +1,6 @@
-@AcessFlow_HostAddress = http://localhost:5161
+@AcessFlowService_HostAddress = http://localhost:5161
 
-GET {{AcessFlow_HostAddress}}/weatherforecast/
+GET {{AcessFlowService_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

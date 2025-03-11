@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.BLL.Services;
+﻿namespace AcessFlowService.BLL.Services;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Configuration;

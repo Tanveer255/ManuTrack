@@ -1,8 +1,8 @@
-﻿using AcessFlow.BLL.Services;
+﻿using AcessFlowService.BLL.Services;
 using JwtAuthentication.Service;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace AcessFlow.Extensions;
+namespace AcessFlowService.Extensions;
 
 public static class ServiceCollectionExtensions
 {

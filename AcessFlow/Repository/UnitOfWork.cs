@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.Repository;
+﻿namespace AcessFlowService.Repository;
 /// <summary>
 /// Unit Of Work interface.
 /// </summary>
@@ -7,7 +7,7 @@ public interface IUnitOfWork : IDisposable
     /// <summary>
     /// Gets context property.
     /// </summary>
-    public AcessFlowDbContext Context { get; }
+    public AcessFlowServiceDbContext Context { get; }
 
     /// <summary>
     /// Commit.
@@ -25,14 +25,14 @@ public class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Gets this is DBContext class.
     /// </summary>
-    public AcessFlowDbContext Context { get; }
+    public AcessFlowServiceDbContext Context { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
     /// </summary>
     /// <param name="context">object of ApplicationDbContext.</param>
     /// <param name="logger">object of ILogger.</param>
-    public UnitOfWork(AcessFlowDbContext context, ILogger<UnitOfWork> logger)
+    public UnitOfWork(AcessFlowServiceDbContext context, ILogger<UnitOfWork> logger)
     {
         Context = context;
         _logger = logger;

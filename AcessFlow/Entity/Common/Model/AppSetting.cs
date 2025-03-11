@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AcessFlow.Entity.Common.Model;
+namespace AcessFlowService.Entity.Common.Model;
 
 public class AppSetting
 {

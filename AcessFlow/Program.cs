@@ -1,12 +1,12 @@
-using AcessFlow.Entity.Data;
+using AcessFlowService.Entity.Data;
 using JwtAuthentication.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using AcessFlow.Extensions;
+using AcessFlowService.Extensions;
 using Serilog;
-using AcessFlow.Entity.Common.Model;
+using AcessFlowService.Entity.Common.Model;
 using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<AcessFlowDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AcessFlowServiceDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-    .AddEntityFrameworkStores<AcessFlowDbContext>()
+    .AddEntityFrameworkStores<AcessFlowServiceDbContext>()
     .AddDefaultTokenProviders();
 
 #region For Swagger

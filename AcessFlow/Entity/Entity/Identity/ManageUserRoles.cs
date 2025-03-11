@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.Entity.Entity.Identity;
+﻿namespace AcessFlowService.Entity.Entity.Identity;
 
 public class ManageUserRoles
 {

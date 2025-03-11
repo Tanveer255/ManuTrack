@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A33D89BE-81B7-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductNest", "ProductNest", "{2A331BCE-5E7F-4674-A943-B5C67F9F230A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcessFlow", "AcessFlow", "{8F5AE7F3-2E97-45AC-921B-DCD201F1DB53}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcessFlowService", "AcessFlowService", "{8F5AE7F3-2E97-45AC-921B-DCD201F1DB53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcessFlow", "AcessFlow\AcessFlow.csproj", "{F5EDD97E-BD0F-43E8-8893-42B4D994D4A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcessFlowService", "AcessFlow\AcessFlowService.csproj", "{F5EDD97E-BD0F-43E8-8893-42B4D994D4A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuthentication", "JwtAuthentication\JwtAuthentication.csproj", "{05B2C63A-E7E6-4AE6-A550-F1671298349E}"
 EndProject

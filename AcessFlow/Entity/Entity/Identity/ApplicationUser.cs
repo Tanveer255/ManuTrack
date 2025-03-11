@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcessFlow.Entity.Entity.Identity;
+namespace AcessFlowService.Entity.Entity.Identity;
 
 public class ApplicationUser : IdentityUser<Guid>
 {

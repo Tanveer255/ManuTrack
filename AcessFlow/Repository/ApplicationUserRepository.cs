@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.Repository;
+﻿namespace AcessFlowService.Repository;
 public interface IApplicationUserRepository : IRepository<ApplicationUser>
 {
     /// <summary>

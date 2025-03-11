@@ -1,4 +1,4 @@
-﻿using AcessFlow.Entity.Common.Model;
+﻿using AcessFlowService.Entity.Common.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Stripe.Checkout;
@@ -6,7 +6,7 @@ using Stripe;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace AcessFlow.Controllers
+namespace AcessFlowService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

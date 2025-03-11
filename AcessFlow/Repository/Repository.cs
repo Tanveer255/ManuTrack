@@ -1,4 +1,4 @@
-﻿namespace AcessFlow.Repository;
+﻿namespace AcessFlowService.Repository;
 /// <summary>
 /// IRepository interface.
 /// </summary>
