@@ -15,3 +15,6 @@ global using AcessFlow.Entity.Data;
 global using AcessFlow.Repository;
 global using Microsoft.Extensions.Logging;
 global using AcessFlow.Entity.Interfaces;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
