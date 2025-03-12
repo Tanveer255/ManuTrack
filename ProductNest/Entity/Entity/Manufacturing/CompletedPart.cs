@@ -1,6 +1,6 @@
 ﻿
 
-namespace ProductNest.Entity.Manufacturing;
+namespace ProductNestService.Entity.Manufacturing;
 
 [Table(nameof(CompletedPart))]
 public class CompletedPart : _Base

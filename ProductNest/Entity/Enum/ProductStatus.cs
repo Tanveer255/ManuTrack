@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Enum;
+﻿namespace ProductNestService.Enum;
 
 public enum ProductStatus
 {

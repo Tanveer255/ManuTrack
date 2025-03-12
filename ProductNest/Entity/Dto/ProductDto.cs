@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Dto;
+﻿namespace ProductNestService.Dto;
 
 public class ProductDto : Product
 {

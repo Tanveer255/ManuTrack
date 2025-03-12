@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ProductNest.Entity.Migrations
+namespace ProductNestService.Entity.Migrations
 {
     /// <inheritdoc />
     public partial class AddUnitOfMeaure : Migration

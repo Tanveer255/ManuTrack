@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Entity.Enum.Manufacturing;
+﻿namespace ProductNestService.Entity.Enum.Manufacturing;
 public enum BatchStatus
 {
     NotStarted,

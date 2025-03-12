@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Entity;
+﻿namespace ProductNestService.Entity;
 
 public class _Base
 {

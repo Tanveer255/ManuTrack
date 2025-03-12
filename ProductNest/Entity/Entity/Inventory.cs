@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Entity.Entity;
+﻿namespace ProductNestService.Entity.Entity;
 
 [Table(nameof(Inventory))]
 public class Inventory : _Base

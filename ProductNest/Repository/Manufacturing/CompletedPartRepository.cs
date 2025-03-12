@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Repository.Manufacturing;
+﻿namespace ProductNestService.Repository.Manufacturing;
 public interface ICompletedPartRepository : IRepository<CompletedPart>
 {
     /// <summary>

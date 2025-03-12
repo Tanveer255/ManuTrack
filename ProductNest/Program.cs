@@ -1,6 +1,6 @@
 
 
-using ProductNest.Extensions;
+using ProductNestService.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,7 +63,7 @@ builder.Services.AddAuthentication(auth =>
 });
 builder.Services.AddAuthorization();
 // Optionally add database context for EF Core (if required)
-builder.Services.AddDbContext<ProductNestDbContext>(options =>
+builder.Services.AddDbContext<ProductNestServiceDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services

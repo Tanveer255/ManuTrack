@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{70EFC4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A33D89BE-81B7-451C-9843-055C08EA5A0C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductNest", "ProductNest", "{2A331BCE-5E7F-4674-A943-B5C67F9F230A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductNestService", "ProductNestService", "{2A331BCE-5E7F-4674-A943-B5C67F9F230A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcessFlowService", "AcessFlowService", "{8F5AE7F3-2E97-45AC-921B-DCD201F1DB53}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuthentication", "JwtAuthentication\JwtAuthentication.csproj", "{05B2C63A-E7E6-4AE6-A550-F1671298349E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductNest", "ProductNest\ProductNest.csproj", "{BB8D9266-7BF3-40F7-B22B-EADC30E9BA31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductNestService", "ProductNest\ProductNestService.csproj", "{BB8D9266-7BF3-40F7-B22B-EADC30E9BA31}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8}"
 EndProject

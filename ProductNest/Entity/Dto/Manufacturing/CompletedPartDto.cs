@@ -1,6 +1,6 @@
 ﻿
 
-namespace ProductNest.Dto.Manufacturing;
+namespace ProductNestService.Dto.Manufacturing;
 
 public class CompletedPartDto : CompletedPart
 {

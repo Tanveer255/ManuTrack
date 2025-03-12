@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Entity.Entity;
+﻿namespace ProductNestService.Entity.Entity;
 [Table(nameof(Warehouse))]
 public class Warehouse : _Base
 {

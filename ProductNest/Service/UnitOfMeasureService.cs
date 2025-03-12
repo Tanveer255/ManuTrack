@@ -1,4 +1,4 @@
-﻿namespace ProductNest.BLL.Service;
+﻿namespace ProductNestService.BLL.Service;
 public interface IUnitOfMeasureService : ICrudService<UnitOfMeasure>
 {
     /// <summary>

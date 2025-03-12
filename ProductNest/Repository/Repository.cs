@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Repository;
+﻿namespace ProductNestService.Repository;
 /// <summary>
 /// IRepository interface.
 /// </summary>

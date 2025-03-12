@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Service.Manufacturing;
+﻿namespace ProductNestService.Service.Manufacturing;
 public interface ICompletedPartService : ICrudService<CompletedPart>
 {
     /// <summary>

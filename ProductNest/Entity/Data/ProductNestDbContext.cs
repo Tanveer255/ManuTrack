@@ -1,8 +1,8 @@
-﻿namespace ProductNest.Entity.Data;
+﻿namespace ProductNestService.Entity.Data;
 
-public class ProductNestDbContext : DbContext
+public class ProductNestServiceDbContext : DbContext
 {
-    public ProductNestDbContext(DbContextOptions<ProductNestDbContext> options)
+    public ProductNestServiceDbContext(DbContextOptions<ProductNestServiceDbContext> options)
             : base(options)
     {
 
@@ -114,7 +114,7 @@ public class ProductNestDbContext : DbContext
             BEGIN
                 SET NOCOUNT ON;
                 SELECT TOP (1000) [Code], [Name]
-                FROM [ProductNestDev].[dbo].[UnitOfMeasures];
+                FROM [ProductNestServiceDev].[dbo].[UnitOfMeasures];
             END;
         ";
 

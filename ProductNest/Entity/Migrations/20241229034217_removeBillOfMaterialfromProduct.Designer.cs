@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProductNest.Entity.Data;
+using ProductNestService.Entity.Data;
 
 #nullable disable
 
-namespace ProductNest.Entity.Migrations
+namespace ProductNestService.Entity.Migrations
 {
-    [DbContext(typeof(ProductNestDbContext))]
+    [DbContext(typeof(ProductNestServiceDbContext))]
     [Migration("20241229034217_removeBillOfMaterialfromProduct")]
     partial class removeBillOfMaterialfromProduct
     {
@@ -25,7 +25,7 @@ namespace ProductNest.Entity.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProductNest.Entity.BOMItem", b =>
+            modelBuilder.Entity("ProductNestService.Entity.BOMItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("BOMItem", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.ImageFile", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.ImageFile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,7 +119,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("ImageFile", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Inventory", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Inventory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,7 +191,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("Inventory", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.PresentmentPrice", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.PresentmentPrice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +228,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("PresentmentPrice", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Price", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Price", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,7 +270,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("Price", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.UnitOfMeasure", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.UnitOfMeasure", b =>
                 {
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(450)");
@@ -511,7 +511,7 @@ namespace ProductNest.Entity.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Variant", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Variant", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -641,7 +641,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("Variant", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.VariantOption", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.VariantOption", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -680,7 +680,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("VariantOption", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Warehouse", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Warehouse", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -732,7 +732,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("Warehouse", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.Batch", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Manufacturing.Batch", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -829,7 +829,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("Batch", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.CompletedPart", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Manufacturing.CompletedPart", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -864,7 +864,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("CompletedPart", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.ImpactedComponent", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Manufacturing.ImpactedComponent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -915,7 +915,7 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("ImpactedComponent", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Product", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -994,22 +994,22 @@ namespace ProductNest.Entity.Migrations
                     b.ToTable("Product", (string)null);
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.ImageFile", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.ImageFile", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Product", null)
+                    b.HasOne("ProductNestService.Entity.Product", null)
                         .WithMany("ImageFiles")
                         .HasForeignKey("ProductId");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Inventory", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Inventory", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Entity.Price", "Price")
+                    b.HasOne("ProductNestService.Entity.Entity.Price", "Price")
                         .WithMany()
                         .HasForeignKey("PriceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProductNest.Entity.Entity.Warehouse", "Warehouse")
+                    b.HasOne("ProductNestService.Entity.Entity.Warehouse", "Warehouse")
                         .WithMany("Inventory")
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1020,38 +1020,38 @@ namespace ProductNest.Entity.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.PresentmentPrice", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.PresentmentPrice", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Entity.Price", "Price")
+                    b.HasOne("ProductNestService.Entity.Entity.Price", "Price")
                         .WithMany()
                         .HasForeignKey("PriceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProductNest.Entity.Entity.Variant", null)
+                    b.HasOne("ProductNestService.Entity.Entity.Variant", null)
                         .WithMany("PresentmentPrices")
                         .HasForeignKey("VariantId");
 
                     b.Navigation("Price");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Variant", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Variant", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Product", null)
+                    b.HasOne("ProductNestService.Entity.Product", null)
                         .WithMany("Variants")
                         .HasForeignKey("ProductId");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.VariantOption", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.VariantOption", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Product", null)
+                    b.HasOne("ProductNestService.Entity.Product", null)
                         .WithMany("Options")
                         .HasForeignKey("ProductId");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Warehouse", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Warehouse", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Entity.Variant", "Variant")
+                    b.HasOne("ProductNestService.Entity.Entity.Variant", "Variant")
                         .WithMany()
                         .HasForeignKey("VariantId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1060,27 +1060,27 @@ namespace ProductNest.Entity.Migrations
                     b.Navigation("Variant");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.Batch", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Manufacturing.Batch", b =>
                 {
-                    b.HasOne("ProductNest.Entity.BOMItem", "BOMItem")
+                    b.HasOne("ProductNestService.Entity.BOMItem", "BOMItem")
                         .WithMany()
                         .HasForeignKey("BOMItemId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ProductNest.Entity.Entity.Inventory", "Inventory")
+                    b.HasOne("ProductNestService.Entity.Entity.Inventory", "Inventory")
                         .WithMany()
                         .HasForeignKey("InventoryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ProductNest.Entity.Product", "Product")
+                    b.HasOne("ProductNestService.Entity.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ProductNest.Entity.Entity.Warehouse", "Warehouse")
+                    b.HasOne("ProductNestService.Entity.Entity.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1095,9 +1095,9 @@ namespace ProductNest.Entity.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.CompletedPart", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Manufacturing.CompletedPart", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Manufacturing.Batch", "Batch")
+                    b.HasOne("ProductNestService.Entity.Manufacturing.Batch", "Batch")
                         .WithMany()
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1106,21 +1106,21 @@ namespace ProductNest.Entity.Migrations
                     b.Navigation("Batch");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Manufacturing.ImpactedComponent", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Manufacturing.ImpactedComponent", b =>
                 {
-                    b.HasOne("ProductNest.Entity.Manufacturing.Batch", "Batch")
+                    b.HasOne("ProductNestService.Entity.Manufacturing.Batch", "Batch")
                         .WithMany()
                         .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProductNest.Entity.Entity.Inventory", "Inventory")
+                    b.HasOne("ProductNestService.Entity.Entity.Inventory", "Inventory")
                         .WithMany()
                         .HasForeignKey("InventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProductNest.Entity.Entity.Warehouse", "Warehouse")
+                    b.HasOne("ProductNestService.Entity.Entity.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1133,17 +1133,17 @@ namespace ProductNest.Entity.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Variant", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Variant", b =>
                 {
                     b.Navigation("PresentmentPrices");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Entity.Warehouse", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Entity.Warehouse", b =>
                 {
                     b.Navigation("Inventory");
                 });
 
-            modelBuilder.Entity("ProductNest.Entity.Product", b =>
+            modelBuilder.Entity("ProductNestService.Entity.Product", b =>
                 {
                     b.Navigation("ImageFiles");
 

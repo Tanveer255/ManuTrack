@@ -2,7 +2,7 @@
 
 using System.ComponentModel;
 
-namespace ProductNest.BLL.Service;
+namespace ProductNestService.BLL.Service;
 public interface IImageFileService : ICrudService<ImageFile>
 {
     /// <summary>

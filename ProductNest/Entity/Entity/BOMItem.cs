@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Entity;
+﻿namespace ProductNestService.Entity;
 
 /// <summary>
 ///  Sub-model for a Bill of Materials (BOM) item

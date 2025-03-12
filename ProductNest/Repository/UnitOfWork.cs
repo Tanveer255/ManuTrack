@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Repository;
+﻿namespace ProductNestService.Repository;
 /// <summary>
 /// Unit Of Work interface.
 /// </summary>
@@ -7,7 +7,7 @@ public interface IUnitOfWork : IDisposable
     /// <summary>
     /// Gets context property.
     /// </summary>
-    public ProductNestDbContext Context { get; }
+    public ProductNestServiceDbContext Context { get; }
 
     /// <summary>
     /// Commit.
@@ -25,14 +25,14 @@ public class UnitOfWork : IUnitOfWork
     /// <summary>
     /// Gets this is DBContext class.
     /// </summary>
-    public ProductNestDbContext Context { get; }
+    public ProductNestServiceDbContext Context { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
     /// </summary>
     /// <param name="context">object of ApplicationDbContext.</param>
     /// <param name="logger">object of ILogger.</param>
-    public UnitOfWork(ProductNestDbContext context, ILogger<UnitOfWork> logger)
+    public UnitOfWork(ProductNestServiceDbContext context, ILogger<UnitOfWork> logger)
     {
         Context = context;
         _logger = logger;

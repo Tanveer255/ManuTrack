@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Entity.Commaon.Interface;
+﻿namespace ProductNestService.Entity.Commaon.Interface;
 
 public interface IHasSoftDelete
 {

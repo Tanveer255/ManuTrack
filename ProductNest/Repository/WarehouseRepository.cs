@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Repository;
+﻿namespace ProductNestService.Repository;
 public interface IWarehouseRepository : IRepository<Warehouse>
 {
     /// <summary>

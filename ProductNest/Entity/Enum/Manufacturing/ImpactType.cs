@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Enum.Manufacturing;
+﻿namespace ProductNestService.Enum.Manufacturing;
 
 public enum ImpactType
 {

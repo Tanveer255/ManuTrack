@@ -1,4 +1,4 @@
-﻿namespace ProductNest.Entity.Commaon.Model;
+﻿namespace ProductNestService.Entity.Commaon.Model;
 
 public class ApiResponse<T>
 {
