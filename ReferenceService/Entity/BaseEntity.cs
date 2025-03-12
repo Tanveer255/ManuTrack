@@ -14,7 +14,7 @@ public class BaseEntity
     public BaseEntity()
     {
         CreatedAt = DateTime.UtcNow;
-        IsActive = false;
+        IsActive = true;
         IsDeleted = false;
     }
 }

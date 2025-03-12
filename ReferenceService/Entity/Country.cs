@@ -1,7 +1,13 @@
-﻿namespace ReferenceService.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-public class Country :BaseEntity
+namespace ReferenceService.Entity;
+
+public class Country
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
     public string Code { get; set; } // ISO Alpha-2 (e.g., "US"), Alpha-3 (e.g., "USA"), or Numeric (e.g., 840)
     public string Name { get; set; } // Full country name (e.g., "United States")
     public string CurrencyCode { get; set; } // ISO 4217 currency code (e.g., "USD")

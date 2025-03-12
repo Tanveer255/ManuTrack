@@ -19,7 +19,7 @@ public class ReferenceServiceDbContext : DbContext
         modelBuilder.Entity<Country>().HasData(countries);
 
         var unitOfMeasure = LoadUnitOfMeasureFromJson("Data/Seed/unitOfMeasure.json");
-        modelBuilder.Entity<UnitOfMeasure>().HasData(countries);
+        modelBuilder.Entity<UnitOfMeasure>().HasData(unitOfMeasure);
 
         base.OnModelCreating(modelBuilder);
     }
