@@ -1,8 +1,9 @@
-﻿namespace ReferenceService.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class UnitOfMeasure
+namespace ReferenceService.Entity;
+[Table(nameof(UnitOfMeasure))]
+public class UnitOfMeasure:BaseEntity
 {
-    public int Id { get; set; }
     public string Code { get; set; }
     public string Name { get; set; }
 }
