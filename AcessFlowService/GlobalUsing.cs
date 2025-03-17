@@ -1,5 +1,4 @@
 ﻿global using AcessFlowService.Entity.Common;
-global using JwtAuthentication.Interface;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Mvc;

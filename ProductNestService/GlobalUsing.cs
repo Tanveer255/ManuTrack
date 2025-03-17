@@ -1,5 +1,4 @@
-﻿global using JwtAuthentication.Interface;
-global using Microsoft.AspNetCore.Mvc;
+﻿global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using ProductNestService.Entity;
 global using ProductNestService.Entity.Commaon.Model;
@@ -22,14 +21,8 @@ global using Microsoft.AspNetCore.Http;
 global using ProductNestService.Entity.Manufacturing;
 global using Microsoft.Extensions.Logging;
 global using ProductNestService.Entity.Commaon.Interface;
-
-global using Microsoft.EntityFrameworkCore;
-global using ProductNestService.Entity.Entity;
-global using ProductNestService.Entity.Manufacturing;
 global using ProductNestService.Enum.Manufacturing;
-global using ProductNestService.Entity;
 global using ProductNestService.Entity.Enum.Manufacturing;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using System.ComponentModel.DataAnnotations;
-global using ProductNestService.Enum;
 

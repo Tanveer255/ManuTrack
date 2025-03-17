@@ -1,10 +1,8 @@
 ﻿
 using AcessFlowService.BLL.Services;
 using AcessFlowService.Entity.DTO;
-using Microsoft.AspNetCore.Identity.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
+using JwtAuthentication.Request;
+using JwtAuthentication.Service;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AcessFlowService.Controllers
@@ -40,8 +38,13 @@ namespace AcessFlowService.Controllers
             {
                 return Unauthorized(new { message = "Invalid credentials" });
             }
+            var generateTokenRequest = new GenerateTokenRequest
+            {
+                Email = user.Email,
+                UserId = user.Id
+            };
 
-            var token = _jwtAuthenticationService.GenerateJwtToken(user.Email);
+            var token = _jwtAuthenticationService.GenerateJwtToken(generateTokenRequest);
             return Ok(new { token, status = 200 });
         }
 
@@ -72,7 +75,12 @@ namespace AcessFlowService.Controllers
            _unitOfWork.Commit(); // Assuming Commit is async
 
             // Generate JWT token
-            var token = _jwtAuthenticationService.GenerateJwtToken(newUser.Email);
+            var generateTokenRequest = new GenerateTokenRequest
+            {
+                Email = newUser.Email,
+                UserId = newUser.Id
+            };
+            var token = _jwtAuthenticationService.GenerateJwtToken(generateTokenRequest);
 
             return Ok(new { token, status = 200 });
         }

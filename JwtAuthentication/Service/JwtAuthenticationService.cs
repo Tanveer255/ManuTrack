@@ -1,4 +1,12 @@
-﻿namespace JwtAuthentication.Service;
+﻿using JwtAuthentication.Request;
+
+namespace JwtAuthentication.Service;
+public interface IJwtAuthenticationService
+{
+
+    public string GenerateJwtToken(GenerateTokenRequest generateTokenRequest);
+    public Task<RefreshTokenRequest> RefreshTokenAsync(GenerateTokenRequest generateTokenRequest);
+}
 
 public class JwtAuthenticationService : IJwtAuthenticationService
 {
@@ -11,11 +19,11 @@ public class JwtAuthenticationService : IJwtAuthenticationService
         _configuration = configuration;
     }
 
-    public string GenerateJwtToken(string username)
+    public string GenerateJwtToken(GenerateTokenRequest request)
     {
         var claims = new[]
         {
-        new Claim(ClaimTypes.Name, username),
+        new Claim(ClaimTypes.Email, request.Email),
         // Add more claims if needed
     };
 
@@ -31,5 +39,23 @@ public class JwtAuthenticationService : IJwtAuthenticationService
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    public async Task<RefreshTokenRequest> RefreshTokenAsync(GenerateTokenRequest tokenRequest)
+    {
+        var claims = new List<Claim>
+     {
+         new Claim(ClaimTypes.Email, tokenRequest.Email),
+         new Claim(ClaimTypes.NameIdentifier, tokenRequest.UserId.ToString())
+     };
+
+        var newRefreshToken = GenerateJwtToken(tokenRequest);
+
+        var token = new RefreshTokenRequest
+        {
+            RefreshToken = newRefreshToken,
+            RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpiryTime)
+        };
+
+        return token;
     }
 }
