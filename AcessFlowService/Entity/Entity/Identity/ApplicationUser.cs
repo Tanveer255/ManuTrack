@@ -12,6 +12,8 @@ public class ApplicationUser : IdentityUser<Guid>
     public string LastName { get; set; }
     public int UsernameChangeLimit { get; set; } = 10;
     public byte[] ProfilePicture { get; set; } = new byte[0];
+    public string RefreshToken { get; set; } = string.Empty;
+    public DateTime RefreshTokenExpiryTime { get; set; }
 
 }
 
