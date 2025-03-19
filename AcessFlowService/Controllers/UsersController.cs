@@ -1,6 +1,7 @@
 ﻿
 using AcessFlowService.BLL.Services;
 using AcessFlowService.Entity.DTO;
+using JwtAuthentication.Model.Common;
 using JwtAuthentication.Request;
 using JwtAuthentication.Service;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -68,6 +69,7 @@ namespace AcessFlowService.Controllers
                 PhoneNumber = userRequest.PhoneNumber,
                 PhoneNumberConfirmed = true,
                 PasswordHash = userRequest.Password,
+                TenantId = UniqueIdGenerator.GenerateId()
             };
 
             // Add user and save changes

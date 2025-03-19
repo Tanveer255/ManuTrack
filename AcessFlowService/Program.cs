@@ -104,6 +104,16 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var app = builder.Build();
+app.Use(async (context, next) =>
+{
+    context.Request.EnableBuffering();
+    var reader = new StreamReader(context.Request.Body);
+    var body = await reader.ReadToEndAsync();
+    context.Request.Body.Position = 0;
+    Console.WriteLine($"Request Body: {body}");
+    await next();
+});
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
