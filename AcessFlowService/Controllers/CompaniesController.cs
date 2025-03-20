@@ -70,7 +70,7 @@ public class CompaniesController : ControllerBase
         return Ok(addresses);
     }
 
-    [HttpPost("{companyId}/addresses")]
+    [HttpPost(nameof(PostAddress))]
     public async Task<ActionResult<Address>> PostAddress(Guid companyId, Address address)
     {
         address.CompanyId = companyId;
