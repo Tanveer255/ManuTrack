@@ -4,6 +4,7 @@ using AcessFlowService.Entity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcessFlowService.Migrations
 {
     [DbContext(typeof(AcessFlowServiceDbContext))]
-    partial class AcessFlowServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250320054958_CompanyAdded")]
+    partial class CompanyAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

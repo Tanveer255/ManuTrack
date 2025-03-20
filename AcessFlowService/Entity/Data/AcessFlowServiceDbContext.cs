@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AcessFlowService.Entity.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace AcessFlowService.Entity.Data;
@@ -9,7 +11,8 @@ public class AcessFlowServiceDbContext : IdentityDbContext<ApplicationUser, Iden
         : base(options)
     {
     }
-
+    DbSet<Company> companies { get; set; }
+    DbSet<Address> addresses { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -57,6 +60,12 @@ public class AcessFlowServiceDbContext : IdentityDbContext<ApplicationUser, Iden
             entity.HasKey(t => t.UserId);
             entity.ToTable("UserTokens");
         });
+        // Configure the relationship between Address and Company
+        builder.Entity<Address>()
+            .HasOne(a => a.Company) // Address has one Company
+            .WithMany(c => c.OtherAddresses) // Company has many Addresses
+            .HasForeignKey(a => a.CompanyId)
+            .IsRequired(false); // Make the foreign key optional if needed.
     }
 
 }
