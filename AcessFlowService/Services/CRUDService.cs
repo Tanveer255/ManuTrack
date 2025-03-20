@@ -1,4 +1,4 @@
-﻿namespace AcessFlowService.BLL.Services;
+﻿namespace AcessFlowService.Services;
 /// <summary>
 /// Crud services interface.
 /// </summary>

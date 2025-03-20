@@ -1,4 +1,4 @@
-﻿namespace AcessFlowService.BLL.Services;
+﻿namespace AcessFlowService.Services;
 public interface IUserRolesService : ICrudService<UserRoles>
 {
 }

@@ -1,5 +1,5 @@
 ﻿
-using AcessFlowService.BLL.Services;
+using AcessFlowService.Services;
 using AcessFlowService.Entity.DTO;
 using JwtAuthentication.Model.Common;
 using JwtAuthentication.Request;

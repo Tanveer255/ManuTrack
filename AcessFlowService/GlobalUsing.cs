@@ -19,3 +19,6 @@ global using Microsoft.EntityFrameworkCore.Migrations;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using System.ComponentModel.DataAnnotations;
 global using System.ComponentModel.DataAnnotations.Schema;
+global using AcessFlowService.Services;
+global using JwtAuthentication.Service;
+global using Microsoft.AspNetCore.Mvc.Infrastructure;
