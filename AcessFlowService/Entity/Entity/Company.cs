@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace AcessFlowService.Entity.Entity;
+﻿namespace AcessFlowService.Entity.Entity;
 [Table(nameof(Company))]
 public class Company:BaseEntity
 {

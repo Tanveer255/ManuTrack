@@ -1,0 +1,43 @@
+﻿using AcessFlowService.Entity.Entity;
+
+namespace AcessFlowService.Repository;
+
+public interface ICompanyRepository : IRepository<Company>
+{
+    Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
+    Task<Company> GetCompanyWithAddressesAsync(Guid id);
+}
+
+internal sealed class CompanyRepository : Repository<Company>, ICompanyRepository
+{
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ILogger<CompanyRepository> _logger;
+
+    public CompanyRepository(IUnitOfWork unitOfWork, ILogger<CompanyRepository> logger, DbContext context) // Add DbContext
+        : base(unitOfWork, logger)
+    {
+        _unitOfWork = unitOfWork;
+        _logger = logger;
+    }
+
+    public async Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync()
+    {
+        return await _unitOfWork.Context.Set<Company>()
+            .Include(c => c.PrimaryAddress)
+            .Include(c => c.SecondaryAddress)
+            .Include(c => c.InvoiceAddress)
+            .Include(c => c.OtherAddresses)
+            .ToListAsync();
+    }
+
+    public async Task<Company> GetCompanyWithAddressesAsync(Guid id)
+    {
+        return await _unitOfWork.Context.Set<Company>()
+            .Where(c => c.Id == id)
+            .Include(c => c.PrimaryAddress)
+            .Include(c => c.SecondaryAddress)
+            .Include(c => c.InvoiceAddress)
+            .Include(c => c.OtherAddresses)
+            .FirstOrDefaultAsync();
+    }
+}
