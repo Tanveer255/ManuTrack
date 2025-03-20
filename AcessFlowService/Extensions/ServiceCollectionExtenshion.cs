@@ -1,4 +1,5 @@
 ﻿using AcessFlowService.BLL.Services;
+using AcessFlowService.Services;
 using JwtAuthentication.Service;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -12,12 +13,16 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IApplicationUserService, ApplicationUserService>();
         services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
         services.AddSingleton<IJwtAuthenticationService, JwtAuthenticationService>();
+        services.AddSingleton<ICompanyService, CompanyService>();
+        services.AddScoped<IAddressService, AddressService>();
         // Register Email Service
         services.AddScoped<IEmailService, EmailService>();
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped(typeof(ICrudService<>), typeof(CrudService<>));
+        services.AddScoped<ICompanyRepository, CompanyRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
 
         return services;
     }
