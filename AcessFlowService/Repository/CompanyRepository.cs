@@ -14,23 +14,17 @@ public interface ICompanyRepository : IRepository<Company>
     Task<Company> GetCompanyWithAddressesAsync(Guid id);
 }
 
-internal sealed class CompanyRepository : Repository<Company>, ICompanyRepository
+internal sealed class CompanyRepository(
+    IUnitOfWork unitOfWork,
+    ILogger<CompanyRepository> logger
+    ) : Repository<Company>(unitOfWork,logger), ICompanyRepository
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<CompanyRepository> _logger;
-    private readonly AcessFlowServiceDbContext _context; // Added context
-
-    public CompanyRepository(IUnitOfWork unitOfWork, ILogger<CompanyRepository> logger, AcessFlowServiceDbContext context) // Corrected context type
-        : base(unitOfWork, logger)
-    {
-        _unitOfWork = unitOfWork;
-        _logger = logger;
-        _context = context; // assigned context
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<CompanyRepository> _logger= logger;
 
     public async Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync()
     {
-        return await _context.Companies // using _context
+        return await _unitOfWork.Context.Companies // using _context
             .Include(c => c.PrimaryAddress)
             .Include(c => c.SecondaryAddress)
             .Include(c => c.InvoiceAddress)
@@ -40,7 +34,7 @@ internal sealed class CompanyRepository : Repository<Company>, ICompanyRepositor
 
     public async Task<Company> GetCompanyWithAddressesAsync(Guid id)
     {
-        return await _context.Companies // using _context
+        return await _unitOfWork.Context.Companies // using _context
             .Where(c => c.Id == id)
             .Include(c => c.PrimaryAddress)
             .Include(c => c.SecondaryAddress)

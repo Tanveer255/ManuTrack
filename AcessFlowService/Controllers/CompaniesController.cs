@@ -7,10 +7,12 @@ namespace AcessFlowService.Controllers;
 [Route("api/companies")]
 public class CompaniesController : ControllerBase
 {
-    private readonly ICompanyService _companyService;
-    private readonly IAddressService _addressService;
+    private readonly ICompanyRepository _companyService;
+    private readonly IAddressRepository _addressService;
 
-    public CompaniesController(ICompanyService companyService, IAddressService addressService)
+    public CompaniesController(
+        ICompanyRepository companyService,
+        IAddressRepository addressService)
     {
         _companyService = companyService;
         _addressService = addressService;

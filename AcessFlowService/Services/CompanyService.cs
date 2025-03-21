@@ -12,17 +12,13 @@ public interface ICompanyService : ICrudService<Company>
     Task<Company> GetCompanyWithAddressesAsync(Guid id);
 }
 
-internal sealed class CompanyService : CrudService<Company>, ICompanyService
+internal sealed class CompanyService(
+    IUnitOfWork unitOfWork,
+    ICompanyRepository companyRepository
+    ) : CrudService<Company>(companyRepository, unitOfWork), ICompanyService
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ICompanyRepository _companyRepository;
-
-    public CompanyService(IUnitOfWork unitOfWork, ICompanyRepository companyRepository)
-        : base(companyRepository, unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-        _companyRepository = companyRepository;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ICompanyRepository _companyRepository = companyRepository;
 
     public async Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync()
     {
