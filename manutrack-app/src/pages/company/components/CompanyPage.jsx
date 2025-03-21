@@ -1,30 +1,44 @@
-// CompanyPage.jsx
-import React, { useState } from 'react';
-import CompanyTable from './CompanyTable';
+// src/pages/CompanyPage.jsx
+import React, { useState, useEffect } from 'react';
+import companyService from '../api/companyService';
+import CompanyTable from '../api/CompanyTable';
 
 const CompanyPage = () => {
-    const [companies, setCompanies] = useState([
-        { id: 1, name: 'Acme Corp', contact: 'John Doe', addressCount: 3 },
-        { id: 2, name: 'Globex Industries', contact: 'Jane Smith', addressCount: 1 },
-    ]);
+    const [companies, setCompanies] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const handleEdit = (id) => {
-        console.log(`Edit company with ID: ${id}`);
+    useEffect(() => {
+        const fetchCompanies = async () => {
+            try {
+                const data = await companyService.getCompanies();
+                setCompanies(data);
+                setLoading(false);
+            } catch (err) {
+                setError(err);
+                setLoading(false);
+            }
+        };
+
+        fetchCompanies();
+    }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            await companyService.deleteCompany(id);
+            setCompanies(companies.filter((company) => company.id !== id));
+        } catch (err) {
+            setError(err);
+        }
     };
 
-    const handleDelete = (id) => {
-        setCompanies(companies.filter((company) => company.id !== id));
-    };
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
 
     return (
         <div className="min-h-screen bg-gray-100 p-4">
             <h1 className="text-3xl font-semibold mb-6">Company Management</h1>
-            <div className="mb-4">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Add Company
-                </button>
-            </div>
-            <CompanyTable companies={companies} onEdit={handleEdit} onDelete={handleDelete} />
+            <CompanyTable companies={companies} onDelete={handleDelete} />
         </div>
     );
 };

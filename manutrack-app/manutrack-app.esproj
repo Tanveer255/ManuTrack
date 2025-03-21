@@ -12,7 +12,6 @@
     <None Include=".vscode\launch.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\pages\address\api\" />
-    <Folder Include="src\pages\company\api\" />
+    <Folder Include="src\NewFolder\" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 // AddressPage.jsx
 import React, { useState } from 'react';
 import AddressTable from './AddressTable';
+import addressService from '../api/companyService';
+import addressTable from '../api/CompanyTable';
 
 const AddressPage = () => {
     const [addresses, setAddresses] = useState([
