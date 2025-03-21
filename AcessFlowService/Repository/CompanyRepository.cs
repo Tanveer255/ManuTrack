@@ -1,4 +1,10 @@
 ﻿using AcessFlowService.Entity.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AcessFlowService.Repository;
 
@@ -12,17 +18,19 @@ internal sealed class CompanyRepository : Repository<Company>, ICompanyRepositor
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<CompanyRepository> _logger;
+    private readonly AcessFlowServiceDbContext _context; // Added context
 
-    public CompanyRepository(IUnitOfWork unitOfWork, ILogger<CompanyRepository> logger, DbContext context) // Add DbContext
+    public CompanyRepository(IUnitOfWork unitOfWork, ILogger<CompanyRepository> logger, AcessFlowServiceDbContext context) // Corrected context type
         : base(unitOfWork, logger)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
+        _context = context; // assigned context
     }
 
     public async Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync()
     {
-        return await _unitOfWork.Context.Set<Company>()
+        return await _context.Companies // using _context
             .Include(c => c.PrimaryAddress)
             .Include(c => c.SecondaryAddress)
             .Include(c => c.InvoiceAddress)
@@ -32,7 +40,7 @@ internal sealed class CompanyRepository : Repository<Company>, ICompanyRepositor
 
     public async Task<Company> GetCompanyWithAddressesAsync(Guid id)
     {
-        return await _unitOfWork.Context.Set<Company>()
+        return await _context.Companies // using _context
             .Where(c => c.Id == id)
             .Include(c => c.PrimaryAddress)
             .Include(c => c.SecondaryAddress)

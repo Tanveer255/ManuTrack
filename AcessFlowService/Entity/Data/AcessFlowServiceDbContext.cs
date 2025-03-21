@@ -11,8 +11,8 @@ public class AcessFlowServiceDbContext : IdentityDbContext<ApplicationUser, Iden
         : base(options)
     {
     }
-    DbSet<Company> companies { get; set; }
-    DbSet<Address> addresses { get; set; }
+    public DbSet<Company> Companies { get; set; } // Corrected: public DbSet<Company> Companies
+    public DbSet<Address> Addresses { get; set; } // Corrected: public DbSet<Address> Addresses
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
