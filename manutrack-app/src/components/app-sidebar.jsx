@@ -26,8 +26,8 @@ import {
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+        name:"ManuTrack",
+    email: "tanveerofficial244@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
@@ -37,7 +37,7 @@ const data = {
       plan: "Enterprise",
     },
     {
-      name: "Acme Corp.",
+      name: "Manu Track.",
       logo: AudioWaveform,
       plan: "Startup",
     },
