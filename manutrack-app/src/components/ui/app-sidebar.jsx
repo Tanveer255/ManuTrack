@@ -73,12 +73,12 @@ const data = {
     },
     {
       title: "Company",
-      url: "#",
+      url: "~/pages/company/companyTable",
       icon: Bot,
       items: [
         {
           title: "Genesis",
-          url: "#",
+              url: "../pages/company/companyTable",
         },
         {
           title: "Explorer",
