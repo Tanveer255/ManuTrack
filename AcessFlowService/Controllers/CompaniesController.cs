@@ -12,7 +12,8 @@ public class CompaniesController : ControllerBase
 
     public CompaniesController(
         ICompanyRepository companyService,
-        IAddressRepository addressService)
+        IAddressRepository addressService
+        )
     {
         _companyService = companyService;
         _addressService = addressService;

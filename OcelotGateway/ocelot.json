@@ -1,9 +1,10 @@
 {
   "Routes": [
+    /////////////////////////////////////////////////////
+    //             Access Flow                         //
+    /////////////////////////////////////////////////////
     {
-      /////////////////////////////////////////////////////
-      //             Access Flow                         //
-      /////////////////////////////////////////////////////
+
       "DownstreamPathTemplate": "/api/users/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -37,6 +38,18 @@
         }
       ],
       "UpstreamPathTemplate": "/email/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Companies/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5161
+        }
+      ],
+      "UpstreamPathTemplate": "/Companies/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
     },
     /////////////////////////////////////////////////////

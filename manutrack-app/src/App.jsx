@@ -10,6 +10,8 @@ import SignUp from "./pages/SignUp/SignUp";
 import Acount from "./pages/Acount/Acount";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CompanyTable from "./pages/company/CompanyTable.jsx";
+import CompanyPage from "./pages/company/components/CompanyPage"; 
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
                             <Route path="/" element={<Dashboard />} />
                             <Route path="/account" element={<Acount />} />
                             <Route path="*" element={<Notfound />} />
+                            <Route path="/company/companyTable" element={<CompanyTable />} />
+                            <Route path="/company" element={<CompanyPage />} />
                         </Routes>
                     </SidebarProvider>
                 ) : (

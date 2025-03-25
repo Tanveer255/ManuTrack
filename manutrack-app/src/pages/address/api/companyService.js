@@ -1,5 +1,5 @@
 // src/services/companyService.js
-import api from '../utils/xiosInstanse';
+import api from '../../../utils/xiosInstanse';
 
 const companyService = {
     getCompanies: async () => {

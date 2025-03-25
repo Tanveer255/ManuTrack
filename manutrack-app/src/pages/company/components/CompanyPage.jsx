@@ -1,7 +1,6 @@
-// src/pages/CompanyPage.jsx
-import React, { useState, useEffect } from 'react';
-import companyService from '../api/companyService';
-import CompanyTable from '../api/CompanyTable';
+import React, { useState, useEffect } from "react";
+import companyService from "../../address/api/companyService"; // Make sure this file has the right service functions
+import CompanyTable from "../CompanyTable.jsx";
 
 const CompanyPage = () => {
     const [companies, setCompanies] = useState([]);
