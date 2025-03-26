@@ -2,7 +2,7 @@
 import api from '../utils/xiosInstanse';
 
 
-const addressService = {
+const companyService = {
     getAddress: async () => {
         try {
             const response = await api.get('/companies');
@@ -53,4 +53,4 @@ const addressService = {
     },
 };
 
-export default addressService;
+export default companyService;

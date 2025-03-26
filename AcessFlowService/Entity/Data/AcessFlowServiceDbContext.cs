@@ -12,7 +12,7 @@ public class AcessFlowServiceDbContext : IdentityDbContext<ApplicationUser, Iden
     {
     }
     public DbSet<Company> Companies { get; set; } // Corrected: public DbSet<Company> Companies
-    public DbSet<Address> Addresses { get; set; } // Corrected: public DbSet<Address> Addresses
+    public DbSet<Entity.Address> Addresses { get; set; } // Corrected: public DbSet<Address> Addresses
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -61,7 +61,7 @@ public class AcessFlowServiceDbContext : IdentityDbContext<ApplicationUser, Iden
             entity.ToTable("UserTokens");
         });
         // Configure the relationship between Address and Company
-        builder.Entity<Address>()
+        builder.Entity<Entity.Address>()
             .HasOne(a => a.Company) // Address has one Company
             .WithMany(c => c.OtherAddresses) // Company has many Addresses
             .HasForeignKey(a => a.CompanyId)

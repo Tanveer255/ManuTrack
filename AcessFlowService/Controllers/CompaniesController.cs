@@ -1,23 +1,16 @@
-﻿using AcessFlowService.Entity.Entity;
-using AcessFlowService.Services;
-
-namespace AcessFlowService.Controllers;
-
+﻿namespace AcessFlowService.Controllers;
 [ApiController]
 [Route("api/companies")]
-public class CompaniesController : ControllerBase
+public class CompaniesController(
+    ICompanyRepository companyService,
+        IAddressRepository addressService,
+        IUnitOfWork unitOfWork
+    ) : ControllerBase
 {
-    private readonly ICompanyRepository _companyService;
-    private readonly IAddressRepository _addressService;
+    private readonly ICompanyRepository _companyService = companyService;
+    private readonly IAddressRepository _addressService = addressService;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public CompaniesController(
-        ICompanyRepository companyService,
-        IAddressRepository addressService
-        )
-    {
-        _companyService = companyService;
-        _addressService = addressService;
-    }
 
     [HttpGet(nameof(GetCompanies))]
     public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
@@ -43,7 +36,7 @@ public class CompaniesController : ControllerBase
     public async Task<ActionResult<Company>> PostCompany(Company company)
     {
         await _companyService.Add(company);
-
+        _unitOfWork.Commit();
         return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
     }
 
@@ -56,28 +49,23 @@ public class CompaniesController : ControllerBase
         }
 
         await _companyService.Update(company);
-        return NoContent();
+        _unitOfWork.Commit();
+        return Ok(company);
     }
 
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteCompany(Guid id)
-    //{
-    //    await _companyService.Delete(id);
-    //    return NoContent();
-    //}
-
     [HttpGet(nameof(GetAddressesByCompany))]
-    public async Task<ActionResult<IEnumerable<Address>>> GetAddressesByCompany(Guid companyId)
+    public async Task<ActionResult<IEnumerable<Entity.Entity.Address>>> GetAddressesByCompany(Guid companyId)
     {
         var addresses = await _addressService.GetAddressesByCompanyIdAsync(companyId);
         return Ok(addresses);
     }
 
     [HttpPost(nameof(PostAddress))]
-    public async Task<ActionResult<Address>> PostAddress(Guid companyId, Address address)
+    public async Task<ActionResult<Entity.Entity.Address>> PostAddress(Guid companyId, Entity.Entity.Address address)
     {
         address.CompanyId = companyId;
         await _addressService.Add(address);
+        _unitOfWork.Commit();
         return CreatedAtAction(nameof(GetAddressesByCompany), new { companyId = companyId }, address);
     }
 }

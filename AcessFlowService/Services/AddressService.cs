@@ -3,12 +3,12 @@ using AcessFlowService.Entity.Entity;
 
 namespace AcessFlowService.Services;
 
-public interface IAddressService : ICrudService<Address>
+public interface IAddressService : ICrudService<Entity.Entity.Address>
 {
-    Task<IEnumerable<Address>> GetAddressesByCompanyIdAsync(Guid companyId);
+    Task<IEnumerable<Entity.Entity.Address>> GetAddressesByCompanyIdAsync(Guid companyId);
 }
 
-internal sealed class AddressService : CrudService<Address>, IAddressService
+internal sealed class AddressService : CrudService<Entity.Entity.Address>, IAddressService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAddressRepository _addressRepository;
@@ -20,7 +20,7 @@ internal sealed class AddressService : CrudService<Address>, IAddressService
         _addressRepository = addressRepository;
     }
 
-    public async Task<IEnumerable<Address>> GetAddressesByCompanyIdAsync(Guid companyId)
+    public async Task<IEnumerable<Entity.Entity.Address>> GetAddressesByCompanyIdAsync(Guid companyId)
     {
         return await _addressRepository.GetAddressesByCompanyIdAsync(companyId);
     }
