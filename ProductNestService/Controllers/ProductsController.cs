@@ -6,32 +6,26 @@ namespace ProductNestService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
-    {
-        private readonly IProductService _productService;
-        private readonly IVariantOptionService _variantOptionService;
-        private readonly IVariantService _variantService;
-        private readonly IBOMItemService _bOMItemService;
-        private readonly IPriceService _priceService;
-        private readonly IImageFileService _imageFileService;
-        private readonly IWarehouseService _warehouseService;
-
-        public ProductsController(IProductService productService,
+    public class ProductsController(
+            IProductService productService,
             IVariantOptionService variantOptionService,
             IVariantService variantService,
             IBOMItemService bOMItemService,
             IPriceService priceService,
             IImageFileService imageFileService,
-            IWarehouseService warehouseService)
-        {
-            _productService = productService;
-            _variantOptionService = variantOptionService;
-            _variantService = variantService;
-            _bOMItemService = bOMItemService;
-            _priceService = priceService;
-            _imageFileService = imageFileService;
-            _warehouseService = warehouseService;
-        }
+            IWarehouseService warehouseServicec,
+            IUnitOfWork unitOfWork
+        ) : ControllerBase
+    {
+        private readonly IProductService _productService = productService;
+        private readonly IVariantOptionService _variantOptionService = variantOptionService;
+        private readonly IVariantService _variantService = variantService;
+        private readonly IBOMItemService _bOMItemService = bOMItemService;
+        private readonly IPriceService _priceService = priceService;
+        private readonly IImageFileService _imageFileService = imageFileService;
+        private readonly IWarehouseService _warehouseService = warehouseServicec;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
         //GET: api/<ProductController>
         [HttpGet]
         //[Authorize]
@@ -122,7 +116,7 @@ namespace ProductNestService.Controllers
 
                 // Update the product using service layer
                 await _productService.Update(existingProduct);
-
+                _unitOfWork.Commit();
                 return Ok(new ApiResponse<Product>(true, "Product updated successfully.", existingProduct));
             }
             else
@@ -150,7 +144,7 @@ namespace ProductNestService.Controllers
 
                 // Add the product using service layer
                 await _productService.Add(product);
-
+                _unitOfWork.Commit();
                 return CreatedAtAction(nameof(GetProductById),
                     new { id = product.ProductId },
                     new ApiResponse<Product>(true, "Product created successfully.", product));

@@ -10,6 +10,7 @@ public interface ICompanyService : ICrudService<Company>
 {
     Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
     Task<Company> GetCompanyWithAddressesAsync(Guid id);
+    //Company create(Company company);
 }
 
 internal sealed class CompanyService(
@@ -29,4 +30,12 @@ internal sealed class CompanyService(
     {
         return await _companyRepository.GetCompanyWithAddressesAsync(id);
     }
+    //public  Company CreateAsync(Company company)
+    //{
+    //    var result = new Company();
+    //     result =  _companyRepository.Add(company);
+    //     _unitOfWork.Commit();
+    //    return result;
+    //}
+
 }
