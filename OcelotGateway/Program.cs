@@ -15,16 +15,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Add CORS service
+// Define allowed origins
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost", policy =>
-    {
-        policy.WithOrigins("http://localhost:5173") // Allow your frontend origin
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials(); // If your frontend uses cookies or auth headers
-    });
+    options.AddPolicy("AllowSpecificOrigins",
+        policy =>
+        {
+            policy.WithOrigins(allowedOrigins??Array.Empty<string>()) // Allow only these origins
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
 });
+
 // Configure logging
 builder.Logging.ClearProviders(); // Optional: Clears default providers
 builder.Logging.AddConsole();     // Console logging
@@ -54,7 +58,7 @@ app.MapControllers();
 
 
 // Enable CORS for the Ocelot API Gateway
-app.UseCors("AllowLocalhost");
+app.UseCors("AllowSpecificOrigins");
 
 // Configure Ocelot middleware
 app.UseOcelot().Wait();
