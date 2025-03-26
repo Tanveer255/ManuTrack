@@ -1,7 +1,4 @@
-﻿using AcessFlowService.Services;
-using AcessFlowService.Entity.Entity;
-
-namespace AcessFlowService.Services;
+﻿namespace AcessFlowService.Services;
 
 public interface IAddressService : ICrudService<Entity.Entity.Address>
 {

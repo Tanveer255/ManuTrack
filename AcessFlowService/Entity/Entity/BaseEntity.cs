@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace AcessFlowService.Entity.Entity
+﻿namespace AcessFlowService.Entity.Entity
 {
     public class BaseEntity: IHasSoftDelete
     {
