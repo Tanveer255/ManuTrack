@@ -48,10 +48,10 @@ public class UnitOfWork : IUnitOfWork
             _logger.LogInformation("Commit save changes");
             Context.SaveChanges();
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            _logger.LogError(ex, ex.Message, ex.InnerException, ex.InnerException != null ? ex.InnerException.Message : string.Empty);
-            throw new Exception(ex.Message, ex.InnerException);
+            _logger.LogError(exception, exception.Message, exception.InnerException, exception.InnerException != null ? exception.InnerException.Message : string.Empty);
+            throw new Exception(exception.Message, exception.InnerException);
         }
     }
 
