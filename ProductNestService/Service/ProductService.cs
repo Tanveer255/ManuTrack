@@ -33,4 +33,24 @@ public class ProductService(
         var products = await _unitOfWork.Context.Product.OrderByDescending(p=>p.CreatedAt).ToListAsync();
         return products;
     }
+    public async Task<ApiResponse<Product>> CreateAsync(Product product)
+    {
+        if (product == null)
+        {
+            return ApiResponse<Product>.FailResponse("Product data is null.");
+        }
+
+        try
+        {
+            await _productRepository.Add(product);
+            _unitOfWork.Commit();
+
+            return ApiResponse<Product>.SuccessResponse(product,"Product created successfully.");
+        }
+        catch (Exception exception)
+        {
+            return ApiResponse<Product>.FailResponse($"Error creating product: {exception.Message}");
+        }
+    }
+
 }

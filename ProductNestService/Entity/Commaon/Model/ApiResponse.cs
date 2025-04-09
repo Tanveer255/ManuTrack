@@ -12,4 +12,14 @@ public class ApiResponse<T>
         Message = message;
         Data = data;
     }
+
+    public static ApiResponse<T> SuccessResponse(T data, string message = "Success")
+    {
+        return new ApiResponse<T>(true, message, data);
+    }
+
+    public static ApiResponse<T> FailResponse(string message = "Something went wrong", T data = default)
+    {
+        return new ApiResponse<T>(false, message, data);
+    }
 }
