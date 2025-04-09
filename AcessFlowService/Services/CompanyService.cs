@@ -1,10 +1,12 @@
-﻿namespace AcessFlowService.Services;
+﻿using JwtAuthentication.Common;
+
+namespace AcessFlowService.Services;
 
 public interface ICompanyService : ICrudService<Company>
 {
     Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
     Task<Company> GetCompanyWithAddressesAsync(Guid id);
-    //Company create(Company company);
+    public  Task<Company> CreateAsync(Company company);
 }
 
 internal sealed class CompanyService(
@@ -25,11 +27,15 @@ internal sealed class CompanyService(
         return await _companyRepository.GetCompanyWithAddressesAsync(id);
     }
 
-    public async Task<Company> CreateAsync(Company company)
+    public async Task<ApiResponse<Company>> CreateAsync(Company company)
     {
+        if (company == null)
+        {
+            return ApiResponse<Company>.FailResponse("Company is not created");
+        }
         await _companyRepository.Add(company);
         _unitOfWork.Commit();
-        return company;
+        return ApiResponse<Company>.SuccessResponse(company,"Company sucessfully created");
     }
 
 }
