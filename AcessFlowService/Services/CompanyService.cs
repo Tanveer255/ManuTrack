@@ -1,10 +1,4 @@
-﻿using AcessFlowService.Services;
-using AcessFlowService.Entity.Entity;
-
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-namespace AcessFlowService.Services;
+﻿namespace AcessFlowService.Services;
 
 public interface ICompanyService : ICrudService<Company>
 {
@@ -30,11 +24,12 @@ internal sealed class CompanyService(
     {
         return await _companyRepository.GetCompanyWithAddressesAsync(id);
     }
-    //public  Company CreateAsync(Company company)
+
+    //public async Task<Company> CreateAsync(Company company)
     //{
     //    var result = new Company();
-    //     result =  _companyRepository.Add(company);
-    //     _unitOfWork.Commit();
+    //    result = await _companyRepository.Add(company);
+    //    _unitOfWork.Commit();
     //    return result;
     //}
 

@@ -1,12 +1,4 @@
-﻿using AcessFlowService.Entity.Entity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AcessFlowService.Repository;
+﻿namespace AcessFlowService.Repository;
 
 public interface ICompanyRepository : IRepository<Company>
 {
