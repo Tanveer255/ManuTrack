@@ -50,108 +50,14 @@ namespace ProductNestService.Controllers
             }
 
             // Check if the product exists
-            var existingProduct = await _productService.GetById(product.Id);
-
-            if (existingProduct != null)
+            var result = await _productService.CreateAsync(product);
+            if (result.Success)
             {
-                // Update existing product
-                existingProduct.IsDeleted = product.IsDeleted;
-                existingProduct.UpdatedAt = product.UpdatedAt;
-                existingProduct.Title = product.Title;
-                existingProduct.BodyHtml = product.BodyHtml;
-                existingProduct.Vendor = product.Vendor;
-                existingProduct.ProductType = product.ProductType;
-                existingProduct.Tags = product.Tags;
-                existingProduct.Status = product.Status;
-                existingProduct.AdminGraphqlApiId = product.AdminGraphqlApiId;
-                existingProduct.Name = product.Name;
-                existingProduct.Description = product.Description;
-                existingProduct.SKU = product.SKU;
-                existingProduct.UnitOfMeasure = product.UnitOfMeasure;
-                existingProduct.UnitCost = product.UnitCost;
-                existingProduct.StockLevel = product.StockLevel;
-                existingProduct.ReorderLevel = product.ReorderLevel;
-                existingProduct.LeadTimeInDays = product.LeadTimeInDays;
-
-                if (product.Variants != null && product.Variants.Count > 0)
-                {
-                    foreach (var variant in product.Variants)
-                    {
-                        var existingVariant = existingProduct.Variants.FirstOrDefault(v => v.VariantId == variant.VariantId);
-                        if (existingVariant != null)
-                        {
-                            // Update variant
-                            existingVariant.Status = variant.Status;
-                        }
-                        else
-                        {
-                            // Add new variant
-                            variant.ParentProductId = existingProduct.ProductId;
-                            variant.VariantId = GenerateId();
-                            variant.Status = ProductStatus.Active.ToString();
-                            existingProduct.Variants.Add(variant);
-                        }
-                    }
-                }
-
-
-                if (product.ImageFiles != null && product.ImageFiles.Count > 0)
-                {
-                    foreach (var imageFile in product.ImageFiles)
-                    {
-                        var existingImage = existingProduct.ImageFiles.FirstOrDefault(i => i.Id == imageFile.Id);
-                        if (existingImage != null)
-                        {
-                            // Update ImageFile
-                            existingImage.UpdatedAt = imageFile.UpdatedAt;
-                        }
-                        else
-                        {
-                            // Add new ImageFile
-                            //imageFile.ProductId = existingProduct.ProductId;
-                            existingProduct.ImageFiles.Add(imageFile);
-                        }
-                    }
-                }
-
-                // Update the product using service layer
-                await _productService.Update(existingProduct);
-                _unitOfWork.Commit();
-                return Ok(new ApiResponse<Product>(true, "Product updated successfully.", existingProduct));
+                return Ok(result);
             }
-            else
-            {
-                // Create new product
-                product.ProductId = long.Parse($"{DateTime.UtcNow:yyyyMMddHHmmss}");
-                product.Status = ProductStatus.Active.ToString();
-
-                if (product.Variants != null && product.Variants.Count > 0)
-                {
-                    foreach (var variant in product.Variants)
-                    {
-                        variant.ParentProductId = product.ProductId;
-                        variant.VariantId = GenerateId();
-                        variant.Status = ProductStatus.Active.ToString();
-                    }
-                }
-                if (product.ImageFiles != null && product.ImageFiles.Count > 0)
-                {
-                    foreach (var imageFile in product.ImageFiles)
-                    {
-                        //imageFile.ProductId = product.ProductId;
-                    }
-                }
-
-                // Add the product using service layer
-                await _productService.Add(product);
-                _unitOfWork.Commit();
-                return CreatedAtAction(nameof(GetProductById),
-                    new { id = product.ProductId },
-                    new ApiResponse<Product>(true, "Product created successfully.", product));
-            }
+            return BadRequest(result.Message);
+            
         }
-
-
         // GET: api/products/{id} (helper method to return a specific product)
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(Guid id)
