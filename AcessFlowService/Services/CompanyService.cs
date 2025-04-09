@@ -6,7 +6,7 @@ public interface ICompanyService : ICrudService<Company>
 {
     Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
     Task<Company> GetCompanyWithAddressesAsync(Guid id);
-    public  Task<Company> CreateAsync(Company company);
+    public  Task<ApiResponse<Company>> CreateAsync(Company company);
 }
 
 internal sealed class CompanyService(
