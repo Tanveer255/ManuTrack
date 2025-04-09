@@ -25,12 +25,11 @@ internal sealed class CompanyService(
         return await _companyRepository.GetCompanyWithAddressesAsync(id);
     }
 
-    //public async Task<Company> CreateAsync(Company company)
-    //{
-    //    var result = new Company();
-    //    result = await _companyRepository.Add(company);
-    //    _unitOfWork.Commit();
-    //    return result;
-    //}
+    public async Task<Company> CreateAsync(Company company)
+    {
+        await _companyRepository.Add(company);
+        _unitOfWork.Commit();
+        return company;
+    }
 
 }
