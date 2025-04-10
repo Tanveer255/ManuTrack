@@ -1,5 +1,7 @@
 
 
+using Infrastructure.Model;
+using Infrastructure.Service;
 using ProductNestService.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,7 +36,7 @@ builder.Services
           c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
       });
 # endregion
-builder.Services.AddSingleton<IJwtAuthenticationService, JwtAuthenticationService>();
+builder.Services.AddSingleton<IInfrastructureService, InfrastructureService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
 builder.Services.AddAuthentication(auth =>

@@ -1,21 +1,25 @@
 ﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+using Infrastructure.Model.Common;
+using Infrastructure.Request;
+using Infrastructure.Service;
+
 namespace AcessFlowService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IJwtAuthenticationService _jwtAuthenticationService;
+        private readonly IInfrastructureService _InfrastructureService;
         private readonly IApplicationUserService _applicationUserService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController(IJwtAuthenticationService jwtAuthenticationService,
+        public UsersController(IInfrastructureService InfrastructureService,
             IApplicationUserService applicationUserService,
             IUnitOfWork unitOfWork
             )
         {
-            _jwtAuthenticationService = jwtAuthenticationService;
+            _InfrastructureService = InfrastructureService;
             _applicationUserService = applicationUserService;
             _unitOfWork = unitOfWork;
         }
@@ -39,7 +43,7 @@ namespace AcessFlowService.Controllers
                 UserId = user.Id
             };
 
-            var token = _jwtAuthenticationService.GenerateJwtToken(generateTokenRequest);
+            var token = _InfrastructureService.GenerateJwtToken(generateTokenRequest);
             return Ok(new { token, status = 200 });
         }
 
@@ -76,7 +80,7 @@ namespace AcessFlowService.Controllers
                 Email = newUser.Email,
                 UserId = newUser.Id
             };
-            var token = _jwtAuthenticationService.GenerateJwtToken(generateTokenRequest);
+            var token = _InfrastructureService.GenerateJwtToken(generateTokenRequest);
 
             return Ok(new { token, status = 200 });
         }

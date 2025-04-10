@@ -5,8 +5,6 @@ global using ProductNestService.Entity.Commaon.Model;
 global using ProductNestService.Entity.Data;
 global using ProductNestService.Entity.Entity;
 global using ProductNestService.Enum;
-global using JwtAuthentication.Model;
-global using JwtAuthentication.Service;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.OpenApi.Models;
@@ -25,4 +23,7 @@ global using ProductNestService.Enum.Manufacturing;
 global using ProductNestService.Entity.Enum.Manufacturing;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using System.ComponentModel.DataAnnotations;
+global using Infrastructure.Model;
+global using Infrastructure.Service;
+global using ProductNestService.Extensions;
 

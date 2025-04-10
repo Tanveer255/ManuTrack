@@ -1,5 +1,5 @@
 ﻿global using System.Text;
-global using JwtAuthentication.Model;
+global using Infrastructure.Model;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.Options;
 global using Microsoft.IdentityModel.Tokens;

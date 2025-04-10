@@ -1,19 +1,19 @@
-﻿using JwtAuthentication.Request;
+﻿using Infrastructure.Request;
 
-namespace JwtAuthentication.Service;
-public interface IJwtAuthenticationService
+namespace Infrastructure.Service;
+public interface IInfrastructureService
 {
 
     public string GenerateJwtToken(GenerateTokenRequest generateTokenRequest);
     public Task<RefreshTokenRequest> RefreshTokenAsync(GenerateTokenRequest generateTokenRequest);
 }
 
-public class JwtAuthenticationService : IJwtAuthenticationService
+public class InfrastructureService : IInfrastructureService
 {
     private readonly JwtSettings _jwtSettings;
     private readonly IConfiguration _configuration;
 
-    public JwtAuthenticationService(IOptions<JwtSettings> jwtSettings, IConfiguration configuration)
+    public InfrastructureService(IOptions<JwtSettings> jwtSettings, IConfiguration configuration)
     {
         _jwtSettings = jwtSettings.Value;
         _configuration = configuration;

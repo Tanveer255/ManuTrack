@@ -1,5 +1,5 @@
 using AcessFlowService.Entity.Data;
-using JwtAuthentication.Model;
+using Infrastructure.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;

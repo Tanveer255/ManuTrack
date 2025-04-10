@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JwtAuthentication.Common;
+namespace Infrastructure.Common;
 
 public class ApiResponse<T>
 {

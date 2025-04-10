@@ -1,4 +1,4 @@
-﻿using JwtAuthentication.Common;
+﻿using Infrastructure.Common;
 
 namespace AcessFlowService.Services;
 

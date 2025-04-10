@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JwtAuthentication.Model.Common;
+namespace Infrastructure.Model.Common;
 
 public class ResultResponse<T>
 {

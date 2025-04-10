@@ -1,4 +1,6 @@
-﻿namespace AcessFlowService.Extensions;
+﻿using Infrastructure.Service;
+
+namespace AcessFlowService.Extensions;
 
 public static class ServiceCollectionExtensions
 {
@@ -11,7 +13,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserRolesService, UserRolesService>();
         services.AddTransient<IApplicationUserService, ApplicationUserService>();
         services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
-        services.AddSingleton<IJwtAuthenticationService, JwtAuthenticationService>();
+        services.AddSingleton<IInfrastructureService, InfrastructureService>();
 
         // Change ICompanyService to scoped
         services.AddScoped<ICompanyService, CompanyService>();
