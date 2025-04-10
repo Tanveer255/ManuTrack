@@ -1,8 +1,4 @@
-﻿
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ProductNestService.Controllers
+﻿namespace ProductNestService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -28,7 +24,6 @@ namespace ProductNestService.Controllers
 
         //GET: api/<ProductController>
         [HttpGet]
-        //[Authorize]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
             var products = await _productService.GetAllDataAsync();
@@ -71,12 +66,6 @@ namespace ProductNestService.Controllers
 
             return Ok(new ApiResponse<Product>(true, "Product retrieved successfully.", product));
         }
-        // PUT api/<ProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

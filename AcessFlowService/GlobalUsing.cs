@@ -23,3 +23,6 @@ global using AcessFlowService.Entity.Common.Model;
 global using Microsoft.Extensions.Options;
 global using Stripe.Checkout;
 global using Stripe;
+global using Infrastructure.Service;
+global using Infrastructure.Model.Common;
+global using Infrastructure.Request;

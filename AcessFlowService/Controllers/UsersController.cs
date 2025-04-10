@@ -1,9 +1,5 @@
 ﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-using Infrastructure.Model.Common;
-using Infrastructure.Request;
-using Infrastructure.Service;
-
 namespace AcessFlowService.Controllers
 {
     [Route("api/[controller]")]

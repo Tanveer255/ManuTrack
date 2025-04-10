@@ -1,6 +1,4 @@
-﻿using Infrastructure.Service;
-
-namespace AcessFlowService.Extensions;
+﻿namespace AcessFlowService.Extensions;
 
 public static class ServiceCollectionExtensions
 {
