@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductNestService", "Produ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcessFlowService", "AcessFlowService", "{8F5AE7F3-2E97-45AC-921B-DCD201F1DB53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuthentication", "JwtAuthentication\JwtAuthentication.csproj", "{05B2C63A-E7E6-4AE6-A550-F1671298349E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "JwtAuthentication\Infrastructure.csproj", "{05B2C63A-E7E6-4AE6-A550-F1671298349E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{671A3A0F-C623-4B05-AFA8-E577FC7D8FE8}"
 EndProject
