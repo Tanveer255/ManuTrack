@@ -27,4 +27,10 @@ public static class CommonUtils
     {
         return date.ToString("yyyy-MM-dd");
     }
+    // Helper function to generate NumberId
+    public static long GenerateNumberId()
+    {
+        var now = DateTime.UtcNow;
+        return long.Parse($"{now:yyyyMMddHHmmss}");
+    }
 }
