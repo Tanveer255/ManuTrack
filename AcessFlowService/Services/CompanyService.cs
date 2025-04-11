@@ -5,7 +5,7 @@ namespace AcessFlowService.Services;
 public interface ICompanyService : ICrudService<Company>
 {
     public Task<ApiResponse<Company>> GetCompanyAsync(Guid id);
-    public Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
+    public Task<ApiResponse<IEnumerable<Company>>> GetAllCompaniesAsync();
     public Task<ApiResponse<Company>> CreateAsync(Company company);
 }
 
@@ -19,9 +19,14 @@ internal sealed class CompanyService(
     private readonly ICompanyRepository _companyRepository = companyRepository;
     private readonly ILogger<CompanyService> _logger = logger;
 
-    public async Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync()
+    public async Task<ApiResponse<IEnumerable<Company>>> GetAllCompaniesAsync()
     {
-        return await _companyRepository.GetCompaniesWithAddressesAsync();
+        var companies = await _companyRepository.GetCompaniesWithAddressesAsync();
+        if (companies == null || !companies.Any())
+        {
+            return ApiResponse<IEnumerable<Company>>.FailResponse("No companies found");
+        }
+        return ApiResponse<IEnumerable<Company>>.SuccessResponse(companies,"Companies found Sucessfully");
     }
 
     public async Task<ApiResponse<Company>> GetCompanyAsync(Guid id)

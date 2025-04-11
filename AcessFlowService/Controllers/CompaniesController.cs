@@ -5,33 +5,58 @@ public class CompaniesController(
     ICompanyService companyService,
     ICompanyRepository companyRepository,
         IAddressRepository addressService,
-        IUnitOfWork unitOfWork
+        IUnitOfWork unitOfWork,
+        ILogger<CompaniesController> logger
     ) : ControllerBase
 {
     private readonly ICompanyService _companyService = companyService;
     private readonly ICompanyRepository _companyRepository = companyRepository;
     private readonly IAddressRepository _addressService = addressService;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly ILogger<CompaniesController> _logger = logger;
 
 
-    [HttpGet(nameof(GetCompanies))]
-    public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
+    [HttpGet(nameof(GetAllCompanies))]
+    public async Task<ActionResult<IEnumerable<Company>>> GetAllCompanies()
     {
-        var companies = await _companyService.GetCompaniesWithAddressesAsync();
-        return Ok(companies);
+        try
+        {
+            var companies = await _companyService.GetAllCompaniesAsync();
+            if (companies.Success)
+            {
+                return Ok(companies);
+            }
+            return NotFound("No companies found");
+        }
+        catch (Exception Exception)
+        {
+           _logger.LogError(Exception, "Error occurred while fetching all companies");
+            return BadRequest("Error occurred while fetching all companies");
+        }
+        
     }
 
     [HttpGet(nameof(GetCompany))]
     public async Task<ActionResult<Company>> GetCompany(Guid id)
     {
-        var company = await _companyService.GetCompanyAsync(id);
-
-        if (company.Success)
+        try
         {
-            return Ok(company);
-        }
+            var company = await _companyService.GetCompanyAsync(id);
 
-        return BadRequest(company.Message);
+            if (company.Success)
+            {
+                return Ok(company);
+            }
+
+            return BadRequest(company.Message);
+
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "Error occurred while fetching company with id {Id}", id);
+            return BadRequest("Error occurred while fetching company");
+        }
+        
     }
 
     [HttpPost(nameof(PostCompany))]
