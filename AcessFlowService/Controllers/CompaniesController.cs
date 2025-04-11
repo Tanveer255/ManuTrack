@@ -2,12 +2,14 @@
 [ApiController]
 [Route("api/companies")]
 public class CompaniesController(
-    ICompanyRepository companyService,
+    ICompanyService companyService,
+    ICompanyRepository companyRepository,
         IAddressRepository addressService,
         IUnitOfWork unitOfWork
     ) : ControllerBase
 {
-    private readonly ICompanyRepository _companyService = companyService;
+    private readonly ICompanyService _companyService = companyService;
+    private readonly ICompanyRepository _companyRepository = companyRepository;
     private readonly IAddressRepository _addressService = addressService;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
@@ -22,14 +24,14 @@ public class CompaniesController(
     [HttpGet(nameof(GetCompany))]
     public async Task<ActionResult<Company>> GetCompany(Guid id)
     {
-        var company = await _companyService.GetCompanyWithAddressesAsync(id);
+        var company = await _companyService.GetCompanyAsync(id);
 
-        if (company == null)
+        if (company.Success)
         {
-            return NotFound();
+            return Ok(company);
         }
 
-        return Ok(company);
+        return BadRequest(company.Message);
     }
 
     [HttpPost(nameof(PostCompany))]

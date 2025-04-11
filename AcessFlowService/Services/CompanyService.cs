@@ -4,27 +4,45 @@ namespace AcessFlowService.Services;
 
 public interface ICompanyService : ICrudService<Company>
 {
-    Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
-    Task<Company> GetCompanyWithAddressesAsync(Guid id);
-    public  Task<ApiResponse<Company>> CreateAsync(Company company);
+    public Task<ApiResponse<Company>> GetCompanyAsync(Guid id);
+    public Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
+    public Task<ApiResponse<Company>> CreateAsync(Company company);
 }
 
 internal sealed class CompanyService(
     IUnitOfWork unitOfWork,
-    ICompanyRepository companyRepository
+    ICompanyRepository companyRepository,
+    ILogger<CompanyService> logger
     ) : CrudService<Company>(companyRepository, unitOfWork), ICompanyService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly ICompanyRepository _companyRepository = companyRepository;
+    private readonly ILogger<CompanyService> _logger = logger;
 
     public async Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync()
     {
         return await _companyRepository.GetCompaniesWithAddressesAsync();
     }
 
-    public async Task<Company> GetCompanyWithAddressesAsync(Guid id)
+    public async Task<ApiResponse<Company>> GetCompanyAsync(Guid id)
     {
-        return await _companyRepository.GetCompanyWithAddressesAsync(id);
+        try
+        {
+            var existedCompany = await _companyRepository.GetCompanyWithAddressesAsync(id);
+            if (existedCompany == null)
+            {
+                return ApiResponse<Company>.FailResponse("Company not found");
+            }
+            var company = await _companyRepository.GetCompanyWithAddressesAsync(id);
+
+            return ApiResponse<Company>.SuccessResponse(company, "Company found");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "Error occurred while fetching company with id {Id}", id);
+            return ApiResponse<Company>.FailResponse("Error occurred while fetching company");
+        }
+        
     }
 
     public async Task<ApiResponse<Company>> CreateAsync(Company company)
