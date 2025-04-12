@@ -4,7 +4,7 @@ namespace AcessFlowService.Services;
 
 public interface ICompanyService : ICrudService<Company>
 {
-    public Task<ApiResponse<Company>> GetCompanyAsync(Guid id);
+    public Task<ApiResponse<Company>> GetCompanyByIdAsync(Guid id);
     public Task<ApiResponse<IEnumerable<Company>>> GetAllCompaniesAsync();
     public Task<ApiResponse<Company>> CreateAsync(Company company);
 }
@@ -21,15 +21,24 @@ internal sealed class CompanyService(
 
     public async Task<ApiResponse<IEnumerable<Company>>> GetAllCompaniesAsync()
     {
-        var companies = await _companyRepository.GetCompaniesWithAddressesAsync();
-        if (companies == null || !companies.Any())
+        try
         {
-            return ApiResponse<IEnumerable<Company>>.FailResponse("No companies found");
+            var companies = await _companyRepository.GetCompaniesWithAddressesAsync();
+            if (companies == null || !companies.Any())
+            {
+                return ApiResponse<IEnumerable<Company>>.FailResponse("No companies found");
+            }
+            return ApiResponse<IEnumerable<Company>>.SuccessResponse(companies, "Companies found Sucessfully");
         }
-        return ApiResponse<IEnumerable<Company>>.SuccessResponse(companies,"Companies found Sucessfully");
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "Error occurred while fetching all companies");
+            return ApiResponse<IEnumerable<Company>>.FailResponse("Error occurred while fetching all companies");
+        }
+
     }
 
-    public async Task<ApiResponse<Company>> GetCompanyAsync(Guid id)
+    public async Task<ApiResponse<Company>> GetCompanyByIdAsync(Guid id)
     {
         try
         {
@@ -47,18 +56,27 @@ internal sealed class CompanyService(
             _logger.LogError(exception, "Error occurred while fetching company with id {Id}", id);
             return ApiResponse<Company>.FailResponse("Error occurred while fetching company");
         }
-        
+
     }
 
     public async Task<ApiResponse<Company>> CreateAsync(Company company)
     {
-        if (company == null)
+        try
         {
-            return ApiResponse<Company>.FailResponse("Company is not created");
+            if (company.Id == Guid.Empty)
+            {
+                await _companyRepository.Add(company);
+                return ApiResponse<Company>.SuccessResponse(company, "Company sucessfully created");
+            }
+            await _companyRepository.Update(company);
+            _unitOfWork.Commit();
+            return ApiResponse<Company>.SuccessResponse(company, "Company sucessfully updated");
         }
-        await _companyRepository.Add(company);
-        _unitOfWork.Commit();
-        return ApiResponse<Company>.SuccessResponse(company,"Company sucessfully created");
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "Error occurred while creating company");
+            return ApiResponse<Company>.FailResponse("Error occurred while creating company");
+        }
     }
 
 }

@@ -3,16 +3,10 @@
 [Route("api/companies")]
 public class CompaniesController(
     ICompanyService companyService,
-    ICompanyRepository companyRepository,
-        IAddressRepository addressService,
-        IUnitOfWork unitOfWork,
         ILogger<CompaniesController> logger
     ) : ControllerBase
 {
     private readonly ICompanyService _companyService = companyService;
-    private readonly ICompanyRepository _companyRepository = companyRepository;
-    private readonly IAddressRepository _addressService = addressService;
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly ILogger<CompaniesController> _logger = logger;
 
 
@@ -30,10 +24,10 @@ public class CompaniesController(
         }
         catch (Exception Exception)
         {
-           _logger.LogError(Exception, "Error occurred while fetching all companies");
+            _logger.LogError(Exception, "Error occurred while fetching all companies");
             return BadRequest("Error occurred while fetching all companies");
         }
-        
+
     }
 
     [HttpGet(nameof(GetCompany))]
@@ -41,7 +35,7 @@ public class CompaniesController(
     {
         try
         {
-            var company = await _companyService.GetCompanyAsync(id);
+            var company = await _companyService.GetCompanyByIdAsync(id);
 
             if (company.Success)
             {
@@ -56,43 +50,25 @@ public class CompaniesController(
             _logger.LogError(exception, "Error occurred while fetching company with id {Id}", id);
             return BadRequest("Error occurred while fetching company");
         }
-        
+
     }
 
-    [HttpPost(nameof(PostCompany))]
-    public async Task<ActionResult<Company>> PostCompany(Company company)
+    [HttpPost(nameof(CreateCompany))]
+    public async Task<ActionResult<Company>> CreateCompany(Company company)
     {
-        await _companyService.Add(company);
-        _unitOfWork.Commit();
-        return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
-    }
-
-    [HttpPut(nameof(PutCompany))]
-    public async Task<IActionResult> PutCompany(Guid id, Company company)
-    {
-        if (id != company.Id)
+        try
         {
-            return BadRequest();
+            var result = await _companyService.CreateAsync(company);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
         }
-
-        await _companyService.Update(company);
-        _unitOfWork.Commit();
-        return Ok(company);
-    }
-
-    [HttpGet(nameof(GetAddressesByCompany))]
-    public async Task<ActionResult<IEnumerable<Entity.Entity.Address>>> GetAddressesByCompany(Guid companyId)
-    {
-        var addresses = await _addressService.GetAddressesByCompanyIdAsync(companyId);
-        return Ok(addresses);
-    }
-
-    [HttpPost(nameof(PostAddress))]
-    public async Task<ActionResult<Entity.Entity.Address>> PostAddress(Guid companyId, Entity.Entity.Address address)
-    {
-        address.CompanyId = companyId;
-        await _addressService.Add(address);
-        _unitOfWork.Commit();
-        return CreatedAtAction(nameof(GetAddressesByCompany), new { companyId = companyId }, address);
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "Error occurred while creating company");
+            return BadRequest("Error occurred while creating company");
+        }
     }
 }
