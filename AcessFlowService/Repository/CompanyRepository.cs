@@ -2,8 +2,8 @@
 
 public interface ICompanyRepository : IRepository<Company>
 {
-    Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync();
-    Task<Company> GetCompanyWithAddressesAsync(Guid id);
+    Task<IEnumerable<Company>> GetAllCompanies();
+    Task<Company> Get(Guid id);
 }
 
 internal sealed class CompanyRepository(
@@ -14,7 +14,7 @@ internal sealed class CompanyRepository(
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly ILogger<CompanyRepository> _logger= logger;
 
-    public async Task<IEnumerable<Company>> GetCompaniesWithAddressesAsync()
+    public async Task<IEnumerable<Company>> GetAllCompanies()
     {
         return await _unitOfWork.Context.Companies // using _context
             .Include(c => c.PrimaryAddress)
@@ -24,7 +24,7 @@ internal sealed class CompanyRepository(
             .ToListAsync();
     }
 
-    public async Task<Company> GetCompanyWithAddressesAsync(Guid id)
+    public async Task<Company> Get(Guid id)
     {
         return await _unitOfWork.Context.Companies // using _context
             .Where(c => c.Id == id)

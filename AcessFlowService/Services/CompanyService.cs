@@ -23,7 +23,7 @@ internal sealed class CompanyService(
     {
         try
         {
-            var companies = await _companyRepository.GetCompaniesWithAddressesAsync();
+            var companies = await _companyRepository.GetAllCompanies();
             if (companies == null || !companies.Any())
             {
                 return ApiResponse<IEnumerable<Company>>.FailResponse("No companies found");
@@ -42,14 +42,13 @@ internal sealed class CompanyService(
     {
         try
         {
-            var existedCompany = await _companyRepository.GetCompanyWithAddressesAsync(id);
+            var existedCompany = await _companyRepository.Get(id);
             if (existedCompany == null)
             {
                 return ApiResponse<Company>.FailResponse("Company not found");
             }
-            var company = await _companyRepository.GetCompanyWithAddressesAsync(id);
 
-            return ApiResponse<Company>.SuccessResponse(company, "Company found");
+            return ApiResponse<Company>.SuccessResponse(existedCompany, "Company found");
         }
         catch (Exception exception)
         {
