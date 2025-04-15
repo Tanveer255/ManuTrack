@@ -49,7 +49,7 @@ builder.Services
 builder.Services.AddAuthorization();
 
 builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSettings"));
-builder.Services.Configure<SendGridSetting>(builder.Configuration.GetSection("SendGrid"));
+builder.Services.Configure<SendGridSettings>(builder.Configuration.GetSection("SendGrid"));
 builder.Services.Configure<ReCaptchaSetting>(builder.Configuration.GetSection("ReCaptcha"));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
