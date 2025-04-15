@@ -18,18 +18,19 @@ public class AppSetting
 
     public static string ReCaptchaUrl { get; set; }
 
-    public SendGridSetting sendGridSettings { get; set; }
+    public SendGridSettings SendGridSettings { get; set; }
     public ReCaptchaSetting ReCaptchaSettings { get; set; }
    // public JwtSettings JwtSettings { get; set; }
     public bool EmailValidationEnabled { get; set; }
     public StripeSettings StripeSettings { get; set; }
 }
-public class SendGridSetting {
-    public static string EmailApiKey { get; set; }
+public class SendGridSettings
+{
+    public  string ApiKey { get; set; }
+    public  string FromEmail { get; set; }
+    public  string FromName { get; set; }
+    public  string ValidationKey { get; set; }
 
-    public static string ValidationApiKey { get; set; }
-
-    public static string FromEmail { get; set; }
 }
 public class ReCaptchaSetting
 {

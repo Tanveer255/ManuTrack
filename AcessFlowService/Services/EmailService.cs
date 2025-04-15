@@ -9,23 +9,21 @@ public interface IEmailService
 {
     Task<ApiResponse<bool>> SendEmailAsync(string toEmail, string subject, string message);
 }
-public class EmailService : IEmailService
-{
-    private readonly string _sendGridApiKey;
-    private readonly ILogger<EmailService> _logger;
+public class EmailService(
+    IOptions<SendGridSettings> SendGridSettings
 
-    public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
-    {
-        _sendGridApiKey = configuration["SendGrid:ApiKey"] ?? throw new ArgumentNullException("SendGrid API Key is missing");
-        _logger = logger;
-    }
+    ) : IEmailService
+{
+    //private readonly string _sendGridApiKey;
+    private readonly ILogger<EmailService> _logger;
+    private readonly SendGridSettings _sendGridSettings = SendGridSettings.Value;
 
     public async Task<ApiResponse<bool>> SendEmailAsync(string toEmail, string subject, string message)
     {
         try
         {
-            var client = new SendGridClient(_sendGridApiKey);
-            var from = new EmailAddress("your-email@example.com", "Your Name");
+            var client = new SendGridClient(_sendGridSettings.ApiKey);
+            var from = new EmailAddress(_sendGridSettings.FromEmail, _sendGridSettings.FromName);
             var to = new EmailAddress(toEmail);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, message, message);
 
