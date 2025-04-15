@@ -3,10 +3,11 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Infrastructure.Common;
 
 public interface IEmailService
 {
-    Task<bool> SendEmailAsync(string toEmail, string subject, string message);
+    Task<ApiResponse<bool>> SendEmailAsync(string toEmail, string subject, string message);
 }
 public class EmailService : IEmailService
 {
@@ -19,7 +20,7 @@ public class EmailService : IEmailService
         _logger = logger;
     }
 
-    public async Task<bool> SendEmailAsync(string toEmail, string subject, string message)
+    public async Task<ApiResponse<bool>> SendEmailAsync(string toEmail, string subject, string message)
     {
         try
         {
@@ -32,16 +33,16 @@ public class EmailService : IEmailService
             if (response.StatusCode == System.Net.HttpStatusCode.Accepted || response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 _logger.LogInformation($"Email sent successfully to {toEmail}");
-                return true;
+                return ApiResponse<bool>.SuccessResponse(true,$"Email sent successfully to {toEmail}") ;
             }
 
             _logger.LogError($"Failed to send email to {toEmail}. Status Code: {response.StatusCode}");
-            return false;
+            return ApiResponse<bool>.FailResponse($"Failed to send email to {toEmail}. Status Code: {response.StatusCode}");
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            _logger.LogError($"Error sending email: {ex.Message}");
-            return false;
+            _logger.LogError($"Error sending email: {exception.Message}");
+            return ApiResponse<bool>.FailResponse($"Error sending email: {exception.Message}");
         }
     }
 }

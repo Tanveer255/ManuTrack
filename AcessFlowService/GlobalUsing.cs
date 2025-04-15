@@ -26,3 +26,4 @@ global using Stripe;
 global using Infrastructure.Service;
 global using Infrastructure.Model.Common;
 global using Infrastructure.Request;
+global using Infrastructure.Common;
