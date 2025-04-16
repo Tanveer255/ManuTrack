@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using SettingService.Entity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,16 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
-// Configure logging
-builder.Logging.ClearProviders(); // Optional: Clears default providers
-builder.Logging.AddConsole();     // Console logging
-builder.Logging.AddDebug();       // Debug output
 builder.Services.AddDbContext<SettingServiceDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-// Configure logging
-builder.Logging.ClearProviders(); // Optional: Clears default providers
-builder.Logging.AddConsole();     // Console logging
-builder.Logging.AddDebug();       // Debug output
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", policy =>
@@ -29,7 +22,11 @@ builder.Services.AddCors(options =>
               .AllowCredentials(); // If your frontend uses cookies or auth headers
     });
 });
-
+builder.Host.UseSerilog((context, configuration) =>
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.FromLogContext()
+        .WriteTo.Console());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
