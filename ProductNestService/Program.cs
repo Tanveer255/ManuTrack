@@ -3,6 +3,7 @@
 using Infrastructure.Model;
 using Infrastructure.Service;
 using ProductNestService.Extensions;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,6 +87,10 @@ builder.Services.AddCors(options =>
 builder.Logging.ClearProviders(); // Optional: Clears default providers
 builder.Logging.AddConsole();     // Console logging
 builder.Logging.AddDebug();       // Debug output
+//Add support to logging with SERILOG
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
