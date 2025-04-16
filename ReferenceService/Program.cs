@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReferenceService.Data;
 using ReferenceService.Extenshions;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,14 +16,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
     .AddAllCustomServices();
-//builder.Host.UseSerilog((context, services, configuration) =>
-//{
-//    configuration
-//        .ReadFrom.Configuration(context.Configuration)
-//        .ReadFrom.Services(services)
-//        .Enrich.FromLogContext()
-//        .WriteTo.Console();
-//});
+builder.Host.UseSerilog((context, services, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext()
+        .WriteTo.Console();
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
