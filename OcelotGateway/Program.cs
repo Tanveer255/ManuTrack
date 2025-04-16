@@ -1,5 +1,6 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Serilog;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,10 +30,14 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Configure logging
-builder.Logging.ClearProviders(); // Optional: Clears default providers
-builder.Logging.AddConsole();     // Console logging
-builder.Logging.AddDebug();       // Debug output
+// Configure Serilog
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.FromLogContext()
+        .WriteTo.Console();
+});
 
 var app = builder.Build();
 
